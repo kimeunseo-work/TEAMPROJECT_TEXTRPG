@@ -8,5 +8,66 @@ namespace TEAMPROJECT_TEXTRPG
 {
     internal class battleStart
     {
+
+
+
+
+        List<Monster> monster = new List<Monster>()
+            {
+
+                new Monster("미니언",2,15,5 ),new Monster("공허충",3,10,9 ),
+                new Monster("대포미니언",5,25,8 )
+
+
+            };
+
+
+
+        public class Monster
+        {
+
+
+            public string Name { get; set; }
+
+            public int Level { get; set; }
+
+            public int Hp { get; set; }
+
+            public int Atk { get; set; }
+
+
+
+
+            public Monster (string name, int level, int hp, int atk)
+            {
+                Name = name;
+                Level = level;
+                Hp = hp;
+                Atk = atk;
+            }
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }
