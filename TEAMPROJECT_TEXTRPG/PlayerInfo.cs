@@ -29,10 +29,25 @@ namespace TEAMPROJECT_TEXTRPG
 
         public void DisplayPlayerinfo()
         {
-            Console.WriteLine($"\nLv.{Level}\n\n{Name}({Job})\n\n공격력: {Attack:F1}\n\n방어력: {Defense}" +
+            bool keep = true;
+            while (keep)
+            {
+                Console.WriteLine($"\nLv.{Level}\n\n{Name}({Job})\n\n공격력: {Attack:F1}\n\n방어력: {Defense}" +
                 $"\n\n체력: {Hp}\n\nGold: {Gold}");
 
-            Console.WriteLine($"\n1.\n0. 나가기\n\n원하시는 행동을 입력해주세요.\n>>");
+                Console.WriteLine($"\n1.\n0. 나가기\n\n원하시는 행동을 입력해주세요.\n>>");
+
+                int input;
+                if (int.TryParse(Console.ReadLine(), out input) && input == 0)
+                {
+                    keep = false;
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("0을 입력해서 메인화면으로 나가기");
+                }
+            }
         }
     }
 
