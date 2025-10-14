@@ -50,6 +50,7 @@ namespace TEAMPROJECT_TEXTRPG
             scenes.Add(GameState.Example2, new ExampleScene2());
             scenes.Add(GameState.Home, new Home());
             scenes.Add(GameState.Stat, new PlayerInfo());
+            scenes.Add(GameState.Battle, new BattleStart());
         }
 
         internal void Run()

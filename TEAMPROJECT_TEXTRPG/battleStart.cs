@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TEAMPROJECT_TEXTRPG
 {
-    public class battleStart
+    internal class BattleStart : Scene
     {
 
 
@@ -25,7 +25,7 @@ namespace TEAMPROJECT_TEXTRPG
 
         public void StartBattle()
         {
-
+            Console.Clear();
             Console.WriteLine("Battle!!");
             Console.WriteLine();
 
@@ -69,17 +69,14 @@ namespace TEAMPROJECT_TEXTRPG
 
         }
 
-
-
-
-
-
-
-
+        internal override void Show()
+        {
+            StartBattle();
+        }
     }
 
 
-        public class Monster
+        internal class Monster
         {
 
 
