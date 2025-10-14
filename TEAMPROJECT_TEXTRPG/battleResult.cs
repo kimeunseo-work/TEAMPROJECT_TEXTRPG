@@ -23,7 +23,32 @@ HP {" 전투 전 체력 "} -> {" 전투 후 체력 "}   // 참조_전투 전 체
 0. 다음
 
 >> ");
-                                    
+
+            WhileInput0();
+        }
+
+
+        public void BattleResultLose()
+        {
+            Console.Clear();
+            Console.Write($@"
+Battle!! - Result
+
+You Lose
+
+Lv.{" Player 레벨 "} {" Player 이름 "}   // 참조_Player 레벨, Player 이름
+HP {" 전투 전 체력 "} -> 0   // 참조_전투 전 체력
+
+0. 다음
+
+>> ");
+
+            WhileInput0();
+        }
+
+
+        public void WhileInput0()
+        {
             while (inputInt != 0)
             {
                 input = Console.ReadLine();
