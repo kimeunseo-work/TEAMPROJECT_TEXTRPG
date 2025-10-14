@@ -47,7 +47,21 @@ namespace TEAMPROJECT_TEXTRPG
             }
 
 
+            public void StartBattle()
+            {
 
+                Console.WriteLine("Battle!!");
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine();
+
+
+
+
+
+
+
+            }
 
 
 
