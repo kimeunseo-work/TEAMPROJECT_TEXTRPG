@@ -32,15 +32,17 @@ namespace TEAMPROJECT_TEXTRPG
             bool keep = true;
             while (keep)
             {
+                Console.Clear();
                 Console.WriteLine($"\nLv.{Level}\n\n{Name}({Job})\n\n공격력: {Attack:F1}\n\n방어력: {Defense}" +
                 $"\n\n체력: {Hp}\n\nGold: {Gold}");
 
-                Console.WriteLine($"\n1.\n0. 나가기\n\n원하시는 행동을 입력해주세요.\n>>");
+                Console.WriteLine($"\n1.\n0. 나가기");
 
-                int input;
-                if (int.TryParse(Console.ReadLine(), out input) && input == 0)
+                int input = InputHandler.GetUserActionInput();
+                if (input == 0)
                 {
                     keep = false;
+                    GameManager.Instance.currentState = GameState.Home;
                 }
                 else
                 {

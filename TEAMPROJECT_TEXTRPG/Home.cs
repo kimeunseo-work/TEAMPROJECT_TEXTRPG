@@ -39,7 +39,7 @@ namespace TEAMPROJECT_TEXTRPG
                     case 1: // 1. 상태 보기
                         isValidInput = true;
                         Console.WriteLine("상태보기를 선택하셨습니다.");
-                        //GameManager.Instance.currentState = GameState.Stat;
+                        GameManager.Instance.currentState = GameState.Stat;
                         break;
 
                     case 2: // 2. 전투 시작
