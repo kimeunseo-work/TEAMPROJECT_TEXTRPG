@@ -27,6 +27,7 @@ namespace TEAMPROJECT_TEXTRPG
             Defense = BaseDefense;
         }
 
+        //상태보기
         public void DisplayPlayerinfo()
         {
             bool keep = true;
@@ -46,8 +47,9 @@ namespace TEAMPROJECT_TEXTRPG
                 }
                 else
                 {
+                    Console.WriteLine("잘못된 입력입니다.");
+                    Console.ReadKey();
                     Console.Clear();
-                    Console.WriteLine("0을 입력해서 메인화면으로 나가기");
                 }
             }
         }
