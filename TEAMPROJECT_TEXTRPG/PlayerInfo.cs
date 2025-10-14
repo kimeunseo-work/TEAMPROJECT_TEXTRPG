@@ -15,7 +15,7 @@ namespace TEAMPROJECT_TEXTRPG
         public string Job { get; set; } = "전사";
         public int Hp { get; set; } = 100;
         public int Gold { get; set; } = 1500;
-
+        public int MaxHP {  get; set; }
         public double BaseAttack { get; set; } = 10;
         public double BaseDefense { get; set; } = 5;
         public double Attack { get; set; }
