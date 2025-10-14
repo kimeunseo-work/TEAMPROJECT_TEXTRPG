@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace TEAMPROJECT_TEXTRPG
@@ -35,28 +34,30 @@ namespace TEAMPROJECT_TEXTRPG
 
                 playerSelect = InputHandler.GetUserActionInput();
 
-                if (playerSelect == 1)
+                switch (playerSelect)
                 {
-                    isValidInput = true;
-                    Console.WriteLine("상태보기를 선택하셨습니다.");
-                    //GameManager.Instance.currentState = GameState.Stat;
-                }
-                else if (playerSelect == 2)
-                {
-                    isValidInput = true;
-                    Console.WriteLine("전투를 선택하셨습니다.");
-                    //GameManager.Instance.currentState = GameState.Battle;
-                }
-                else if (playerSelect == 0)
-                {
-                    isValidInput = true;
-                    Console.WriteLine("게임종료를 선택하셨습니다.");
-                    GameManager.Instance.currentState = GameState.None;
-                }
-                else
-                {
-                    Console.WriteLine("잘못된 입력입니다.");
-                    Console.ReadKey();
+                    case 1: // 1. 상태 보기
+                        isValidInput = true;
+                        Console.WriteLine("상태보기를 선택하셨습니다.");
+                        //GameManager.Instance.currentState = GameState.Stat;
+                        break;
+
+                    case 2: // 2. 전투 시작
+                        isValidInput = true;
+                        Console.WriteLine("전투를 선택하셨습니다.");
+                        //GameManager.Instance.currentState = GameState.Battle;
+                        break;
+
+                    case 0: // 0. 게임 종료
+                        isValidInput = true;
+                        Console.WriteLine("게임을 종료합니다.");
+                        GameManager.Instance.currentState = GameState.None;
+                        break;
+
+                    default: // 유효하지 않은 입력
+                        Console.WriteLine("잘못된 입력입니다.");
+                        Console.ReadKey();
+                        break;
                 }
 
                 if (isValidInput && GameManager.Instance.currentState != GameState.None)
