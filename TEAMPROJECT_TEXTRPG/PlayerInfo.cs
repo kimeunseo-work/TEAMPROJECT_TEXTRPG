@@ -10,21 +10,15 @@ namespace TEAMPROJECT_TEXTRPG
 
     internal class PlayerInfo: Scene
     {
-        public int Level { get; set; } = 1;
-        public string Name { get; set; } = "Chad";
-        public string Job { get; set; } = "전사";
-        public int Hp { get; set; } = 100;
-        public int Gold { get; set; } = 1500;
-        public int MaxHP {  get; set; }
-        public double BaseAttack { get; set; } = 10;
-        public double BaseDefense { get; set; } = 5;
-        public double Attack { get; set; }
-        public double Defense { get; set; }
+        private Player player;
 
-        public PlayerInfo() // 기본 공격력과 추가된 총 공격력 구별
+        public PlayerInfo(Player player)
         {
-            Attack = BaseAttack;
-            Defense = BaseDefense;
+            this.player = player;
+        }
+        internal override void Show()
+        {
+            DisplayPlayerinfo();
         }
 
         //상태보기
@@ -34,8 +28,8 @@ namespace TEAMPROJECT_TEXTRPG
             while (keep)
             {
                 Console.Clear();
-                Console.WriteLine($"\nLv.{Level}\n\n{Name}({Job})\n\n공격력: {Attack:F1}\n\n방어력: {Defense}" +
-                $"\n\n체력: {Hp}\n\nGold: {Gold}");
+                Console.WriteLine($"\nLv.{player.Level}\n\n{player.Name}({player.Job})\n\n공격력: {player.Attack:F1}\n\n방어력: {player.Defense}" +
+                $"\n\n체력: {player.Hp}\n\nGold: {player.Gold}");
 
                 Console.WriteLine($"\n1.\n0. 나가기");
 
@@ -54,10 +48,7 @@ namespace TEAMPROJECT_TEXTRPG
             }
         }
 
-        internal override void Show()
-        {
-            DisplayPlayerinfo();
-        }
+        
     }
 
 

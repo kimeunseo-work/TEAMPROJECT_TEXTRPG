@@ -1,4 +1,5 @@
-﻿using TEAMPROJECT_TEXTRPG.Scenes;
+﻿using System.Numerics;
+using TEAMPROJECT_TEXTRPG.Scenes;
 
 namespace TEAMPROJECT_TEXTRPG
 {
@@ -44,12 +45,12 @@ namespace TEAMPROJECT_TEXTRPG
             // 예제 확인하려면 currentState = GameState.Example1
             currentState = GameState.Home;
             scenes = new Dictionary<GameState, Scene>();
-
+            Player player = new Player();// 플레이어 객채
             // 씬을 매니저에 추가하는 방법 예시
             scenes.Add(GameState.Example1, new ExampleScene());
             scenes.Add(GameState.Example2, new ExampleScene2());
             scenes.Add(GameState.Home, new Home());
-            scenes.Add(GameState.Stat, new PlayerInfo());
+            scenes.Add(GameState.Stat, new PlayerInfo(player));
             scenes.Add(GameState.Battle, new BattleStart());
         }
 
