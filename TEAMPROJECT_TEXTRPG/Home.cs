@@ -51,7 +51,7 @@ namespace TEAMPROJECT_TEXTRPG
                 {
                     isValidInput = true;
                     Console.WriteLine("게임종료를 선택하셨습니다.");
-                    //GameManager.Instance.currentState = GameState.None;
+                    GameManager.Instance.currentState = GameState.None;
                 }
                 else
                 {
