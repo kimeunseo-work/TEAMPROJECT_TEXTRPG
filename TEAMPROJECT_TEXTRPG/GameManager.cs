@@ -48,6 +48,7 @@ namespace TEAMPROJECT_TEXTRPG
             // 씬을 매니저에 추가하는 방법 예시
             scenes.Add(GameState.Example1, new ExampleScene());
             scenes.Add(GameState.Example2, new ExampleScene2());
+            scenes.Add(GameState.Home, new Home());
         }
 
         internal void Run()
