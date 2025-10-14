@@ -42,12 +42,13 @@ namespace TEAMPROJECT_TEXTRPG
         internal GameManager()
         {
             // 예제 확인하려면 currentState = GameState.Example1
-            currentState = GameState.Home;
+            currentState = GameState.Stat;
             scenes = new Dictionary<GameState, Scene>();
 
             // 씬을 매니저에 추가하는 방법 예시
             scenes.Add(GameState.Example1, new ExampleScene());
             scenes.Add(GameState.Example2, new ExampleScene2());
+            scenes.Add(GameState.Stat, new PlayerInfo());
         }
 
         internal void Run()

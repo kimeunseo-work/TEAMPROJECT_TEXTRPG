@@ -8,7 +8,7 @@ namespace TEAMPROJECT_TEXTRPG
 {
 
 
-    internal class PlayerInfo
+    internal class PlayerInfo: Scene
     {
         public int Level { get; set; } = 1;
         public string Name { get; set; } = "Chad";
@@ -48,6 +48,11 @@ namespace TEAMPROJECT_TEXTRPG
                     Console.WriteLine("0을 입력해서 메인화면으로 나가기");
                 }
             }
+        }
+
+        internal override void Show()
+        {
+            DisplayPlayerinfo();
         }
     }
 
