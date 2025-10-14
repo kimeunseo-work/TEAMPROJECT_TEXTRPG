@@ -4,10 +4,7 @@
     {
         static void Main()
         {
-
-      
             GameManager.Instance.Run();
-
         }
     }
 }
