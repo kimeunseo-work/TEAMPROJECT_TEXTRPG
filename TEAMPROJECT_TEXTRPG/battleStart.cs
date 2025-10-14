@@ -10,17 +10,11 @@ namespace TEAMPROJECT_TEXTRPG
     {
 
 
+        static Monsters monsters = new Monsters();
 
+        List<Monster> monster = monsters.monster;
 
-        List<Monster> monster = new List<Monster>() {
-
-            new Monster("미니언", 2, 15, 5),
-            new Monster("공허충", 3, 10, 9),
-            new Monster("대포미니언", 5, 25, 8)
-
-
-
-        };
+        
 
 
         public void StartBattle()
@@ -33,7 +27,7 @@ namespace TEAMPROJECT_TEXTRPG
 
             int monsterCount = random.Next(0, 2); ;
 
-            Monster spawn = monster[random.Next(monster.Count)];
+            Monster spawn = monster [random.Next(monster.Count)];
 
             List<Monster> spawnMon = new List<Monster>() { spawn };
 
@@ -59,7 +53,13 @@ namespace TEAMPROJECT_TEXTRPG
             Console.Write(">>");
             string input = Console.ReadLine();
 
+            if( input == "0")
+            {
 
+                
+
+
+            }
 
 
 
@@ -76,40 +76,7 @@ namespace TEAMPROJECT_TEXTRPG
     }
 
 
-        internal class Monster
-        {
-
-
-            
-
-            public string Name;
-
-            public int Level;
-
-            public int Hp;
-
-            public int Atk { get; set; }
-        
-
-
-
-            public Monster (string name, int level, int hp, int atk)
-            {
-                Name = name;
-                Level = level;
-                Hp = hp;
-                Atk = atk;
-                
-            }
-
-
-
-           
-
-
-
-
-        }
+     
 
 
 
