@@ -22,6 +22,20 @@ namespace TEAMPROJECT_TEXTRPG
             IsDead = isDead;
         }
 
+        public Monster(Monster clone)
+        {
+
+            Name = clone.Name;
+            Level = clone.Level;
+            Hp = clone.Hp;
+            Atk = clone.Atk;
+            IsDead = clone.IsDead;
+
+
+
+
+        }
+
 
         
 
@@ -59,7 +73,7 @@ namespace TEAMPROJECT_TEXTRPG
             for (int i = 0; i < count; i++)
             {
                 var index = new Random().Next(monsterCount);
-                monsters.Add(monster[index]);
+                monsters.Add(new Monster(monster[index]));
             }
             return monsters;
         }
