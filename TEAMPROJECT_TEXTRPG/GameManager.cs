@@ -12,6 +12,7 @@ namespace TEAMPROJECT_TEXTRPG
         Home,// 메인 화면
         Stat,// 상태창
         Battle,// 전투
+        BattleResult,//전투 결과
         Example1,
         Example2,
     }
@@ -52,6 +53,7 @@ namespace TEAMPROJECT_TEXTRPG
             scenes.Add(GameState.Home, new Home());
             scenes.Add(GameState.Stat, new PlayerInfo(player));
             scenes.Add(GameState.Battle, new BattleStart(player));
+            scenes.Add(GameState.BattleResult, new BattleResult());
         }
 
         internal void Run()
