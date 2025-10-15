@@ -26,7 +26,7 @@ namespace TEAMPROJECT_TEXTRPG
             Console.Clear();
             Console.WriteLine("**Battle!!**\n");
             ShowMonsters();
-            Console.WriteLine("\n. 취소\n");
+            Console.WriteLine("\n0. 취소\n");
             Console.Write("대상을 선택해주세요.\n>>");
 
             string input = Console.ReadLine();
@@ -34,7 +34,7 @@ namespace TEAMPROJECT_TEXTRPG
             if (input == "0")
             {
                 Console.WriteLine("전투를 취소했습니다.");
-                return;
+                GameManager.Instance.currentState = GameState.Home;
             }
             int targetIndex;
             if (!int.TryParse(input, out targetIndex) || targetIndex < 1 || targetIndex > GameManager.Instance.monsters.Count)
@@ -42,7 +42,7 @@ namespace TEAMPROJECT_TEXTRPG
                 Console.WriteLine("잘못된 입력입니다.");
                 return;
             }
-            Monster target = GameManager.Instance.monsters[targetIndex];
+            Monster target = GameManager.Instance.monsters[targetIndex - 1];
 
             if (target.Hp <= 0)
             {
