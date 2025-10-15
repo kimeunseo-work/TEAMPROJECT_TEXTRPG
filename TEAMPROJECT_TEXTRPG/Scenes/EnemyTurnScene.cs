@@ -25,10 +25,24 @@
                 }
             }
 
-            input = InputHandler.GetUserActionInput();
-            if (input == 0)
+            // 입력
+            while (true)
             {
-                GameManager.Instance.currentState = GameState.Battle;
+                input = InputHandler.GetUserActionInput();
+                
+                if (input == 0)
+                {
+                    if(player.Hp <= 0)
+                    {
+                        GameManager.Instance.currentBattleState = BattleState.Defeat;
+                        GameManager.Instance.currentState = GameState.BattleResult;
+                    }
+                    else
+                    {
+                        GameManager.Instance.currentState = GameState.Battle;
+                    }
+                    break;
+                }
             }
         }
 
