@@ -22,6 +22,20 @@ namespace TEAMPROJECT_TEXTRPG
             IsDead = isDead;
         }
 
+        public Monster(Monster clone)
+        {
+
+            Name = clone.Name;
+            Level = clone.Level;
+            Hp = clone.Hp;
+            Atk = clone.Atk;
+            IsDead = clone.IsDead;
+
+
+
+
+        }
+
 
         
 
