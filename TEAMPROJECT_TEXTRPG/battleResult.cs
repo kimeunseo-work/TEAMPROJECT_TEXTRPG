@@ -6,11 +6,20 @@
         int parsedInput;
         bool isParsedSuccess;
 
+        private Player player;
+
+
+
+        internal BattleResult(Player player)
+        {
+            this.player = player;
+        }
+
 
         internal void BattleResultWin()
         {
             Console.Clear();
-            // 참조 요구_{ 랜덤 몬스터 생성 값 }, { 현재 Player 레벨 }, { Player 이름 }, { 전투 전 체력 }, { 전투 후 체력 }
+            // 참조 요구_{ 랜덤 몬스터 개수 }, { 전투 후 체력 }
             Console.Write(@$"
 Battle!! - Result
 
@@ -18,8 +27,8 @@ Victory
 
 던전에서 몬스터 {" 랜덤 몬스터 개수 "}마리를 잡았습니다.
 
-Lv.{" Player 레벨 "} {" Player 이름 "}
-HP {" 전투 전 체력 "} -> {" 전투 후 체력 "}
+Lv.{player.Level} {player.Name}
+HP {player.Hp} -> {" 전투 후 체력 "}
 
 0. 다음
 
@@ -32,14 +41,13 @@ HP {" 전투 전 체력 "} -> {" 전투 후 체력 "}
         internal void BattleResultLose()
         {
             Console.Clear();
-            // 참조 요구_{ 현재 Player 레벨 }, { Player 이름 }, { 전투 전 체력 }
             Console.Write($@"
 Battle!! - Result
 
 You Lose
 
-Lv.{" Player 레벨 "} {" Player 이름 "}
-HP {" 전투 전 체력 "} -> 0
+Lv.{player.Level} {player.Name}
+HP {player.Hp} -> 0
 
 0. 다음
 
@@ -88,9 +96,14 @@ HP {" 전투 전 체력 "} -> 0
 
         internal override void Show()
         {
-            BattleResultWin();
-
-            BattleResultLose();
+            if (GameManager.Instance.currentBattleState == BattleState.Victory)
+            {
+                BattleResultWin();
+            }
+            else if (GameManager.Instance.currentBattleState == BattleState.Defeat)
+            {
+                BattleResultLose();
+            }
         }
     }
 }
