@@ -50,7 +50,7 @@ HP {" 전투 전 체력 "} -> 0
 
 
         // Input 값이 '0' 일 때까지 반복하는 메서드
-        public void WhileInput0()
+        private void WhileInput0()
         {
             while (parsedInput != 0)
             {
@@ -72,7 +72,7 @@ HP {" 전투 전 체력 "} -> 0
 
 
         // Input 값이 'int 자료형' 으로 변환 가능한지 체크하는 메서드 (변환 불가 시 '-1' 값으로 고정)
-        public void CheckInputInt()
+        private void CheckInputInt()
         {
             isParsedSuccess = int.TryParse(input, out parsedInput);
 
