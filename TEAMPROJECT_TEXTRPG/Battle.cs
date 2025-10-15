@@ -5,18 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using TEAMPROJECT_TEXTRPG;
 
-namespace TeamProject_Attack
+namespace TEAMPROJECT_TEXTRPG
 {
-    internal class battle
+    internal class Battle: Scene
     {
         private Player Player;
-        private Monster[] monsters;
+        
         private Random random = new Random();
 
-        public battle(Player player, Monster[] monsters)
+        public Battle(Player player)
         {
             this.Player = player;
-            this.monsters = monsters;
+            
+            
+             
 
         }
         public void Start()
@@ -35,12 +37,12 @@ namespace TeamProject_Attack
                 return;
             }
             int targetIndex;
-            if (!int.TryParse(input, out targetIndex) || targetIndex < 1 || targetIndex > monsters.Length)
+            if (!int.TryParse(input, out targetIndex) || targetIndex < 1 || targetIndex > GameManager.Instance.monsters.Count)
                 {
                 Console.WriteLine("잘못된 입력입니다.");
                 return;
             }
-            Monster target = monsters[targetIndex];
+            Monster target = GameManager.Instance.monsters[targetIndex];
 
             if (target.Hp <= 0)
             {
@@ -86,9 +88,9 @@ namespace TeamProject_Attack
         }
         private void ShowMonsters()
         {
-            for (int i = 0; i < monsters.Length; i++)
+            for (int i = 0; i < GameManager.Instance.monsters.Count; i++)
             {
-                Monster m = monsters[i];
+                Monster m = GameManager.Instance.monsters[i];
                 if (m.Hp > 0)
                 {
                     Console.ForegroundColor = ConsoleColor.White;
@@ -105,7 +107,10 @@ namespace TeamProject_Attack
 
         }
 
-
+        internal override void Show()
+        {
+            Start();
+        }
     }
 
 }
