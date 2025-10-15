@@ -72,7 +72,7 @@ namespace TEAMPROJECT_TEXTRPG
             if (target.Hp <= 0)
             {
                 target.Hp = 0;
-                
+                target.IsDead = true;
                 Console.WriteLine($"\n{target.Name}");
                 Console.WriteLine($"HP{oldHP} -> Dead");
             }
@@ -83,8 +83,21 @@ namespace TEAMPROJECT_TEXTRPG
 
             }
             Console.WriteLine("\n0.다음");
-            Console.ReadLine();
+            Console.ReadKey();
+
+            bool allDead = GameManager.Instance.monsters.All(x => x.IsDead);
+            if (allDead)
+            {
+                GameManager.Instance.currentState = GameState.BattleResult;
+                GameManager.Instance.currentBattleState = BattleState.Victory;
+                
+            }
+            else
+            {
+                GameManager.Instance.currentState = GameState.EnemyTurn;
+            }
         }
+        
         private int GetRandomAttack(double baseattack)
         {
             double error = baseattack * 0.1;
