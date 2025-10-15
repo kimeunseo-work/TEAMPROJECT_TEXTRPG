@@ -39,6 +39,7 @@ namespace TEAMPROJECT_TEXTRPG
         //============================================================//
         internal GameState currentState;
         internal Dictionary<GameState, Scene> scenes;
+        internal List<Monster> monsters = new List<Monster>();
 
         /* 생성자 */
         //============================================================//
