@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Reflection.Emit;
 using System.Runtime.Intrinsics.Arm;
+using System.Xml.Linq;
 
 namespace TEAMPROJECT_TEXTRPG
 {
@@ -19,6 +21,10 @@ namespace TEAMPROJECT_TEXTRPG
             Atk = atk;
             IsDead = isDead;
         }
+
+
+        
+
 
         /// <summary>
         /// 몬스터 공격
@@ -57,5 +63,14 @@ namespace TEAMPROJECT_TEXTRPG
             }
             return monsters;
         }
+
+
+       
+
+
+
+
     }
+
+
 }
