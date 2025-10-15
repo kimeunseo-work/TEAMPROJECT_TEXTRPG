@@ -27,9 +27,14 @@ namespace TEAMPROJECT_TEXTRPG
             Console.WriteLine("**Battle!!**\n");
             ShowMonsters();
             Console.WriteLine("\n0. 취소\n");
-            Console.Write("대상을 선택해주세요.\n>>");
+
 
             string input = Console.ReadLine();
+            
+
+            
+
+
 
             if (input == "0")
             {
