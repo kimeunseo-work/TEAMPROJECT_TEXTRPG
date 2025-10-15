@@ -10,63 +10,61 @@
         }
 
         internal override void Show()
-        
         {
-            var input = -1;
-
-            for(int i = 0; i < GameManager.Instance.monsters.Count; i++)
+            foreach (var monster in GameManager.Instance.monsters)
             {
-                var oldHp = player.Hp;
-                var monster = GameManager.Instance.monsters[i];
-                var isDead = MonsterAttack(monster);
+                // 몬스터 공격
+                var oldHp = MonsterAttack(monster);
 
-                if (isDead) continue;
+                // 몬스터가 사망하여 공격하지 않았음.
+                if (oldHp == null) break; 
+                
+                // 화면 출력
+                MonsterAttackResultUI(monster, oldHp);
 
-                WriteResult(monster, oldHp);
-
-                // 다음 이외의 선택지면 다시 입력 받기
+                // 선택지 입력
                 while (true)
                 {
-                    input = InputHandler.GetUserActionInput();
-                    if (input == 0)
-                    {
-                        if (player.Hp <= 0)
-                        {
-                            GameManager.Instance.currentBattleState = BattleState.Defeat;
-                            GameManager.Instance.currentState = GameState.BattleResult;
-                        }
-                        else if (player.Hp > 0 && i < GameManager.Instance.monsters.Count - 1)
-                        {
-                            break;
-                        }
-                        else if(player.Hp > 0 && i >= GameManager.Instance.monsters.Count - 1)
-                        {
-                            GameManager.Instance.currentState = GameState.Battle;
-                            break;
-                        }
-                    }
+                    var input = InputHandler.GetUserActionInput();
+                    // 유효한 키 아니면 반복
+                    if (input == 0) break;
                 }
+
+                var list = new List<int>();
+                CheckDefeat();
+                if (CheckBattleEnd()) return;
             }
+            // 몬스터 공격 순회 후 플레이어가 사망하지 않았으면 Battle로
+            GameManager.Instance.currentState = GameState.Battle;
         }
 
-        /// <summary>
-        /// 몬스터 공격
-        /// </summary>
-        private bool MonsterAttack(Monster monster)
+        /* 키 입력 */
+        //============================================================//
+
+        private void CheckDefeat()
         {
-            if (monster.IsDead == true)
+            if (player.Hp <= 0)
             {
-                return true;
+                GameManager.Instance.currentBattleState = BattleState.Defeat;
+                GameManager.Instance.currentState = GameState.BattleResult;
             }
-            monster.Attack(player);
-            return false;
         }
 
-        /// <summary>
-        /// 화면 출력
-        /// </summary>
-        private void WriteResult(Monster monster, int oldHp)
+        private bool CheckBattleEnd()
         {
+            return GameManager.Instance.currentBattleState == BattleState.Defeat;
+        }
+
+        /* 화면 출력 */
+        //============================================================//
+
+        /// <summary>
+        /// 공격 후 화면 출력
+        /// </summary>
+        private void MonsterAttackResultUI(Monster monster, int? oldHp)
+        {
+            if (oldHp == null) return;
+
             Console.Clear();
             Console.WriteLine("Battle!!");
             Console.WriteLine();
@@ -79,6 +77,23 @@
             Console.WriteLine();
 
             Console.WriteLine("0. 다음");
+        }
+
+        /* 몬스터 공격 처리 */
+        //============================================================//
+
+        /// <summary>
+        /// 몬스터 공격 처리
+        /// </summary>
+        /// <returns>공격 전후 플레이어 체력</returns>
+        private int? MonsterAttack(Monster monster)
+        {
+            if (monster.IsDead) return null;
+
+            var oldHp = player.Hp;
+            monster.Attack(player);
+
+            return oldHp;
         }
     }
 }
