@@ -6,6 +6,16 @@ namespace TEAMPROJECT_TEXTRPG
     internal class Monster
     {
 
+        public int Level;
+
+        public int Hp;
+
+        public int Atk;
+
+
+
+
+        public Monster(string name, int level, int hp, int atk)
         {
             Name = name;
             Level = level;
