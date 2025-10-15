@@ -14,8 +14,9 @@
             var input = -1;
             foreach (var monster in GameManager.Instance.monsters)
             {
+                var oldHp = player.Hp;
                 MonsterAttack(monster);
-                WriteResult(monster);
+                WriteResult(monster, oldHp);
 
                 while (true)
                 {
@@ -43,14 +44,20 @@
         /// <summary>
         /// 화면 출력
         /// </summary>
-        private void WriteResult(Monster monster)
+        private void WriteResult(Monster monster, int oldHp)
         {
             Console.Clear();
             Console.WriteLine("Battle!!");
             Console.WriteLine();
 
-            Console.WriteLine("Lv.1  Chad (전사)");
-            Console.WriteLine("HP 100/100");
+            Console.WriteLine($"Lv.{monster.Level} {monster.Name}의 공격!");
+            Console.WriteLine($"{player.Name} 을(를) 맞췄습니다. [데미지 : {monster.Atk}]");
+
+            Console.WriteLine($"Lv.{player.Level} {player.Name} ({player.Job})");
+            Console.WriteLine($"HP {oldHp} → {player.Hp}");
+            Console.WriteLine();
+
+            Console.WriteLine("0. 다음");
         }
     }
 }
