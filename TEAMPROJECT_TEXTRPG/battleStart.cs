@@ -35,8 +35,13 @@ namespace TEAMPROJECT_TEXTRPG
 
             int monsterCount = random.Next(1, 5); ;
 
-             
-           
+            Monster Spawn()
+            {
+                Monster clonmon = monster[random.Next(monster.Count)]; // 몬스터리스트에서 몬스터가 가져와짐. 이제 몬스터리스트에서 가져온 몬스터를 새 개체로 생성해서 (생성될때마다)그 새로생긴 몬스터들이
+                // GameManager에 있는 몬스터 리스트에 추가해야됨
+                return t.Clone(); // ← 새로 만든 개체라 HP 안 공유
+            }
+
 
 
             for (int i = 0; i < monsterCount; i++)
