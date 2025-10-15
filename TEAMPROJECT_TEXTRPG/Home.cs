@@ -45,7 +45,7 @@ namespace TEAMPROJECT_TEXTRPG
                     case 2: // 2. 전투 시작
                         isValidInput = true;
                         Console.WriteLine("전투를 선택하셨습니다.");
-                        GameManager.Instance.currentState = GameState.Battle;
+                        GameManager.Instance.currentState = GameState.BattleStart;
                         break;
 
                     case 0: // 0. 게임 종료

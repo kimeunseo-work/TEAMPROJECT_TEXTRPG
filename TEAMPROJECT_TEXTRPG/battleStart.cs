@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace TEAMPROJECT_TEXTRPG
 {
     internal class BattleStart : Scene
@@ -14,12 +15,14 @@ namespace TEAMPROJECT_TEXTRPG
 
         List<Monster> monster = monsters.monster; //리스트 몬스터
         private Player player;
+        
 
 
 
         public BattleStart(Player player)
         {
             this.player = player;
+            
         }
 
         public void StartBattle()
@@ -33,7 +36,7 @@ namespace TEAMPROJECT_TEXTRPG
             int monsterCount = random.Next(1, 5); ;
 
              
-            List<Monster> spawnMon = new List<Monster>(); // 스폰된 몬스터의 리스트가 있음
+           
 
 
             for (int i = 0; i < monsterCount; i++)
@@ -41,7 +44,7 @@ namespace TEAMPROJECT_TEXTRPG
 
                 Monster spawn = monster[random.Next(monster.Count)]; // for가 실행될때마다 spawn에 들어있는 몬스터의 종류가 랜덤으로 바뀜
 
-                spawnMon.Add(spawn); // spawn에 들어있는 몬스터가 추가됨
+                GameManager.Instance.monsters.Add(spawn); // spawn에 들어있는 몬스터가 추가됨
 
 
 
@@ -51,10 +54,10 @@ namespace TEAMPROJECT_TEXTRPG
 
 
 
-            for (int i = 0; i < spawnMon.Count; i++)
+            for (int i = 0; i < GameManager.Instance.monsters.Count; i++)
 
             {
-                Console.WriteLine($"Lv.{spawnMon[i].Level} {spawnMon[i].Name} HP {spawnMon[i].Hp}");
+                Console.WriteLine($"Lv.{GameManager.Instance.monsters[i].Level} {GameManager.Instance.monsters[i].Name} HP {GameManager.Instance.monsters[i].Hp}");
 
             }
 
@@ -82,6 +85,7 @@ namespace TEAMPROJECT_TEXTRPG
             else if (input == 1)
             {
 
+                GameManager.Instance.currentState = GameState.Battle;
 
 
 
