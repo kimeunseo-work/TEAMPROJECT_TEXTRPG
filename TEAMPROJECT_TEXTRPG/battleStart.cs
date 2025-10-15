@@ -9,18 +9,13 @@ namespace TEAMPROJECT_TEXTRPG
 {
     internal class BattleStart : Scene
     {
-
-
-        static Monsters monsters = new Monsters();
-
-        List<Monster> monster = monsters.monster; //리스트 몬스터
+        private Monsters monsters;
         private Player player;
         
 
-
-
         public BattleStart(Player player)
         {
+            monsters = new Monsters();
             this.player = player;
             
         }
@@ -31,7 +26,7 @@ namespace TEAMPROJECT_TEXTRPG
             Console.WriteLine("Battle!!");
             Console.WriteLine();
 
-            Random random = new Random();
+            GameManager.Instance.monsters = monsters.SpawnRandomMonsters();
 
             int monsterCount = random.Next(1, 5); ;
 

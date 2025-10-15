@@ -9,13 +9,15 @@ namespace TEAMPROJECT_TEXTRPG
         public int Level;
         public int Hp;
         public int Atk;
+        public bool IsDead;
 
-        public Monster(string name, int level, int hp, int atk)
+        public Monster(string name, int level, int hp, int atk, bool isDead = false)
         {
             Name = name;
             Level = level;
             Hp = hp;
             Atk = atk;
+            IsDead = isDead;
         }
 
         /// <summary>
