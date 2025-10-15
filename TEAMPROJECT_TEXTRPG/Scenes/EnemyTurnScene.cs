@@ -12,37 +12,37 @@
         internal override void Show()
         {
             var input = -1;
-            foreach (var monster in GameManager.Instance.monsters)
+
+            for(int i = 0; i < GameManager.Instance.monsters.Count; i++)
             {
                 var oldHp = player.Hp;
-                MonsterAttack(monster);
+                var monster = GameManager.Instance.monsters[i];
+                var isDead = MonsterAttack(monster);
+
+                if (isDead) continue;
+
                 WriteResult(monster, oldHp);
 
                 // 다음 이외의 선택지면 다시 입력 받기
                 while (true)
                 {
                     input = InputHandler.GetUserActionInput();
-                    if (input == 0) break;
-                }
-            }
-
-            // 결과창 or Battle
-            while (true)
-            {
-                input = InputHandler.GetUserActionInput();
-                
-                if (input == 0)
-                {
-                    if(player.Hp <= 0)
+                    if (input == 0)
                     {
-                        GameManager.Instance.currentBattleState = BattleState.Defeat;
-                        GameManager.Instance.currentState = GameState.BattleResult;
+                        if (player.Hp <= 0)
+                        {
+                            GameManager.Instance.currentBattleState = BattleState.Defeat;
+                            GameManager.Instance.currentState = GameState.BattleResult;
+                        }
+                        else if (player.Hp > 0 && i < GameManager.Instance.monsters.Count - 1)
+                        {
+                            break;
+                        }
+                        else if(player.Hp > 0 && i >= GameManager.Instance.monsters.Count - 1)
+                        {
+                            GameManager.Instance.currentState = GameState.Battle;
+                        }
                     }
-                    else
-                    {
-                        GameManager.Instance.currentState = GameState.Battle;
-                    }
-                    break;
                 }
             }
         }
@@ -50,10 +50,14 @@
         /// <summary>
         /// 몬스터 공격
         /// </summary>
-        private void MonsterAttack(Monster monster)
+        private bool MonsterAttack(Monster monster)
         {
-            if (monster.IsDead) return;
+            if (monster.IsDead == true)
+            {
+                return false;
+            }
             monster.Attack(player);
+            return true;
         }
 
         /// <summary>
