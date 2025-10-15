@@ -12,9 +12,9 @@ namespace TEAMPROJECT_TEXTRPG
 
         static Monsters monsters = new Monsters();
 
-        List<Monster> monster = monsters.monster;
+        List<Monster> monster = monsters.monster; //리스트 몬스터
 
-        
+
 
 
         public void StartBattle()
@@ -25,13 +25,28 @@ namespace TEAMPROJECT_TEXTRPG
 
             Random random = new Random();
 
-            int monsterCount = random.Next(0, 2); ;
+            int monsterCount = random.Next(1, 5); ;
 
-            Monster spawn = monster [random.Next(monster.Count)];
+             
+            List<Monster> spawnMon = new List<Monster>(); // 스폰된 몬스터의 리스트가 있음
 
-            List<Monster> spawnMon = new List<Monster>() { spawn };
 
             for (int i = 0; i < monsterCount; i++)
+            {
+
+                Monster spawn = monster[random.Next(monster.Count)]; // for가 실행될때마다 spawn에 들어있는 몬스터의 종류가 랜덤으로 바뀜
+
+                spawnMon.Add(spawn); // spawn에 들어있는 몬스터가 추가됨
+
+
+
+            }
+
+
+
+
+
+            for (int i = 0; i < spawnMon.Count; i++)
 
             {
                 Console.WriteLine($"Lv.{spawnMon[i].Level} {spawnMon[i].Name} HP {spawnMon[i].Hp}");
@@ -39,8 +54,8 @@ namespace TEAMPROJECT_TEXTRPG
             }
 
 
+            Console.WriteLine();
 
-            
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("[내정보]");
@@ -48,25 +63,26 @@ namespace TEAMPROJECT_TEXTRPG
             Console.WriteLine("HP 100/100");
             Console.WriteLine();
             Console.WriteLine("1. 공격");
-            Console.WriteLine();
-            Console.WriteLine("원하시는 행동을 입력해주세요.");
-            Console.Write(">>");
-            string input = Console.ReadLine();
+            Console.WriteLine("0. 나가기");
+            
+            int input = InputHandler.GetUserActionInput();
 
-            if( input == "0")
+            if (input == 0)
             {
 
-                
+                GameManager.Instance.currentState = GameState.Home;
 
 
             }
+            else if (input == 1)
+            {
 
 
 
 
 
 
-
+            }
         }
 
         internal override void Show()
