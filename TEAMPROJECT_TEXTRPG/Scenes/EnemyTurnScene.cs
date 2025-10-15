@@ -18,6 +18,7 @@
                 MonsterAttack(monster);
                 WriteResult(monster, oldHp);
 
+                // 다음 이외의 선택지면 다시 입력 받기
                 while (true)
                 {
                     input = InputHandler.GetUserActionInput();
@@ -25,7 +26,7 @@
                 }
             }
 
-            // 입력
+            // 결과창 or Battle
             while (true)
             {
                 input = InputHandler.GetUserActionInput();
