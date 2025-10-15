@@ -63,7 +63,7 @@ namespace TEAMPROJECT_TEXTRPG
             Console.WriteLine("HP 100/100");
             Console.WriteLine();
             Console.WriteLine("1. 공격");
-            Console.WriteLine();
+            Console.WriteLine("0. 나가기");
             
             int input = InputHandler.GetUserActionInput();
 
