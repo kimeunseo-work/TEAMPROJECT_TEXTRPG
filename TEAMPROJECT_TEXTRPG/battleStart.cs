@@ -28,27 +28,6 @@ namespace TEAMPROJECT_TEXTRPG
 
             GameManager.Instance.monsters = monsters.SpawnRandomMonsters();
 
-            int monsterCount = random.Next(1, 5); ;
-
-            
-
-
-
-            for (int i = 0; i < monsterCount; i++)
-            {
-
-                Monster spawn = monster[random.Next(monster.Count)]; // for가 실행될때마다 spawn에 들어있는 몬스터의 종류가 랜덤으로 바뀜
-
-                GameManager.Instance.monsters.Add(spawn); // spawn에 들어있는 몬스터가 추가됨
-
-
-
-            }
-
-
-
-
-
             for (int i = 0; i < GameManager.Instance.monsters.Count; i++)
 
             {
