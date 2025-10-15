@@ -55,7 +55,7 @@ namespace TEAMPROJECT_TEXTRPG
             scenes.Add(GameState.Home, new Home());
             scenes.Add(GameState.Stat, new PlayerInfo(player));
             scenes.Add(GameState.BattleStart, new BattleStart(player));
-            scenes.Add(GameState.Battle, new Battle(player, monsters.ToArray()));
+            scenes.Add(GameState.Battle, new Battle(player));
             
         }
 
