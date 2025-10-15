@@ -1,13 +1,13 @@
 ﻿namespace TEAMPROJECT_TEXTRPG
 {
-    public class BattleResult
+    internal class BattleResult : Scene
     {
         string input;
         int parsedInput;
         bool isParsedSuccess;
 
 
-        public void BattleResultWin()
+        internal void BattleResultWin()
         {
             Console.Clear();
             // 참조 요구_{ 랜덤 몬스터 생성 값 }, { 현재 Player 레벨 }, { Player 이름 }, { 전투 전 체력 }, { 전투 후 체력 }
@@ -29,7 +29,7 @@ HP {" 전투 전 체력 "} -> {" 전투 후 체력 "}
         }
 
 
-        public void BattleResultLose()
+        internal void BattleResultLose()
         {
             Console.Clear();
             // 참조 요구_{ 현재 Player 레벨 }, { Player 이름 }, { 전투 전 체력 }
@@ -84,6 +84,13 @@ HP {" 전투 전 체력 "} -> 0
             {
                 parsedInput = -1;
             }
+        }
+
+        internal override void Show()
+        {
+            BattleResultWin();
+
+            BattleResultLose();
         }
     }
 }
