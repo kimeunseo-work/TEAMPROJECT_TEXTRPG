@@ -62,12 +62,10 @@ namespace TEAMPROJECT_TEXTRPG
             scenes.Add(GameState.Stat, new PlayerInfo(player));
 
             
+            scenes.Add(GameState.Battle, new BattleStart(player));
             scenes.Add(GameState.BattleResult, new BattleResult());
-
             scenes.Add(GameState.BattleStart, new BattleStart(player));
             scenes.Add(GameState.Battle, new Battle(player));
-            
-
             scenes.Add(GameState.EnemyTurn, new EnemyTurnScene(player));
         }
 
