@@ -10,6 +10,7 @@
         }
 
         internal override void Show()
+        
         {
             var input = -1;
 
@@ -41,6 +42,7 @@
                         else if(player.Hp > 0 && i >= GameManager.Instance.monsters.Count - 1)
                         {
                             GameManager.Instance.currentState = GameState.Battle;
+                            break;
                         }
                     }
                 }
@@ -54,10 +56,10 @@
         {
             if (monster.IsDead == true)
             {
-                return false;
+                return true;
             }
             monster.Attack(player);
-            return true;
+            return false;
         }
 
         /// <summary>
