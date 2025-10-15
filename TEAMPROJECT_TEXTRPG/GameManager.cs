@@ -22,6 +22,16 @@ namespace TEAMPROJECT_TEXTRPG
         EnemyTurn,
     }
 
+    /// <summary>
+    /// 배틀 결과 상태
+    /// </summary>
+    internal enum BattleState
+    {
+        None,
+        Victory,
+        Defeat
+    }
+
     internal class GameManager
     {
         /* 싱글톤 */
@@ -42,6 +52,7 @@ namespace TEAMPROJECT_TEXTRPG
         /* 게임 상태 */
         //============================================================//
         internal GameState currentState;
+        internal BattleState currentBattleState;
         internal Dictionary<GameState, Scene> scenes;
         internal List<Monster> monsters = new List<Monster>();
 
@@ -52,6 +63,7 @@ namespace TEAMPROJECT_TEXTRPG
             // 예제 확인하려면 currentState = GameState.Example1
             monsters = new List<Monster>();
             currentState = GameState.Home;
+            currentBattleState = BattleState.None;
             scenes = new Dictionary<GameState, Scene>();
             Player player = new Player();// 플레이어 객채
             
