@@ -5,18 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using TEAMPROJECT_TEXTRPG;
 
-namespace TeamProject_Attack
+namespace TEAMPROJECT_TEXTRPG
 {
-    internal class battle
+    internal class Battle: Scene
     {
         private Player Player;
         private Monster[] monsters;
         private Random random = new Random();
 
-        public battle(Player player, Monster[] monsters)
+        public Battle(Player player, Monster[] monsters)
         {
             this.Player = player;
             this.monsters = monsters;
+            
+             
 
         }
         public void Start()
@@ -105,7 +107,10 @@ namespace TeamProject_Attack
 
         }
 
-
+        internal override void Show()
+        {
+            Start();
+        }
     }
 
 }
