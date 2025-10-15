@@ -24,5 +24,7 @@ namespace TEAMPROJECT_TEXTRPG
             Attack = BaseAttack;
             Defense = BaseDefense;
         }
+
+        internal void TakeDamage(int amount) => Hp -= amount;
     }
 }

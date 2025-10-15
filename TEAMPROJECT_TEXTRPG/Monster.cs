@@ -13,6 +13,10 @@ namespace TEAMPROJECT_TEXTRPG
             Atk = atk;
         }
 
+        /// <summary>
+        /// 몬스터 공격
+        /// </summary>
+        internal void Attack(Player player) => player.TakeDamage(Atk);
     }
 
     internal class Monsters
