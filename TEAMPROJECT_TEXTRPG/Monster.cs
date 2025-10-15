@@ -14,7 +14,7 @@ namespace TEAMPROJECT_TEXTRPG
 
         public int Hp;
 
-        public int Atk { get; set; }
+        public int Atk;
 
 
 
