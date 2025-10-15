@@ -73,7 +73,7 @@ namespace TEAMPROJECT_TEXTRPG
             for (int i = 0; i < count; i++)
             {
                 var index = new Random().Next(monsterCount);
-                monsters.Add(monster[index]);
+                monsters.Add(new Monster(monster[index]));
             }
             return monsters;
         }
