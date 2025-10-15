@@ -4,17 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace TEAMPROJECT_TEXTRPG
 {
     internal class BattleStart : Scene
     {
         private Monsters monsters;
         private Player player;
+        
 
         public BattleStart(Player player)
         {
             monsters = new Monsters();
             this.player = player;
+            
         }
 
         public void StartBattle()
@@ -24,6 +27,27 @@ namespace TEAMPROJECT_TEXTRPG
             Console.WriteLine();
 
             GameManager.Instance.monsters = monsters.SpawnRandomMonsters();
+
+            int monsterCount = random.Next(1, 5); ;
+
+             
+           
+
+
+            for (int i = 0; i < monsterCount; i++)
+            {
+
+                Monster spawn = monster[random.Next(monster.Count)]; // for가 실행될때마다 spawn에 들어있는 몬스터의 종류가 랜덤으로 바뀜
+
+                GameManager.Instance.monsters.Add(spawn); // spawn에 들어있는 몬스터가 추가됨
+
+
+
+            }
+
+
+
+
 
             for (int i = 0; i < GameManager.Instance.monsters.Count; i++)
 
@@ -38,8 +62,8 @@ namespace TEAMPROJECT_TEXTRPG
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("[내정보]");
-            Console.WriteLine("Lv.1  Chad (전사)");
-            Console.WriteLine("HP 100/100");
+            Console.WriteLine($"Lv.{player.Level}  {player.Name} ({player.Job})");
+            Console.WriteLine($"HP {player.Hp}/100");
             Console.WriteLine();
             Console.WriteLine("1. 공격");
             Console.WriteLine("0. 나가기");
@@ -56,6 +80,7 @@ namespace TEAMPROJECT_TEXTRPG
             else if (input == 1)
             {
 
+                GameManager.Instance.currentState = GameState.Battle;
 
 
 

@@ -11,8 +11,12 @@ namespace TEAMPROJECT_TEXTRPG
         None,// 게임 종료
         Home,// 메인 화면
         Stat,// 상태창
+
         Battle,// 전투
         BattleResult,//전투 결과
+
+        BattleStart,// 전투
+
         Example1,
         Example2,
         EnemyTurn,
@@ -46,16 +50,24 @@ namespace TEAMPROJECT_TEXTRPG
         internal GameManager()
         {
             // 예제 확인하려면 currentState = GameState.Example1
+            monsters = new List<Monster>();
             currentState = GameState.Home;
             scenes = new Dictionary<GameState, Scene>();
             Player player = new Player();// 플레이어 객채
+            
             // 씬을 매니저에 추가하는 방법 예시
             scenes.Add(GameState.Example1, new ExampleScene());
             scenes.Add(GameState.Example2, new ExampleScene2());
             scenes.Add(GameState.Home, new Home());
             scenes.Add(GameState.Stat, new PlayerInfo(player));
-            scenes.Add(GameState.Battle, new BattleStart(player));
+
+            
             scenes.Add(GameState.BattleResult, new BattleResult());
+
+            scenes.Add(GameState.BattleStart, new BattleStart(player));
+            scenes.Add(GameState.Battle, new Battle(player));
+            
+
             scenes.Add(GameState.EnemyTurn, new EnemyTurnScene(player));
         }
 
