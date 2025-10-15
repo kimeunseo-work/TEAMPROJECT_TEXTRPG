@@ -11,7 +11,6 @@ namespace TEAMPROJECT_TEXTRPG
         public int Level { get; set; } = 1;
         public string Name { get; set; } = "Chad";
         public string Job { get; set; } = "전사";
-        public int Hp { get; set; } = 100;
         public int Gold { get; set; } = 1500;
         public int MaxHP { get; set; }
         public double BaseAttack { get; set; } = 10;
@@ -20,6 +19,13 @@ namespace TEAMPROJECT_TEXTRPG
         public double Defense { get; set; }
 
         public int Exp { get; set; }
+
+        private int hp;
+        public int Hp
+        {
+            get => hp;
+            set => hp = Math.Max(0, value); // hp가 0보다 작으면 0으로 고정
+        }
 
         //경험치 테이블
         private Dictionary<int, int> ExpTable = new Dictionary<int, int>()
@@ -34,6 +40,7 @@ namespace TEAMPROJECT_TEXTRPG
         {
             Attack = BaseAttack;
             Defense = BaseDefense;
+            Hp = 100; //시작 hp 100
         }
 
         public void AddExp(int getExp)
