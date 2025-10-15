@@ -75,5 +75,6 @@ namespace TEAMPROJECT_TEXTRPG
 
         }
 
+        internal void TakeDamage(int amount) => Hp -= amount;
     }
 }

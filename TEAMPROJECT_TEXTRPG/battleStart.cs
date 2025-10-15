@@ -13,9 +13,14 @@ namespace TEAMPROJECT_TEXTRPG
         static Monsters monsters = new Monsters();
 
         List<Monster> monster = monsters.monster; //리스트 몬스터
+        private Player player;
 
 
 
+        public BattleStart(Player player)
+        {
+            this.player = player;
+        }
 
         public void StartBattle()
         {
