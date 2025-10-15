@@ -15,6 +15,7 @@ namespace TEAMPROJECT_TEXTRPG
         BattleResult,//전투 결과
         Example1,
         Example2,
+        EnemyTurn,
     }
 
     internal class GameManager
@@ -54,6 +55,7 @@ namespace TEAMPROJECT_TEXTRPG
             scenes.Add(GameState.Stat, new PlayerInfo(player));
             scenes.Add(GameState.Battle, new BattleStart(player));
             scenes.Add(GameState.BattleResult, new BattleResult());
+            scenes.Add(GameState.EnemyTurn, new EnemyTurnScene(player));
         }
 
         internal void Run()
