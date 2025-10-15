@@ -9,13 +9,13 @@ namespace TeamProject_Attack
 {
     internal class battle
     {
-        private Player player;
+        private Player Player;
         private Monster[] monsters;
         private Random random = new Random();
 
         public battle(Player player, Monster[] monsters)
         {
-            this.player = player;
+            this.Player = player;
             this.monsters = monsters;
 
         }
@@ -35,14 +35,14 @@ namespace TeamProject_Attack
                 return;
             }
             int targetIndex;
-            if (!int.TryParse(input, out targetIndex)) targetIndex < 1 || targetIndex > monsters.Length
-            {
+            if (!int.TryParse(input, out targetIndex) || targetIndex < 1 || targetIndex > monsters.Length)
+                {
                 Console.WriteLine("잘못된 입력입니다.");
                 return;
             }
-            monster target = monsters[targetIndex];
+            Monster target = monsters[targetIndex];
 
-            if (!target.IsAlive)
+            if (target.Hp <= 0)
             {
                 Console.WriteLine("이미 죽은 몬스터입니다.");
                 return;
@@ -55,44 +55,44 @@ namespace TeamProject_Attack
         }
         private void PlayerAttack(Monster target)
         {
-            int attackPower = GetRandomAttack(player.Attack);
-            Console.WriteLine($"\n{player.Name}의 공격");
+            int attackPower = GetRandomAttack((int)Player.Attack);
+            Console.WriteLine($"\n{Player.Name}의 공격");
             Console.WriteLine($"{target.Name}을(를) 맞췄습니다. [데미지 : {attackPower}]");
 
-            int oldHP = target.HP;
-            target.HP -= attackPower;
+            int oldHP = target.Hp;
+            target.Hp -= attackPower;
 
-            if (target.HP <= 0)
+            if (target.Hp <= 0)
             {
-                target.HP = 0;
-                target.IsAlive = false;
+                target.Hp = 0;
+                
                 Console.WriteLine($"\n{target.Name}");
                 Console.WriteLine($"HP{oldHP} -> Dead");
             }
             else
             {
                 Console.WriteLine($"\n{target.Name}");
-                Console.WriteLine($"HP {oldHP} -> {target.HP}");
+                Console.WriteLine($"HP {oldHP} -> {target.Hp}");
 
             }
             Console.WriteLine("\n0.다음");
             Console.ReadLine();
         }
-        private int GetRandomAttack(int baseattack)
+        private int GetRandomAttack(double baseattack)
         {
             double error = baseattack * 0.1;
             int errorInt = (int)Math.Ceiling(error);
-            return random.Next(baseattack - errorInt, baseattack + errorInt + 1);
+            return (int)random.Next((int)baseattack - errorInt, (int)baseattack + errorInt + 1);
         }
-        private void ShowMonster()
+        private void ShowMonsters()
         {
             for (int i = 0; i < monsters.Length; i++)
             {
-                monsters m = monsters[i];
-                if (m.IsAlive)
+                Monster m = monsters[i];
+                if (m.Hp > 0)
                 {
                     Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine($"**{i + 1}** Lv.{m.Level} {m.Name} HP {m.HP}");
+                    Console.WriteLine($"**{i + 1}** Lv.{m.Level} {m.Name} HP {m.Hp}");
                 }
                 else
                 {
