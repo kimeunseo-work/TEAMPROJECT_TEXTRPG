@@ -19,7 +19,7 @@ namespace TEAMPROJECT_TEXTRPG
         public double Attack { get; set; }
         public double Defense { get; set; }
 
-        public int Exp {  get; set; }   
+        public int Exp { get; set; }
 
         //경험치 테이블
         private Dictionary<int, int> ExpTable = new Dictionary<int, int>()
@@ -39,9 +39,9 @@ namespace TEAMPROJECT_TEXTRPG
         public void AddExp(int getExp)
         {
             Exp += getExp;
-            Console.WriteLine($"\n경험치{getExp} 획득 (현재 {Exp} / 필요 { GetRequiredExp()})");
+            Console.WriteLine($"\n경험치{getExp} 획득 (현재 {Exp} / 필요 {GetRequiredExp()})");
 
-            while(true)
+            while (true)
             {
                 int RequiredExp = GetRequiredExp();
                 if (Exp < RequiredExp)
@@ -49,19 +49,16 @@ namespace TEAMPROJECT_TEXTRPG
                 Exp -= RequiredExp;
                 LevelUp();
             }
-                
-            
+
+
         }
         // 경험치 반환
-        private int GetRequiredExp()
-        {
-            if(ExpTable.ContainsKey(Level))
-                return ExpTable[Level];
-            else
-                return int.MaxValue; // 최고 레벨 도달 시 레벨업 X
-        }
+        private int GetRequiredExp() =>
 
-     
+            ExpTable.ContainsKey(Level) ? ExpTable[Level] : int.MaxValue;
+
+
+
         private void LevelUp()
         {
             Level++;
@@ -72,7 +69,7 @@ namespace TEAMPROJECT_TEXTRPG
             //회복
 
             Hp = MaxHP;
-            
+
             Console.WriteLine($"\n 레벨 업! 현재 레벨: {Level}");
             Console.WriteLine($"공격력 + 0.5 -> {BaseAttack}, 방어력 + 1 -> {BaseDefense}");
 
