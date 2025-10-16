@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-
-namespace TEAMPROJECT_TEXTRPG
+﻿namespace TEAMPROJECT_TEXTRPG.Scenes
 {
-    internal class Home : Scene
+    internal class HomeScene : Scene
     {
         internal override void Show()
         {

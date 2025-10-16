@@ -1,28 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TEAMPROJECT_TEXTRPG
+﻿namespace TEAMPROJECT_TEXTRPG.Scenes
 {
 
 
-    internal class PlayerInfo: Scene
+    internal class PlayerInfoScene : Scene
     {
         private Player player;
 
-        public PlayerInfo(Player player)
+        public PlayerInfoScene(Player player)
         {
             this.player = player;
         }
         internal override void Show()
         {
-            DisplayPlayerinfo();
+            DisplayPlayerInfo();
         }
 
         //상태보기
-        public void DisplayPlayerinfo()
+        public void DisplayPlayerInfo()
         {
             bool keep = true;
             while (keep)
@@ -48,7 +42,7 @@ namespace TEAMPROJECT_TEXTRPG
             }
         }
 
-        
+
     }
 
 

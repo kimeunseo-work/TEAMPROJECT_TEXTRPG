@@ -1,6 +1,6 @@
-﻿namespace TEAMPROJECT_TEXTRPG
+﻿namespace TEAMPROJECT_TEXTRPG.Scenes
 {
-    internal class BattleResult : Scene
+    internal class BattleResultScene : Scene
     {
         string input;
         int parsedInput;
@@ -9,7 +9,7 @@
         private Player player;
 
 
-        internal BattleResult(Player player)
+        internal BattleResultScene(Player player)
         {
             this.player = player;
         }

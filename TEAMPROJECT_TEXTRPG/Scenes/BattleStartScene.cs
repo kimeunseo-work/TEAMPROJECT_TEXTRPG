@@ -5,15 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace TEAMPROJECT_TEXTRPG
+namespace TEAMPROJECT_TEXTRPG.Scenes
 {
-    internal class BattleStart : Scene
+    internal class BattleStartScene : Scene
     {
         private Monsters monsters;
         private Player player;
         
 
-        public BattleStart(Player player)
+        public BattleStartScene(Player player)
         {
             monsters = new Monsters();
             this.player = player;
@@ -60,10 +60,6 @@ namespace TEAMPROJECT_TEXTRPG
             {
 
                 GameManager.Instance.currentState = GameState.Battle;
-
-
-
-
 
             }
         }

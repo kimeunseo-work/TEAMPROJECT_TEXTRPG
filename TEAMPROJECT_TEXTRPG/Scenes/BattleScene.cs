@@ -1,24 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TEAMPROJECT_TEXTRPG;
-
-namespace TEAMPROJECT_TEXTRPG
+﻿namespace TEAMPROJECT_TEXTRPG.Scenes
 {
-    internal class Battle: Scene
+    internal class BattleScene : Scene
     {
         private Player Player;
-        
+
         private Random random = new Random();
 
-        public Battle(Player player)
+        public BattleScene(Player player)
         {
-            this.Player = player;
-            
-            
-             
+            Player = player;
 
         }
         public void Start()
@@ -28,13 +18,7 @@ namespace TEAMPROJECT_TEXTRPG
             ShowMonsters();
             Console.WriteLine("\n0. 취소\n");
 
-
             string input = Console.ReadLine();
-            
-
-            
-
-
 
             if (input == "0")
             {
@@ -43,7 +27,7 @@ namespace TEAMPROJECT_TEXTRPG
             }
             int targetIndex;
             if (!int.TryParse(input, out targetIndex) || targetIndex < 1 || targetIndex > GameManager.Instance.monsters.Count)
-                {
+            {
                 Console.WriteLine("잘못된 입력입니다.");
                 return;
             }
@@ -56,8 +40,6 @@ namespace TEAMPROJECT_TEXTRPG
             }
 
             PlayerAttack(target);
-
-
 
         }
         private void PlayerAttack(Monster target)
@@ -90,19 +72,19 @@ namespace TEAMPROJECT_TEXTRPG
             {
                 GameManager.Instance.currentState = GameState.BattleResult;
                 GameManager.Instance.currentBattleState = BattleState.Victory;
-                
+
             }
             else
             {
                 GameManager.Instance.currentState = GameState.EnemyTurn;
             }
         }
-        
+
         private int GetRandomAttack(double baseattack)
         {
             double error = baseattack * 0.1;
             int errorInt = (int)Math.Ceiling(error);
-            return (int)random.Next((int)baseattack - errorInt, (int)baseattack + errorInt + 1);
+            return random.Next((int)baseattack - errorInt, (int)baseattack + errorInt + 1);
         }
         private void ShowMonsters()
         {

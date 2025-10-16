@@ -1,4 +1,4 @@
-﻿namespace TEAMPROJECT_TEXTRPG
+﻿namespace TEAMPROJECT_TEXTRPG.Scenes
 {
     internal abstract class Scene
     {

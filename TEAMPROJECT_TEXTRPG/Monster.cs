@@ -1,9 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Reflection.Emit;
-using System.Runtime.Intrinsics.Arm;
-using System.Xml.Linq;
-
-namespace TEAMPROJECT_TEXTRPG
+﻿namespace TEAMPROJECT_TEXTRPG
 {
     internal class Monster
     {
@@ -31,14 +26,7 @@ namespace TEAMPROJECT_TEXTRPG
             Atk = clone.Atk;
             IsDead = clone.IsDead;
 
-
-
-
         }
-
-
-        
-
 
         /// <summary>
         /// 몬스터 공격
@@ -49,7 +37,7 @@ namespace TEAMPROJECT_TEXTRPG
     internal class Monsters
     {
         internal List<Monster> monster = new List<Monster>()
-        { 
+        {
             new Monster("미니언", 2, 15, 5),
             new Monster("공허충", 3, 10, 9),
             new Monster("대포미니언", 5, 25, 8)
@@ -62,10 +50,10 @@ namespace TEAMPROJECT_TEXTRPG
         {
             var monsterCount = new Random().Next(1, 5);
             var monsters = GetRandomMonsters(monsterCount);
-            
+
             return monsters;
         }
-        
+
         private List<Monster> GetRandomMonsters(int count)
         {
             var monsters = new List<Monster>();
@@ -78,13 +66,6 @@ namespace TEAMPROJECT_TEXTRPG
             return monsters;
         }
 
-
-       
-
-
-
-
     }
-
 
 }
