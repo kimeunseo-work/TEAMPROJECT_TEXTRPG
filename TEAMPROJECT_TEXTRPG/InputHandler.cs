@@ -49,5 +49,14 @@ namespace TEAMPROJECT_TEXTRPG
             }
         }
 
+        public static string GetUserCharacterName()
+        {
+            Console.WriteLine("원하시는 이름을 설정해주세요.");
+            Console.Write(">> ");
+            string input = Console.ReadLine() ?? "";
+            string cleanInput = Regex.Replace(input, @"\s+", "");
+
+            return cleanInput;
+        }
     }
 }

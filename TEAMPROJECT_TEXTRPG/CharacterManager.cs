@@ -1,4 +1,4 @@
-﻿namespace TEAMPROJECT_TEXTRPG
+namespace TEAMPROJECT_TEXTRPG
 {
     internal class CharacterManager
     {
@@ -9,14 +9,13 @@
         {
             get
             {
-                if (instance == null)
+                if(instance == null)
                 {
                     instance = new CharacterManager();
                 }
                 return instance;
             }
         }
-
         internal Player player = new();
     }
 }
