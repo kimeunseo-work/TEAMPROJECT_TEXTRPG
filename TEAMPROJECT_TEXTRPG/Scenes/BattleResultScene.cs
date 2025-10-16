@@ -9,25 +9,24 @@
         internal void BattleResultWin()
         {
             Console.Clear();
-            Console.Write(@$"
-Battle!! - Result
+            Console.WriteLine("Battle!! - Result");
+            Console.WriteLine();
+            Console.WriteLine("Victory!!");
+            Console.WriteLine();
+            Console.WriteLine($"던전에서 몬스터 {GameManager.Instance.monsters.Count}마리를 잡았습니다.");
+            Console.WriteLine($"Lv.{CharacterManager.Instance.player.Level} {CharacterManager.Instance.player.Name}");
+            Console.WriteLine($"HP { CharacterManager.Instance.player.hped} -> { CharacterManager.Instance.player.Hp}");
+            Console.WriteLine();
 
-Victory
+            for (int i = 0; i < GameManager.Instance.monsters.Count; i++)
+            {
+                CharacterManager.Instance.player.AddExp(GameManager.Instance.monsters[i].MonExp);
+            }
 
-던전에서 몬스터 {GameManager.Instance.monsters.Count}마리를 잡았습니다.
-
-Lv.{CharacterManager.Instance.player.Level} {CharacterManager.Instance.player.Name}
-HP {CharacterManager.Instance.player.hped} -> {CharacterManager.Instance.player.Hp}");
-
-            int ex = 50;
-
-            CharacterManager.Instance.player.AddExp(ex);
-
-            Console.Write(@"
-
-0. 다음
-
->> ");
+            Console.WriteLine();
+            Console.WriteLine("0. 다음");
+            Console.WriteLine();
+            Console.Write(">> ");
 
             WhileInput0();
         }
@@ -36,17 +35,16 @@ HP {CharacterManager.Instance.player.hped} -> {CharacterManager.Instance.player.
         internal void BattleResultLose()
         {
             Console.Clear();
-            Console.Write($@"
-Battle!! - Result
-
-You Lose
-
-Lv.{CharacterManager.Instance.player.Level} {CharacterManager.Instance.player.Name}
-HP {CharacterManager.Instance.player.hped} -> 0
-
-0. 다음
-
->> ");
+            Console.WriteLine("Battle!! - Result");
+            Console.WriteLine();
+            Console.WriteLine("You Lose..");
+            Console.WriteLine();
+            Console.WriteLine($"Lv.{CharacterManager.Instance.player.Level} {CharacterManager.Instance.player.Name}");
+            Console.WriteLine($"HP {CharacterManager.Instance.player.hped} -> 0");
+            Console.WriteLine();
+            Console.WriteLine("0. 다음");
+            Console.WriteLine();
+            Console.WriteLine(">> ");
 
             WhileInput0();
         }
@@ -67,7 +65,9 @@ HP {CharacterManager.Instance.player.hped} -> 0
                         GameManager.Instance.currentState = GameState.Home;
                         break;
                     default:
-                        Console.Write("잘못된 입력입니다.\n\n>> ");
+                        Console.WriteLine("잘못된 입력입니다.");
+                        Console.WriteLine();
+                        Console.Write(">> ");
                         break;
                 }
             }

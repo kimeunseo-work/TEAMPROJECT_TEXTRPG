@@ -2,6 +2,7 @@
 {
     internal class SkillAction
     {
+        private static Random random = new Random();
 
         // 직업에 따른 스킬 목록 불러오기
         internal static void HaveSkill(Player player, Monster target)
@@ -13,12 +14,12 @@
                 case "전사":
                     skills = SkillDatabase.Instance.WarriorSkills;
                     break;
-                //case "마법사":
-                //    skills = SkillDatabase.Instance.MageSkills;
-                //    break;
-                //case "도적":
-                //    skills = SkillDatabase.Instance.ThiefSkills;
-                //    break;
+                case "마법사":
+                    skills = SkillDatabase.Instance.MageSkills;
+                    break;
+                case "도적":
+                    skills = SkillDatabase.Instance.ThiefSkills;
+                    break;
                 default:
                     Console.WriteLine("이 직업은 아직 스킬이 없습니다.");
                     return;
@@ -36,9 +37,10 @@
             //사용할 스킬 번호 입력
             int skillIndex = InputHandler.GetUserActionInput();
 
-            if (skillIndex < 0 || skillIndex >= skills.Count)
+            if (skillIndex < 0 || skillIndex > skills.Count)
             {
                 Console.WriteLine("잘못된 입력입니다.");
+                Console.ReadKey();
                 return;
             }
 
@@ -48,7 +50,7 @@
 
             Action(player, target, selectedSkill);
         }
-        internal static void Action(Player player, Monster monster, Skill skill)
+        internal static void Action(Player player, Monster target, Skill skill)
         {
             //MP 충분한지 확인
             if (player.Mp < skill.Mp)
@@ -70,32 +72,54 @@
             //스킬이 랜덤형태인지 아닌지 확인
             if (!skill.IsRandom)
             {
-                for (int i = 0; i < GameManager.Instance.monsters.Count; i++)
-                {
-                    var m = GameManager.Instance.monsters[i];
-                    Console.WriteLine($"{i + 1}. {m.Name} (HP: {m.Hp})");
-                }
-                int targetIndex = InputHandler.GetUserActionInput();
-                var target = GameManager.Instance.monsters[targetIndex - 1];
-
+                //단일 대상
                 ApplyDamage(target, damage);
-
             }
             else
             {
-                var random = new Random();
-                var count = Math.Min(skill.Count, GameManager.Instance.monsters.Count);
+                //복수 대상
+                //살아있는 몬스터만 대상으로
+                var aliveMonsters = GameManager.Instance.monsters
+                    .Where(m => !m.IsDead)
+                    .ToList();
 
+                // 실제 타격 수는 Count와 생존 수 중 작은 값으로
+                var count = Math.Min(skill.Count, aliveMonsters.Count);
+                
                 for (int i = 0; i < count; i++)
                 {
-                    var t = GameManager.Instance.monsters[random.Next(GameManager.Instance.monsters.Count)];
-                    Console.WriteLine($"{skill.Count}명의 랜덤 적을 대상으로 지정했습니다.");
+                    if (aliveMonsters.Count == 0) break;
+                    // aliveMonsters 에서만 대상 선정
+                    var idx = random.Next(aliveMonsters.Count);
+                    var t = aliveMonsters[idx];
+                    
+                    //같은 대상 중복 방지
+                    aliveMonsters.RemoveAt(idx);
 
                     ApplyDamage(t, damage);
 
                 }
             }
 
+            EndPlayerTurn();
+            
+        }
+
+        private static void EndPlayerTurn()
+        {
+            Console.WriteLine("\n0.다음");
+            Console.ReadKey();
+
+            bool allDead = GameManager.Instance.monsters.All(x => x.IsDead);
+            if (allDead)
+            {
+                GameManager.Instance.currentBattleState = BattleState.Victory;
+                GameManager.Instance.currentState = GameState.BattleResult;
+            }
+            else
+            {
+                GameManager.Instance.currentState = GameState.EnemyTurn;
+            }
         }
 
         private static void ApplyDamage(Monster target, int damage)

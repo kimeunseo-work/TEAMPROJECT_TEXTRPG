@@ -6,15 +6,17 @@
         public int Level { get; set; }
         public int Hp { get;  set; }
         public int Atk { get; set; }
+        public int MonExp {  get; set; }
         public bool IsDead { get;  set; }
         public bool IsAttackComplete { get; private set; }
 
-        public Monster(string name, int level, int hp, int atk, bool isDead = false)
+        public Monster(string name, int level, int hp, int atk, int monExp, bool isDead = false)
         {
             Name = name;
             Level = level;
             Hp = hp;
             Atk = atk;
+            MonExp = monExp;
             IsDead = isDead;
         }
 
@@ -25,6 +27,7 @@
             Level = clone.Level;
             Hp = clone.Hp;
             Atk = clone.Atk;
+            MonExp = clone.MonExp;
             IsDead = clone.IsDead;
 
         }
@@ -39,12 +42,12 @@
     {
         internal List<Monster> monster = new List<Monster>()
         {
-            new Monster("미니언", 2, 15, 5),
-            new Monster("공허충", 3, 10, 9),
-            new Monster("대포미니언", 5, 25, 8),
-            new Monster("돌거북", 3,10,3),
-            new Monster("고대 돌거북",8,25,7),
-            new Monster("칼날부리",5,15,6)
+            new Monster("미니언", 2, 15, 5, 5),
+            new Monster("공허충", 3, 10, 9, 3),
+            new Monster("대포미니언", 5, 25, 8, 10),
+            new Monster("돌거북", 3, 10, 3, 2),
+            new Monster("고대 돌거북", 8, 25, 7, 9),
+            new Monster("칼날부리", 5, 15, 6, 6)
 
         };
 
