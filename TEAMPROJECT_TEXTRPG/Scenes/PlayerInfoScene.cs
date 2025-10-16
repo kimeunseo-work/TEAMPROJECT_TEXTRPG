@@ -14,7 +14,7 @@
             while (keep)
             {
                 Console.Clear();
-                Console.WriteLine($"\nLv.{CharacterManager.Instance.player.Level}\n\n{CharacterManager.Instance.player.Name}({CharacterManager.Instance.player.Job})\n\n공격력: {CharacterManager.Instance.player.Attack:F1}\n\n방어력: {CharacterManager.Instance.player.Defense}" +
+                Console.WriteLine($"\nLv.{CharacterManager.Instance.player.Level}\n\n{CharacterManager.Instance.player.Name}({CharacterManager.Instance.player.CurrentJob.Name})\n\n공격력: {CharacterManager.Instance.player.Attack:F1}\n\n방어력: {CharacterManager.Instance.player.Defense}" +
                 $"\n\n체력: {CharacterManager.Instance.player.Hp}\n\n마나: {CharacterManager.Instance.player.Mp}\n\n경험치: {CharacterManager.Instance.player.Exp}\n\nGold: {CharacterManager.Instance.player.Gold}");
 
                 Console.WriteLine($"\n1.\n0. 나가기");
