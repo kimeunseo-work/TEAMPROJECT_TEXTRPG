@@ -1,4 +1,6 @@
-﻿namespace TEAMPROJECT_TEXTRPG.Scenes
+﻿using TEAMPROJECT_TEXTRPG.Skills;
+
+namespace TEAMPROJECT_TEXTRPG.Scenes
 {
     internal class BattleScene : Scene
     {
@@ -42,7 +44,8 @@
             }
             else if (action == "2")
             {
-                //스킬
+                var player = CharacterManager.Instance.player;
+                SkillAction.HaveSkill(player, target);
             }
             else if (action == "0")
             {
