@@ -25,18 +25,6 @@
             LvUpDefense = lvUpDefense;
         }
 
-        public int AddMaxHP()
-        {
-            MaxHP += LvUpAddMaxHP;
-            return MaxHP;
-        }
-
-        public int AddMaxMP()
-        {
-            MaxMP += LvUpAddMaxMP;
-            return MaxMP;
-        }
-
         // public List<Skill> SkillList { get; private set; } = new List<Skill>();  //직업간의 스킬 목록
     }
 }
