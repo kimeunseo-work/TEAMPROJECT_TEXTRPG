@@ -8,5 +8,51 @@ namespace TEAMPROJECT_TEXTRPG
 {
     internal class Quest
     {
+        string Name;
+
+        string Description;
+
+        Item ItemReward;
+
+        int GoldReward;
+
+        int ExpReward;
+
+
+
+
+
+
+        internal class MonsterKillQuest
+        {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+      
+
+
+
     }
 }
