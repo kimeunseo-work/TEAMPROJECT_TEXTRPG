@@ -40,7 +40,11 @@
         {
             new Monster("미니언", 2, 15, 5),
             new Monster("공허충", 3, 10, 9),
-            new Monster("대포미니언", 5, 25, 8)
+            new Monster("대포미니언", 5, 25, 8),
+            new Monster("돌거북", 3,10,3),
+            new Monster("고대 돌거북",8,25,7),
+            new Monster("칼날부리",5,15,6)
+
         };
 
         /// <summary>

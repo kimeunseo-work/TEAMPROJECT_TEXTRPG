@@ -37,11 +37,22 @@
         private void PlayerAttack(Monster target)
         {
             int attackPower = GetRandomAttack((int)CharacterManager.Instance.player.Attack);
+
+            bool isCritical = random.Next(100) < 15;
+            if (isCritical)
+            {
+                attackPower = (int)(attackPower * 1.6);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\n 치명타 공격!!");
+                Console.ResetColor();
+            }
             Console.WriteLine($"\n{CharacterManager.Instance.player.Name}의 공격");
             Console.WriteLine($"{target.Name}을(를) 맞췄습니다. [데미지 : {attackPower}]");
 
             int oldHP = target.Hp;
             target.Hp -= attackPower;
+
+            
 
             if (target.Hp <= 0)
             {
@@ -69,7 +80,7 @@
                 GameManager.Instance.currentState = GameState.EnemyTurn;
             }
         }
-
+        
         private int GetRandomAttack(double baseattack)
         {
             double error = baseattack * 0.1;
