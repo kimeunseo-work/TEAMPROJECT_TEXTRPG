@@ -65,7 +65,7 @@ namespace TEAMPROJECT_TEXTRPG
             //Player player = new Player();// 플레이어 객채
 
             // 씬을 매니저에 추가하는 방법 예시
-            scenes.Add(GameState.CharacterCreate, new CharacterCreateScene());
+            scenes.Add(GameState.CharacterCreate, new InitCharacterScene());
             scenes.Add(GameState.SelectJob, new SelectJobScene());
             scenes.Add(GameState.Home, new HomeScene());
             scenes.Add(GameState.Stat, new PlayerInfoScene());
