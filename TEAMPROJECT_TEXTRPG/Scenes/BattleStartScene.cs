@@ -11,6 +11,9 @@
 
         public void StartBattle()
         {
+            int x = CharacterManager.Instance.player.Hp;
+            CharacterManager.Instance.player.hped = x;
+
             Console.Clear();
             Console.WriteLine("Battle!!");
             Console.WriteLine();
