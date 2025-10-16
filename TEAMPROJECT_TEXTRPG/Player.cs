@@ -22,6 +22,8 @@
             set => hp = Math.Max(0, value); // hp가 0보다 작으면 0으로 고정
         }
 
+        public int hped; // 전투 전 체력
+
         private int mp;
         public int Mp
         {
