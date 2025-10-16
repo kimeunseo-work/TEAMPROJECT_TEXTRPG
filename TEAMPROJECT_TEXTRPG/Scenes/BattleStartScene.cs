@@ -30,7 +30,7 @@
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("[내정보]");
-            Console.WriteLine($"Lv.{CharacterManager.Instance.player.Level}  {CharacterManager.Instance.player.Name} ({CharacterManager.Instance.player.Job})");
+            Console.WriteLine($"Lv.{CharacterManager.Instance.player.Level}  {CharacterManager.Instance.player.Name} ({CharacterManager.Instance.player.CurrentJob.Name})");
             Console.WriteLine($"HP {CharacterManager.Instance.player.Hp}/100");
             Console.WriteLine();
             Console.WriteLine("1. 공격");

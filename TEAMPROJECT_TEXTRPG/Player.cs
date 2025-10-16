@@ -4,12 +4,12 @@
     {
         public int Level { get; set; } = 1;
         public string Name { get; set; }
-        public string Job { get; set; } = "전사";
+        public Job CurrentJob { get; set; }
         public int Gold { get; set; } = 1500;
         public int MaxHP { get; set; }
         public int MaxMP { get; set; }
-        public double BaseAttack { get; set; } = 10;
-        public double BaseDefense { get; set; } = 5;
+        public double BaseAttack { get; set; }
+        public double BaseDefense { get; set; }
         public double Attack { get; set; }
         public double Defense { get; set; }
 
@@ -42,10 +42,29 @@
 
         public Player() // 기본 공격력과 추가된 총 공격력 구별
         {
+            // 직업 선택 전 임시 값
+            MaxHP = 100;
+            MaxMP = 50;
+            BaseAttack = 10;
+            BaseDefense = 5;
             Attack = BaseAttack;
             Defense = BaseDefense;
-            Hp = 100; //시작 체력 100
-            Mp = 50; // 시작 마나 50
+            Hp = MaxHP;
+            Mp = MaxMP;
+        }
+
+        public void SetJobsStat(Job selectedJob)
+        {
+            CurrentJob = selectedJob;
+
+            MaxHP = CurrentJob.MaxHP;
+            MaxMP = CurrentJob.MaxMP;
+            BaseAttack = CurrentJob.BaseAttack;
+            BaseDefense = CurrentJob.BaseDefense;
+            Attack = BaseAttack;
+            Defense = BaseDefense;
+            Hp = MaxHP;
+            Mp = MaxMP;
         }
 
         public void AddExp(int getExp)
@@ -74,17 +93,18 @@
         private void LevelUp()
         {
             Level++;
-            MaxHP += 20;
-            MaxMP += 10;
-            BaseAttack += 0.5;
-            BaseDefense += 1;
+            MaxHP += CurrentJob.LvUpAddMaxHP;
+            MaxMP += CurrentJob.LvUpAddMaxMP;
+            BaseAttack += CurrentJob.LvUpAttack;
+            BaseDefense += CurrentJob.LvUpDefense;
 
             //회복
 
             Hp = MaxHP;
+            Mp = MaxMP;
 
             Console.WriteLine($"\n 레벨 업! 현재 레벨: {Level}");
-            Console.WriteLine($"공격력 + 0.5 -> {BaseAttack}, 방어력 + 1 -> {BaseDefense}");
+            Console.WriteLine($"공격력 + {CurrentJob.LvUpAttack} -> {BaseAttack}, 방어력 + {CurrentJob.LvUpDefense} -> {BaseDefense}");
 
         }
 

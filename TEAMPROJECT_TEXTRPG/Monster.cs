@@ -2,11 +2,12 @@
 {
     internal class Monster
     {
-        public string Name;
-        public int Level;
-        public int Hp;
-        public int Atk;
-        public bool IsDead;
+        public string Name { get;  set; }
+        public int Level { get; set; }
+        public int Hp { get;  set; }
+        public int Atk { get; set; }
+        public bool IsDead { get;  set; }
+        public bool IsAttackComplete { get; private set; }
 
         public Monster(string name, int level, int hp, int atk, bool isDead = false)
         {

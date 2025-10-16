@@ -1,4 +1,6 @@
-﻿namespace TEAMPROJECT_TEXTRPG.Scenes
+﻿using TEAMPROJECT_TEXTRPG.Skills;
+
+namespace TEAMPROJECT_TEXTRPG.Scenes
 {
     internal class BattleScene : Scene
     {
@@ -31,8 +33,30 @@
                 Console.WriteLine("이미 죽은 몬스터입니다.");
                 return;
             }
-
-            PlayerAttack(target);
+            Console.WriteLine("\n무엇을 하시겠습니까?");
+            Console.WriteLine("1. 기본 공격");
+            Console.WriteLine("2. 스킬 사용");
+            Console.Write(">>");
+            string action = Console.ReadLine();
+            if (action == "1")
+            {
+                PlayerAttack(target);
+            }
+            else if (action == "2")
+            {
+                var player = CharacterManager.Instance.player;
+                SkillAction.HaveSkill(player, target);
+            }
+            else if (action == "0")
+            {
+                Console.WriteLine("다시 몬스터를 선택합니다.");
+                Start();
+            }
+            else
+            {
+                Console.WriteLine("잘못된 입력입니다.");
+            }
+            
         }
         private void PlayerAttack(Monster target)
         {
@@ -80,6 +104,7 @@
                 GameManager.Instance.currentState = GameState.EnemyTurn;
             }
         }
+        
         
         private int GetRandomAttack(double baseattack)
         {
