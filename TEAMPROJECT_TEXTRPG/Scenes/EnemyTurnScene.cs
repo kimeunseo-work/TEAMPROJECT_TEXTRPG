@@ -2,13 +2,6 @@
 {
     internal class EnemyTurnScene : Scene
     {
-        private Player player;
-
-        internal EnemyTurnScene(Player player)
-        {
-            this.player = player;
-        }
-
         internal override void Show()
         {
             foreach (var monster in GameManager.Instance.monsters)
@@ -43,7 +36,7 @@
 
         private void CheckDefeat()
         {
-            if (player.Hp <= 0)
+            if (CharacterManager.Instance.player.Hp <= 0)
             {
                 GameManager.Instance.currentBattleState = BattleState.Defeat;
                 GameManager.Instance.currentState = GameState.BattleResult;
@@ -70,10 +63,10 @@
             Console.WriteLine();
 
             Console.WriteLine($"Lv.{monster.Level} {monster.Name}의 공격!");
-            Console.WriteLine($"{player.Name} 을(를) 맞췄습니다. [데미지 : {monster.Atk}]");
+            Console.WriteLine($"{CharacterManager.Instance.player.Name} 을(를) 맞췄습니다. [데미지 : {monster.Atk}]");
 
-            Console.WriteLine($"Lv.{player.Level} {player.Name} ({player.Job})");
-            Console.WriteLine($"HP {oldHp} → {player.Hp}");
+            Console.WriteLine($"Lv.{CharacterManager.Instance.player.Level} {CharacterManager.Instance.player.Name} ({CharacterManager.Instance.player.Job})");
+            Console.WriteLine($"HP {oldHp} → {CharacterManager.Instance.player.Hp}");
             Console.WriteLine();
 
             Console.WriteLine("0. 다음");
@@ -90,8 +83,8 @@
         {
             if (monster.IsDead) return null;
 
-            var oldHp = player.Hp;
-            monster.Attack(player);
+            var oldHp = CharacterManager.Instance.player.Hp;
+            monster.Attack(CharacterManager.Instance.player);
 
             return oldHp;
         }

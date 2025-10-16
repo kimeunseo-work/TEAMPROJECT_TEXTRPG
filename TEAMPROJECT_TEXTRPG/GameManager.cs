@@ -59,15 +59,15 @@ namespace TEAMPROJECT_TEXTRPG
             currentState = GameState.Home;
             currentBattleState = BattleState.None;
             scenes = new Dictionary<GameState, Scene>();
-            Player player = new Player();// 플레이어 객채
+            //Player player = new Player();// 플레이어 객채
 
             // 씬을 매니저에 추가하는 방법 예시
             scenes.Add(GameState.Home, new HomeScene());
-            scenes.Add(GameState.Stat, new PlayerInfoScene(player));
-            scenes.Add(GameState.BattleResult, new BattleResultScene(player));
-            scenes.Add(GameState.BattleStart, new BattleStartScene(player));
-            scenes.Add(GameState.Battle, new BattleScene(player));
-            scenes.Add(GameState.EnemyTurn, new EnemyTurnScene(player));
+            scenes.Add(GameState.Stat, new PlayerInfoScene());
+            scenes.Add(GameState.BattleResult, new BattleResultScene());
+            scenes.Add(GameState.BattleStart, new BattleStartScene());
+            scenes.Add(GameState.Battle, new BattleScene());
+            scenes.Add(GameState.EnemyTurn, new EnemyTurnScene());
         }
 
         internal void Run()

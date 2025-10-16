@@ -6,15 +6,6 @@
         int parsedInput;
         bool isParsedSuccess;
 
-        private Player player;
-
-
-        internal BattleResultScene(Player player)
-        {
-            this.player = player;
-        }
-
-
         internal void BattleResultWin()
         {
             Console.Clear();
@@ -25,8 +16,8 @@ Victory
 
 던전에서 몬스터 {GameManager.Instance.monsters.Count}마리를 잡았습니다.
 
-Lv.{player.Level} {player.Name}
-HP 100 -> {player.Hp}
+Lv.{CharacterManager.Instance.player.Level} {CharacterManager.Instance.player.Name}
+HP 100 -> {CharacterManager.Instance.player.Hp}
 
 0. 다음
 
@@ -44,7 +35,7 @@ Battle!! - Result
 
 You Lose
 
-Lv.{player.Level} {player.Name}
+Lv.{CharacterManager.Instance.player.Level} {CharacterManager.Instance.player.Name}
 HP 100 -> 0
 
 0. 다음
@@ -53,7 +44,6 @@ HP 100 -> 0
 
             WhileInput0();
         }
-
 
         // Input 값이 '0' 일 때까지 반복하는 메서드
         private void WhileInput0()
@@ -78,7 +68,6 @@ HP 100 -> 0
             while (parsedInput != 0);
         }
 
-
         // Input 값이 'int 자료형' 으로 변환 가능한지 체크하는 메서드 (변환 불가 시 '-1' 값으로 고정)
         private void CheckInputInt()
         {
@@ -93,7 +82,6 @@ HP 100 -> 0
                 parsedInput = -1;
             }
         }
-
 
         internal override void Show()
         {

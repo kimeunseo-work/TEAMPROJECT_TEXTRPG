@@ -2,15 +2,8 @@
 {
     internal class BattleScene : Scene
     {
-        private Player Player;
-
         private Random random = new Random();
 
-        public BattleScene(Player player)
-        {
-            Player = player;
-
-        }
         public void Start()
         {
             Console.Clear();
@@ -40,12 +33,11 @@
             }
 
             PlayerAttack(target);
-
         }
         private void PlayerAttack(Monster target)
         {
-            int attackPower = GetRandomAttack((int)Player.Attack);
-            Console.WriteLine($"\n{Player.Name}의 공격");
+            int attackPower = GetRandomAttack((int)CharacterManager.Instance.player.Attack);
+            Console.WriteLine($"\n{CharacterManager.Instance.player.Name}의 공격");
             Console.WriteLine($"{target.Name}을(를) 맞췄습니다. [데미지 : {attackPower}]");
 
             int oldHP = target.Hp;
@@ -62,7 +54,6 @@
             {
                 Console.WriteLine($"\n{target.Name}");
                 Console.WriteLine($"HP {oldHP} -> {target.Hp}");
-
             }
             Console.WriteLine("\n0.다음");
             Console.ReadKey();
@@ -72,7 +63,6 @@
             {
                 GameManager.Instance.currentState = GameState.BattleResult;
                 GameManager.Instance.currentBattleState = BattleState.Victory;
-
             }
             else
             {
@@ -101,17 +91,13 @@
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                     Console.WriteLine($"**{i + 1}** Lv.{m.Level} {m.Name} Dead ");
                 }
-
             }
             Console.ResetColor();
-
         }
-
         internal override void Show()
         {
             Start();
         }
     }
-
 }
 
