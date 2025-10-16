@@ -18,13 +18,12 @@
         internal void BattleResultWin()
         {
             Console.Clear();
-            // 참조 요구_{ 랜덤 몬스터 개수 }
             Console.Write(@$"
 Battle!! - Result
 
 Victory
 
-던전에서 몬스터 {" 랜덤 몬스터 개수 "}마리를 잡았습니다.
+던전에서 몬스터 {GameManager.Instance.monsters.Count}마리를 잡았습니다.
 
 Lv.{player.Level} {player.Name}
 HP 100 -> {player.Hp}
