@@ -42,7 +42,7 @@
                 return;
             }
 
-            var selectedSkill = skills[skillIndex];
+            var selectedSkill = skills[skillIndex -1];
 
             // 선택한 스킬 실행
 
@@ -75,8 +75,8 @@
                     var m = GameManager.Instance.monsters[i];
                     Console.WriteLine($"{i + 1}. {m.Name} (HP: {m.Hp})");
                 }
-                int targetIndex = int.Parse(Console.ReadLine()) - 1;
-                var target = GameManager.Instance.monsters[targetIndex];
+                int targetIndex = InputHandler.GetUserActionInput();
+                var target = GameManager.Instance.monsters[targetIndex - 1];
 
                 ApplyDamage(target, damage);
 
