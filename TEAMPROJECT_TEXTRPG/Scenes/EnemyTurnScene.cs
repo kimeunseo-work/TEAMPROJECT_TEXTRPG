@@ -1,4 +1,6 @@
-﻿namespace TEAMPROJECT_TEXTRPG.Scenes
+﻿using System.Reflection.Metadata.Ecma335;
+
+namespace TEAMPROJECT_TEXTRPG.Scenes
 {
     internal class EnemyTurnScene : Scene
     {
@@ -7,13 +9,17 @@
             foreach (var monster in GameManager.Instance.monsters)
             {
                 // 몬스터 공격
-                var oldHp = MonsterAttack(monster);
+                (bool isDodge, int? oldHp)? result = MonsterAttack(monster);
 
                 // 몬스터가 사망하여 공격하지 않았음.
-                if (oldHp == null) continue;
+                if (result.Value.oldHp == null && result.Value.isDodge == false) continue;
 
-                // 화면 출력
-                MonsterAttackResultUI(monster, oldHp);
+                
+                if (result.Value.oldHp != null && result.Value.isDodge != true)
+                {
+                    // 화면 출력
+                    MonsterAttackResultUI(monster, result.Value.oldHp);
+                }
 
                 // 선택지 입력
                 while (true)
@@ -79,14 +85,34 @@
         /// 몬스터 공격 처리
         /// </summary>
         /// <returns>공격 전후 플레이어 체력</returns>
-        private int? MonsterAttack(Monster monster)
+        private (bool,int?)? MonsterAttack(Monster monster)
         {
-            if (monster.IsDead) return null;
+            if (monster.IsDead) return (false,null);
 
             var oldHp = CharacterManager.Instance.player.Hp;
-            monster.Attack(CharacterManager.Instance.player);
+            //회피기능
+            Random move = new Random();
+            int chance = move.Next(0, 100);
+            if (chance < 50)
+            {
+                Console.Clear();
+                Console.WriteLine("Battle");
+                Console.WriteLine($"Lv.{monster.Level} {monster.Name}의 공격!");
+                Console.WriteLine($"{CharacterManager.Instance.player.Name}이 피했습니다!");
+                Console.WriteLine();
+                Console.WriteLine("0. 다음");
 
-            return oldHp;
+
+                return (true, null);
+            }
+            else
+            {
+                monster.Attack(CharacterManager.Instance.player);
+            }
+
+
+
+            return (false,oldHp);
         }
     }
 }
