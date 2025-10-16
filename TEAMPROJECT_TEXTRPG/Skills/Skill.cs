@@ -80,7 +80,7 @@
             {
 
                 Name = "윈드 커터",
-                Mp = 20,
+                Mp = 40,
                 Multiple = 1.5,
                 IsRandom = true,
                 Count = 3,
@@ -100,7 +100,7 @@
             ThiefSkills.Add(new Skill
             {
                 Name = "단검 던지기",
-                Mp = 10,
+                Mp = 20,
                 Multiple = 1,
                 IsRandom = true,
                 Count = 2,
