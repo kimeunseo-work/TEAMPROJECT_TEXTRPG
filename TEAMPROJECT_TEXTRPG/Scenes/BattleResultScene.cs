@@ -17,7 +17,7 @@ Victory
 던전에서 몬스터 {GameManager.Instance.monsters.Count}마리를 잡았습니다.
 
 Lv.{CharacterManager.Instance.player.Level} {CharacterManager.Instance.player.Name}
-HP 100 -> {CharacterManager.Instance.player.Hp}
+HP {CharacterManager.Instance.player.hped} -> {CharacterManager.Instance.player.Hp}
 
 0. 다음
 
@@ -36,7 +36,7 @@ Battle!! - Result
 You Lose
 
 Lv.{CharacterManager.Instance.player.Level} {CharacterManager.Instance.player.Name}
-HP 100 -> 0
+HP {CharacterManager.Instance.player.hped} -> 0
 
 0. 다음
 
