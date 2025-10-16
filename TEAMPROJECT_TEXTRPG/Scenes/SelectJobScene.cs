@@ -4,7 +4,7 @@
     {
         internal override void Show()
         {
-            //DisplayJob();
+            DisplayJob();
         }
 
         public void DisplayJob()
@@ -36,16 +36,19 @@
                 else
                 {
                     
-                    Console.WriteLine($"선택하신 직업은 selectJobs[playerSelect-1]입니다.");
+                    Console.WriteLine($"선택하신 직업은 {selectJobs[playerSelect-1].Name}입니다.");
                     Console.WriteLine("정말 이 직업으로 선택하시겠습니까? ( Y / N ) ");
                     string confirmInput = Console.ReadLine();
 
                     if(confirmInput == "Y" || confirmInput == "y")
                     {
+                        CharacterManager.Instance.player.SetJobsStat(selectJobs[playerSelect-1]);
                         Console.WriteLine("성공적으로 직업을 선택하셨습니다.");
                         Console.WriteLine($"{CharacterManager.Instance.player.Name} 님 환영합니다.");
                         Console.WriteLine("\n아무 키나 눌러 다음으로 진행해주세요.");
                         Console.ReadKey();
+                        GameManager.Instance.currentState = GameState.Home;
+                        break;
                     }
                 }
             }

@@ -65,7 +65,7 @@
             Console.WriteLine($"Lv.{monster.Level} {monster.Name}의 공격!");
             Console.WriteLine($"{CharacterManager.Instance.player.Name} 을(를) 맞췄습니다. [데미지 : {monster.Atk}]");
 
-            Console.WriteLine($"Lv.{CharacterManager.Instance.player.Level} {CharacterManager.Instance.player.Name} ({CharacterManager.Instance.player.Job})");
+            Console.WriteLine($"Lv.{CharacterManager.Instance.player.Level} {CharacterManager.Instance.player.Name} ({CharacterManager.Instance.player.CurrentJob.Name})");
             Console.WriteLine($"HP {oldHp} → {CharacterManager.Instance.player.Hp}");
             Console.WriteLine();
 
