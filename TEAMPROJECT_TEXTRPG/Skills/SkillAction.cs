@@ -13,12 +13,12 @@
                 case "전사":
                     skills = SkillDatabase.Instance.WarriorSkills;
                     break;
-                //case "마법사":
-                //    skills = SkillDatabase.Instance.MageSkills;
-                //    break;
-                //case "도적":
-                //    skills = SkillDatabase.Instance.ThiefSkills;
-                //    break;
+                case "마법사":
+                    skills = SkillDatabase.Instance.MageSkills;
+                    break;
+                case "도적":
+                    skills = SkillDatabase.Instance.ThiefSkills;
+                    break;
                 default:
                     Console.WriteLine("이 직업은 아직 스킬이 없습니다.");
                     return;
