@@ -50,8 +50,9 @@
                         Console.WriteLine("\n아무 키나 눌러 다음으로 진행해주세요.");
                         Console.ReadKey();
                         GameManager.Instance.currentState = GameState.SelectJob;
+                        break;
                     }
-                    break;
+                    
                 }
             }
         }
