@@ -4,7 +4,7 @@
     {
         public int Level { get; set; } = 1;
         public string Name { get; set; }
-        public string Job { get; set; } = "전사";
+        public Job CurrentJob { get; set; }
         public int Gold { get; set; } = 1500;
         public int MaxHP { get; set; }
         public int MaxMP { get; set; }

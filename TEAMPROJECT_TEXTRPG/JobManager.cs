@@ -1,0 +1,29 @@
+﻿namespace TEAMPROJECT_TEXTRPG
+{
+    internal class JobManager
+    {
+        public static List<Job> AllJobs { get; private set; }
+
+        static JobManager()
+        {
+            AllJobs = new List<Job>()
+            {
+                new Job("전사", 150, 50, 5, 10, 20, 5),
+                new Job("마법사", 100, 100, 8, 7, 10, 10),
+                new Job("도적", 120, 70, 10, 5, 10, 10)
+            };
+        }
+        
+        public static Job GetJob(int index)
+        {
+            if (index >0 && index < AllJobs.Count)
+            {
+                return AllJobs[index];
+            }
+            else
+            {
+                return null;
+            }
+        }
+    }
+}

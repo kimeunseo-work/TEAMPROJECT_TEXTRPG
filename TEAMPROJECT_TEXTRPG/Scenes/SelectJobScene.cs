@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TEAMPROJECT_TEXTRPG.Scenes
+﻿namespace TEAMPROJECT_TEXTRPG.Scenes
 {
     internal class SelectJobScene : Scene
     {
@@ -16,6 +10,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
         public void DisplayJob()
         {
             int playerSelect;
+            List<Job> selectJobs = JobManager.AllJobs;
 
             while (true)
             {
@@ -24,16 +19,16 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                 Console.WriteLine("||                                                                                                        ||");
                 Console.WriteLine("||                                       원하시는 직업을 선택해주세요.                                    ||");
                 Console.WriteLine("||                                                                                                        ||");
-                Console.WriteLine($"|| 1. xxx.job.[index]                                                                                     ||");
-                Console.WriteLine($"|| 2. xxx.job.[index]                                                                                     ||");
-                Console.WriteLine($"|| 3. xxx.job.[index]                                                                                     ||");
+                for (int i = 0; i < selectJobs.Count; i++)
+                {
+                    Console.WriteLine($"|| {i+1}. {selectJobs[i].Name}                                                                                  ||");
+                }
                 Console.WriteLine("||                                                                                                        ||");
                 Console.WriteLine("============================================================================================================");
 
                 playerSelect = InputHandler.GetUserActionInput();
 
-                /*
-                if(playerSelect <= 0 || playerSelect > xxx.job.Length또는Count)
+                if(playerSelect <= 0 || playerSelect > selectJobs.Count)
                 {
                     Console.WriteLine("잘못된 입력입니다.");
                     Console.ReadKey();
@@ -41,7 +36,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                 else
                 {
                     
-                    Console.WriteLine($"선택하신 직업은 xxx.job.[playerSelect-1]입니다.");
+                    Console.WriteLine($"선택하신 직업은 selectJobs[playerSelect-1]입니다.");
                     Console.WriteLine("정말 이 직업으로 선택하시겠습니까? ( Y / N ) ");
                     string confirmInput = Console.ReadLine();
 
@@ -53,7 +48,6 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                         Console.ReadKey();
                     }
                 }
-                */
             }
         }
     }
