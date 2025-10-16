@@ -17,7 +17,13 @@ Victory
 던전에서 몬스터 {GameManager.Instance.monsters.Count}마리를 잡았습니다.
 
 Lv.{CharacterManager.Instance.player.Level} {CharacterManager.Instance.player.Name}
-HP {CharacterManager.Instance.player.hped} -> {CharacterManager.Instance.player.Hp}
+HP {CharacterManager.Instance.player.hped} -> {CharacterManager.Instance.player.Hp}");
+
+            int ex = 50;
+
+            CharacterManager.Instance.player.AddExp(ex);
+
+            Console.Write(@"
 
 0. 다음
 
