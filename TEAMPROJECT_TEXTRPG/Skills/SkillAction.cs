@@ -26,7 +26,7 @@
 
             //스킬 목록 출력
 
-            Console.WriteLine("\n[사용 가능 스킬 목록]");
+            Console.WriteLine($"\n[사용 가능 스킬 목록][현재 마나: {player.Mp}]");
             for (int i = 0; i < skills.Count; i++)
             {
                 var s= skills[i];
@@ -67,10 +67,9 @@
             var atk = (int)player.Attack;
             int damage = (int)(atk * skill.Multiple); // 실행시 데미지 계산
 
-            //누구에게 지정할지
+            //스킬이 랜덤형태인지 아닌지 확인
             if (!skill.IsRandom)
             {
-                Console.WriteLine("공격할 적을 선택하세요: ");
                 for (int i = 0; i < GameManager.Instance.monsters.Count; i++)
                 {
                     var m = GameManager.Instance.monsters[i];

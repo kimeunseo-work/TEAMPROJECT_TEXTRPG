@@ -34,6 +34,7 @@
 
         public SkillDatabase()
         {
+            //단일 몬스터에게 데미지 20
             WarriorSkills.Add(new Skill
             {
                 Name = "알파 스트라이크",
@@ -44,7 +45,8 @@
                 Description = "하나의 적을 공격합니다."
             });
 
-            WarriorSkills.Add(new Skill()
+            //랜덤 몬스터 2마리에게 데미지 15 씩
+            WarriorSkills.Add(new Skill
             {
                 Name = "더블 스트라이크",
                 Mp = 10,
