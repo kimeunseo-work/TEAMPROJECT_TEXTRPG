@@ -21,7 +21,7 @@
                 Console.WriteLine("||                                                                                                        ||");
                 for (int i = 0; i < selectJobs.Count; i++)
                 {
-                    Console.WriteLine($"|| {i+1}. {selectJobs[i].Name}                                                                                  ||");
+                    Console.WriteLine($"|| {i+1}. {selectJobs[i].Name, -10}                                                                                        ||");
                 }
                 Console.WriteLine("||                                                                                                        ||");
                 Console.WriteLine("============================================================================================================");
