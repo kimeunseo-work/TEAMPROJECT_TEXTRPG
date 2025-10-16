@@ -101,6 +101,7 @@
             //회복
 
             Hp = MaxHP;
+            Mp = MaxMP;
 
             Console.WriteLine($"\n 레벨 업! 현재 레벨: {Level}");
             Console.WriteLine($"공격력 + {CurrentJob.LvUpAttack} -> {BaseAttack}, 방어력 + {CurrentJob.LvUpDefense} -> {BaseDefense}");
