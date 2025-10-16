@@ -1,6 +1,6 @@
 ﻿namespace TEAMPROJECT_TEXTRPG.Scenes
 {
-    internal class CharacterCreateScene : Scene
+    internal class InitCharacterScene : Scene
     {
         internal override void Show()
         {
@@ -47,7 +47,6 @@
                     // GameManager.Instance.currentState = GameState.SelectJob;
                     break;
                 }
-
             }
         }
     }
