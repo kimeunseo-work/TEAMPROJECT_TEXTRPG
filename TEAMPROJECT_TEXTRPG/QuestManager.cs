@@ -26,8 +26,19 @@ namespace TEAMPROJECT_TEXTRPG
 
 
 
-        Dictionary<int, Quest> Quest;
+        Dictionary<int, Quest> Quests;
+        List<Quest> AbleQuests;
+        Quest CurrentQuest;
+        int TotalMonsterKillCount;
+        int BestEquipmentStat;
+        int BestLevel;
 
+
+        public QuestManager() { }
+
+        public void AddMonsterCount() { }
+        public void CheckBestStat() { }
+        public void CheckBestLevel() { }
 
 
 
