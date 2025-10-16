@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TEAMPROJECT_TEXTRPG
+﻿namespace TEAMPROJECT_TEXTRPG
 {
     internal class Player
     {
         public int Level { get; set; } = 1;
-        public string Name { get; set; } = "Chad";
+        public string Name { get; set; }
         public string Job { get; set; } = "전사";
         public int Gold { get; set; } = 1500;
         public int MaxHP { get; set; }
