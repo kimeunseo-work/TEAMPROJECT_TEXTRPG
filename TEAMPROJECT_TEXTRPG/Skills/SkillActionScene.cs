@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TEAMPROJECT_TEXTRPG.Skills
 {
-    internal class SkillAction
+    internal class SkillActionScene
     {
         internal static void Action(Player player, Monster monster, Skill skill)
         {
