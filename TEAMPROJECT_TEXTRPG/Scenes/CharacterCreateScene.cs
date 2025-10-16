@@ -2,13 +2,6 @@
 {
     internal class CharacterCreateScene : Scene
     {
-        private Player player;
-
-        public CharacterCreateScene(Player player)
-        {
-            this.player = player;
-        }
-
         internal override void Show()
         {
             DisplayCreate();
@@ -46,7 +39,7 @@
                 }
                 else
                 {
-                    player.Name = playerInputName;
+                    CharacterManager.Instance.player.Name = playerInputName;
                     Console.WriteLine($"'{playerInputName}'(으)로 캐릭터 이름이 성공적으로 설정되었습니다.");
                     Console.WriteLine("아무 키나 눌러 다음으로 진행해주세요.");
                     Console.ReadKey();

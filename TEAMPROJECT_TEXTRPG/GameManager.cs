@@ -8,6 +8,8 @@ namespace TEAMPROJECT_TEXTRPG
     internal enum GameState
     {
         None,// 게임 종료
+        CharacterCreate,//캐릭터 생성 화면
+        SelectJob,//캐릭터 직업 선택 화면
         Home,// 메인 화면
         Stat,// 상태창
         Battle,// 전투
@@ -56,12 +58,15 @@ namespace TEAMPROJECT_TEXTRPG
         {
             // 예제 확인하려면 currentState = GameState.Example1
             monsters = new List<Monster>();
-            currentState = GameState.Home;
+            var characterMgr = CharacterManager.Instance;
+            currentState = GameState.CharacterCreate;
             currentBattleState = BattleState.None;
             scenes = new Dictionary<GameState, Scene>();
             //Player player = new Player();// 플레이어 객채
 
             // 씬을 매니저에 추가하는 방법 예시
+            scenes.Add(GameState.CharacterCreate, new CharacterCreateScene());
+            //scenes.Add(GameState.SelectJob, new SelectJobScene());
             scenes.Add(GameState.Home, new HomeScene());
             scenes.Add(GameState.Stat, new PlayerInfoScene());
             scenes.Add(GameState.BattleResult, new BattleResultScene());
