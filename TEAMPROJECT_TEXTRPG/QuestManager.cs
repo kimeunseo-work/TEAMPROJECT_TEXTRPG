@@ -6,6 +6,18 @@ using System.Threading.Tasks;
 
 namespace TEAMPROJECT_TEXTRPG
 {
+
+    internal enum QuestType
+    {
+
+        Monster,
+        Gear,
+        enhance
+
+    }
+
+
+
     internal class QuestManager
     {
         /// <싱글톤>
@@ -24,11 +36,30 @@ namespace TEAMPROJECT_TEXTRPG
             }
         }
 
+        public Dictionary<QuestType, Quest> Quests;
+        public List<Quest> AbleQuests;
+        public Quest CurrentQuest;
+        public int TotalMonsterKillCount;
+        public int BestEquipmentStat;
+        public int BestLevel;
+        public Items items;
+        public Monster monster;
+        public Monsters monsters;
+        public Quest Quest;
+
+
         private QuestManager()
         {
 
-            Monsters monsters = new Monsters();
-            Quest Quest = new Quest(monsters);
+
+            
+            monsters = new Monsters();
+            Quest = new MonsterKillQuest(monsters);
+            Quests = new Dictionary<QuestType, Quest>();
+            items = new Items();
+
+
+            Quests.Add(QuestType.Monster, new MonsterKillQuest(monsters));
 
 
         }
@@ -51,12 +82,7 @@ namespace TEAMPROJECT_TEXTRPG
 
 
 
-        Dictionary<int, Quest> Quests;
-        List<Quest> AbleQuests;
-        Quest CurrentQuest;
-        int TotalMonsterKillCount;
-        int BestEquipmentStat;
-        int BestLevel;
+        
 
 
        
@@ -64,9 +90,18 @@ namespace TEAMPROJECT_TEXTRPG
         public void AddMonsterCount() 
         {
 
-            if(GameManager.Instance.monsters.All(x => x.IsDead) )//&&) //퀘스트 몬스터가 있을시 )
+            if(GameManager.Instance.monsters.All(x => x.IsDead) )  //퀘스트 몬스터가 있을시 )
             {
 
+                // 여기서 이제 몬스터 카운트가 올라감
+                //그니까 이제 퀘스트에 몬스터 카운트가 올라가는건데 
+
+                //그니까 이제 그 죽은 몬스터가 퀘스트 몬스터였던거임;;;
+                //그러면 이제 퀘스트에 있는 몬스터였다 그러면
+                //이제 그 퀘스트 완료조건의 그 몬스터 카운트를
+
+                //이제 이 함수를 실행해서
+                //그 퀘스트 완료조건을 채울수있게 하는거임
 
 
 
@@ -88,6 +123,16 @@ namespace TEAMPROJECT_TEXTRPG
 
         public void CheckBestStat() { }
         public void CheckBestLevel() { }
+
+
+        public void QuestScene()
+        {
+           
+
+
+
+
+        }
 
 
 
