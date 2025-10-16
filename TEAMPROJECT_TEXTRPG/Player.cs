@@ -7,6 +7,7 @@
         public string Job { get; set; } = "전사";
         public int Gold { get; set; } = 1500;
         public int MaxHP { get; set; }
+        public int MaxMP { get; set; }
         public double BaseAttack { get; set; } = 10;
         public double BaseDefense { get; set; } = 5;
         public double Attack { get; set; }
@@ -19,6 +20,13 @@
         {
             get => hp;
             set => hp = Math.Max(0, value); // hp가 0보다 작으면 0으로 고정
+        }
+
+        private int mp;
+        public int Mp
+        {
+            get => mp;
+            set => mp = Math.Max(0, value); // mp가 0보다 작으면 0으로 고정
         }
 
         //경험치 테이블
@@ -34,7 +42,8 @@
         {
             Attack = BaseAttack;
             Defense = BaseDefense;
-            Hp = 100; //시작 hp 100
+            Hp = 100; //시작 체력 100
+            Mp = 50; // 시작 마나 50
         }
 
         public void AddExp(int getExp)
@@ -64,6 +73,7 @@
         {
             Level++;
             MaxHP += 20;
+            MaxMP += 10;
             BaseAttack += 0.5;
             BaseDefense += 1;
 
