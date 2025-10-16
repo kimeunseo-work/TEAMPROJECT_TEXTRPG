@@ -93,7 +93,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
             //회피기능
             Random move = new Random();
             int chance = move.Next(0, 100);
-            if (chance < 50)
+            if (chance < 10)
             {
                 Console.Clear();
                 Console.WriteLine("Battle");
