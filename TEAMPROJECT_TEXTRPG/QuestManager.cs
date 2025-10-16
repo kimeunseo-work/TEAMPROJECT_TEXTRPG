@@ -8,5 +8,37 @@ namespace TEAMPROJECT_TEXTRPG
 {
     internal class QuestManager
     {
+        /// <싱글톤>
+        /// 
+        /// </summary>
+        private static QuestManager instance;
+        internal static QuestManager Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new QuestManager();
+                }
+                return instance;
+            }
+        }
+
+
+
+        Dictionary<int, Quest> Quest;
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }
