@@ -36,9 +36,10 @@
             //사용할 스킬 번호 입력
             int skillIndex = InputHandler.GetUserActionInput();
 
-            if (skillIndex < 0 || skillIndex >= skills.Count)
+            if (skillIndex < 0 || skillIndex > skills.Count)
             {
                 Console.WriteLine("잘못된 입력입니다.");
+                Console.ReadKey();
                 return;
             }
 
@@ -48,7 +49,7 @@
 
             Action(player, target, selectedSkill);
         }
-        internal static void Action(Player player, Monster monster, Skill skill)
+        internal static void Action(Player player, Monster target, Skill skill)
         {
             //MP 충분한지 확인
             if (player.Mp < skill.Mp)
@@ -70,25 +71,20 @@
             //스킬이 랜덤형태인지 아닌지 확인
             if (!skill.IsRandom)
             {
-                for (int i = 0; i < GameManager.Instance.monsters.Count; i++)
-                {
-                    var m = GameManager.Instance.monsters[i];
-                    Console.WriteLine($"{i + 1}. {m.Name} (HP: {m.Hp})");
-                }
-                int targetIndex = InputHandler.GetUserActionInput();
-                var target = GameManager.Instance.monsters[targetIndex - 1];
-
                 ApplyDamage(target, damage);
-
             }
             else
             {
                 var random = new Random();
                 var count = Math.Min(skill.Count, GameManager.Instance.monsters.Count);
-
+                var availableMonsters = GameManager.Instance.monsters.ToList();
+               
                 for (int i = 0; i < count; i++)
                 {
+                    if (availableMonsters.Count == 0) break;
+
                     var t = GameManager.Instance.monsters[random.Next(GameManager.Instance.monsters.Count)];
+                    availableMonsters.Remove(t);
                     Console.WriteLine($"{skill.Count}명의 랜덤 적을 대상으로 지정했습니다.");
 
                     ApplyDamage(t, damage);
