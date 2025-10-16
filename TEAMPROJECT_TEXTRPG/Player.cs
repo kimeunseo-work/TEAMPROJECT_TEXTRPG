@@ -103,7 +103,7 @@
             Hp = MaxHP;
 
             Console.WriteLine($"\n 레벨 업! 현재 레벨: {Level}");
-            Console.WriteLine($"공격력 + 0.5 -> {BaseAttack}, 방어력 + 1 -> {BaseDefense}");
+            Console.WriteLine($"공격력 + {CurrentJob.LvUpAttack} -> {BaseAttack}, 방어력 + {CurrentJob.LvUpDefense} -> {BaseDefense}");
 
         }
 
