@@ -17,7 +17,7 @@
                 var oldHp = MonsterAttack(monster);
 
                 // 몬스터가 사망하여 공격하지 않았음.
-                if (oldHp == null) break; 
+                if (oldHp == null) continue; 
                 
                 // 화면 출력
                 MonsterAttackResultUI(monster, oldHp);
