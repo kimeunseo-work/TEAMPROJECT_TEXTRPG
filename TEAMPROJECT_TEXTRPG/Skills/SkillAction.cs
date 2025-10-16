@@ -2,6 +2,52 @@
 {
     internal class SkillAction
     {
+
+        // 직업에 따른 스킬 목록 불러오기
+        internal static void HaveSkill(Player player, Monster target)
+        {
+            List<Skill> skills = new();
+
+            switch (player.CurrentJob.Name)
+            {
+                case "전사":
+                    skills = SkillDatabase.Instance.WarriorSkills;
+                    break;
+                //case "마법사":
+                //    skills = SkillDatabase.Instance.MageSkills;
+                //    break;
+                //case "도적":
+                //    skills = SkillDatabase.Instance.ThiefSkills;
+                //    break;
+                default:
+                    Console.WriteLine("이 직업은 아직 스킬이 없습니다.");
+                    return;
+            }
+
+            //스킬 목록 출력
+
+            Console.WriteLine("\n[사용 가능 스킬 목록]");
+            for (int i = 0; i < skills.Count; i++)
+            {
+                var s= skills[i];
+                Console.WriteLine($"{i + 1}. {s.Name} (Mp: {s.Mp}) - {s.Description})");
+            }
+
+            //사용할 스킬 번호 입력
+            int skillIndex = InputHandler.GetUserActionInput();
+
+            if (skillIndex < 0 || skillIndex >= skills.Count)
+            {
+                Console.WriteLine("잘못된 입력입니다.");
+                return;
+            }
+
+            var selectedSkill = skills[skillIndex];
+
+            // 선택한 스킬 실행
+
+            Action(player, target, selectedSkill);
+        }
         internal static void Action(Player player, Monster monster, Skill skill)
         {
             //MP 충분한지 확인
