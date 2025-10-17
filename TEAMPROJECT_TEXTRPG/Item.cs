@@ -87,31 +87,25 @@
         }
     }
 
-    internal class Items()
+    internal class Items
     {
-        internal List<Item> items = new List<Item>()
-        {
-            new Item(0, "", ""), // 기본 값
-            new Item(1, "전리품 A", ""), // '미니언'이 드랍할 전리품
-            new Item(2, "전리품 B", ""), // '공허충'이 드랍할 전리품
-            new Item(3, "전리품 C", ""), // '대포 미니언'이 드랍할 전리품
-            new Item(4, "전리품 D", ""), // '돌거북'이 드랍할 전리품
-            new Item(5, "전리품 E", ""), // '고대 돌거북'이 드랍할 전리품
-            new Item(6, "전리품 F", ""), // '칼날부리'가 드랍할 전리품
-        };
+        // 새롭게 생성한 기타 Item
+        Item itemDefault0 = new Item(0, "", ""); // 기본 값
+        Item item1 = new Item(1, "전리품 A", ""); // '미니언'이 드랍할 전리품
+        Item item2 = new Item(2, "전리품 B", ""); // '공허충'이 드랍할 전리품
+        Item item3 = new Item(3, "전리품 C", ""); // '대포 미니언'이 드랍할 전리품
+        Item item4 = new Item(4, "전리품 D", ""); // '돌거북'이 드랍할 전리품
+        Item item5 = new Item(5, "전리품 E", ""); // '고대 돌거북'이 드랍할 전리품
+        Item item6 = new Item(6, "전리품 F", ""); // '칼날부리'가 드랍할 전리품
 
-        internal List<EquipItem> euqipItems = new List<EquipItem>()
-        {
-            new EquipItem(0, "", 0, 0, 0, "", false), // 기본 값
-            new EquipItem(1, "낡은 검", 1, 1, 5, "", false),
-            new EquipItem(2, "냄비 뚜껑", 2, 2, 2, "", false),
-        };
+        // 새롭게 생성한 장비 Item
+        EquipItem equipItemDefault0 = new EquipItem(0, "", 0, 0, 0, "", false); // 기본 값
+        EquipItem equipItem1 = new EquipItem(1, "낡은 검", 1, 1, 5, "", false);
+        EquipItem equipItem2 = new EquipItem(2, "냄비 뚜껑", 2, 2, 2, "", false);
 
-        internal List<UseItem> useItems = new List<UseItem>()
-        {
-            new UseItem(0, "", 0, 0, ""), // 기본 값
-            new UseItem(1, "체력 회복 포션", 1, 30, ""),
-            new UseItem(2, "마나 회복 포션", 2, 20, ""),
-        };
+        // 새롭게 생성한 소비 Item
+        UseItem useItemDefault0 = new UseItem(0, "", 0, 0, ""); // 기본 값
+        UseItem useItem0 = new UseItem(1, "체력 회복 포션", 1, 30, "");
+        UseItem useItem1 = new UseItem(2, "마나 회복 포션", 2, 20, "");
     }
 }
