@@ -6,6 +6,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
     {
         private Random random = new Random();
 
+        //전투 시작
         public void Start()
         {
             Console.Clear();
@@ -13,6 +14,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
             ShowMonsters();
             Console.WriteLine("\n0. 취소\n");
 
+            // 몬스터 선택
             string input = Console.ReadLine();
 
             if (input == "0")
@@ -21,18 +23,21 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                 GameManager.Instance.currentState = GameState.Home;
             }
             int targetIndex;
+            // 플레이어가 숫자를 제대로 입력했는지 확인
             if (!int.TryParse(input, out targetIndex) || targetIndex < 1 || targetIndex > GameManager.Instance.monsters.Count)
             {
                 Console.WriteLine("잘못된 입력입니다.");
                 return;
             }
-            Monster target = GameManager.Instance.monsters[targetIndex - 1];
+           
+            Monster target = GameManager.Instance.monsters[targetIndex - 1]; //리스트는 0부터 시작하기 때문에 -1 추가
 
             if (target.Hp <= 0)
             {
                 Console.WriteLine("이미 죽은 몬스터입니다.");
                 return;
             }
+            // 몬스터 선택 후 공격 방식 선택
             Console.WriteLine("\n무엇을 하시겠습니까?");
             Console.WriteLine("1. 기본 공격");
             Console.WriteLine("2. 스킬 사용");
@@ -58,6 +63,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
             }
             
         }
+        //플레이어 공격(치명타)
         private void PlayerAttack(Monster target)
         {
             int attackPower = GetRandomAttack((int)CharacterManager.Instance.player.Attack);
@@ -105,7 +111,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
             }
         }
         
-        
+        // 랜덤 공격력
         private int GetRandomAttack(double baseattack)
         {
             double error = baseattack * 0.1;
