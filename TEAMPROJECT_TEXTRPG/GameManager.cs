@@ -84,5 +84,7 @@ namespace TEAMPROJECT_TEXTRPG
                 scenes[currentState].Show();
             }
         }
+
+        internal void ChangeGameState(GameState state) => currentState = state;
     }
 }
