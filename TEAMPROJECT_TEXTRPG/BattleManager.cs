@@ -133,6 +133,7 @@ namespace TEAMPROJECT_TEXTRPG
             else if (CurrentBattleState == NewBattleState.MonsterTurn)
             {
                 // 몬스터가 공격하는 로직
+                MonsterTurn();
             }
             else if (CurrentBattleState == NewBattleState.Victory || CurrentBattleState == NewBattleState.Lose)
             {
