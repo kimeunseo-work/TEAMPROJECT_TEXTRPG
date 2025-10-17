@@ -93,12 +93,12 @@
         UseItem useItem1 = new UseItem(2, "마나 회복 포션", 2, 20, "");
 
         // 새롭게 생성한 기타 Item
-        EtcItem itemDefault0 = new EtcItem(0, "", ""); // 기본 값
-        EtcItem item1 = new EtcItem(1, "전리품 A", ""); // '미니언'이 드랍할 전리품
-        EtcItem item2 = new EtcItem(2, "전리품 B", ""); // '공허충'이 드랍할 전리품
-        EtcItem item3 = new EtcItem(3, "전리품 C", ""); // '대포 미니언'이 드랍할 전리품
-        EtcItem item4 = new EtcItem(4, "전리품 D", ""); // '돌거북'이 드랍할 전리품
-        EtcItem item5 = new EtcItem(5, "전리품 E", ""); // '고대 돌거북'이 드랍할 전리품
-        EtcItem item6 = new EtcItem(6, "전리품 F", ""); // '칼날부리'가 드랍할 전리품
+        EtcItem etcItemDefault0 = new EtcItem(0, "", ""); // 기본 값
+        EtcItem etcItem1 = new EtcItem(1, "전리품 A", ""); // '미니언'이 드랍할 전리품
+        EtcItem etcItem2 = new EtcItem(2, "전리품 B", ""); // '공허충'이 드랍할 전리품
+        EtcItem etcItem3 = new EtcItem(3, "전리품 C", ""); // '대포 미니언'이 드랍할 전리품
+        EtcItem etcItem4 = new EtcItem(4, "전리품 D", ""); // '돌거북'이 드랍할 전리품
+        EtcItem etcItem5 = new EtcItem(5, "전리품 E", ""); // '고대 돌거북'이 드랍할 전리품
+        EtcItem etcItem6 = new EtcItem(6, "전리품 F", ""); // '칼날부리'가 드랍할 전리품
     }
 }
