@@ -104,7 +104,7 @@ namespace TEAMPROJECT_TEXTRPG
 
             ExpReward = 100;
 
-            ItemReward = QuestManager.Instance.items.items[1];
+            ItemReward = QuestManager.Instance.items.equipItem;
 
             GetMonster(monsters);
 
@@ -120,12 +120,12 @@ namespace TEAMPROJECT_TEXTRPG
             int deadCount = GameManager.Instance.monsters
                 .Count(m => m.Name == QuestMonster.Name && m.IsDead);
 
-            count = deadCount;
+            Count = deadCount;
 
-            if (count >= 5)
+            if (Count >= 5)
             {
                 isClear = true;
-                ShowQuestClear();
+               
             }
         }
 
