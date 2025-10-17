@@ -48,10 +48,14 @@ namespace TEAMPROJECT_TEXTRPG
             set
             {
                 currentBattleState = value;
-                StateHandler();
+                HandleBattleState();
             }
         }
 
+        // 몬스터 리스트(고정)
+        private Monsters monsterList = new Monsters();
+        // 현재 스폰된 몬스터
+        internal List<Monster> CurrentMonsters;
         /* 상태 관련 메서드 */
         //============================================================//
 
@@ -110,7 +114,7 @@ namespace TEAMPROJECT_TEXTRPG
         /// 현재 배틀 상태에 따라
         /// 적절한 로직을 호출하는 메서드
         /// </summary>
-        private void StateHandler()
+        private void HandleBattleState()
         {
             if (CurrentBattleState == NewBattleState.None)
             {
@@ -119,6 +123,7 @@ namespace TEAMPROJECT_TEXTRPG
             else if (CurrentBattleState == NewBattleState.Start)
             {
                 // 배틀 시작 위한 준비 코드
+                SpawnMonsters();
 
             }
             else if (CurrentBattleState == NewBattleState.PlayerTurn)
@@ -135,6 +140,18 @@ namespace TEAMPROJECT_TEXTRPG
             }
         }
 
+        /* 내부 로직 */
+        //============================================================//
+
+        /// <summary>
+        /// 전투 시작시 몬스터를 소환
+        /// </summary>
+        private void SpawnMonsters()
+        {
+            CurrentMonsters = monsterList.SpawnRandomMonsters();
+
+            OnMonsterSpawned?.Invoke(CurrentMonsters);
+        }
         /* 유틸리티 */
         //============================================================//
         private void ChangeBattleState(NewBattleState state) => CurrentBattleState = state;
