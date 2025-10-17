@@ -48,10 +48,11 @@ namespace TEAMPROJECT_TEXTRPG
             set
             {
                 currentBattleState = value;
+                StateHandler();
             }
         }
 
-        /* 외부 전용 */
+        /* 상태 관련 메서드 */
         //============================================================//
 
         /// <summary>
@@ -102,6 +103,35 @@ namespace TEAMPROJECT_TEXTRPG
                     ChangeBattleState(NewBattleState.None);
                     GameManager.Instance.ChangeGameState(GameState.Home);
                     break;
+            }
+        }
+
+        /// <summary>
+        /// 현재 배틀 상태에 따라
+        /// 적절한 로직을 호출하는 메서드
+        /// </summary>
+        private void StateHandler()
+        {
+            if (CurrentBattleState == NewBattleState.None)
+            {
+                // 이전 배틀 내용을 초기화?
+            }
+            else if (CurrentBattleState == NewBattleState.Start)
+            {
+                // 배틀 시작 위한 준비 코드
+
+            }
+            else if (CurrentBattleState == NewBattleState.PlayerTurn)
+            {
+                // 플레이어 공격 입력 받고 처리해야 함.
+            }
+            else if (CurrentBattleState == NewBattleState.MonsterTurn)
+            {
+                // 몬스터가 공격하는 로직
+            }
+            else if (CurrentBattleState == NewBattleState.Victory || CurrentBattleState == NewBattleState.Lose)
+            {
+                // 화면 호출
             }
         }
 
