@@ -5,18 +5,23 @@
         string input;
         int parsedInput;
         bool isParsedSuccess;
-
+        int subExp;
         internal void BattleResultWin()
         {
             Console.Clear();
-
-            BattleResultWinText();
-
             for (int i = 0; i < GameManager.Instance.monsters.Count; i++)
             {
                 CharacterManager.Instance.player.AddExp(GameManager.Instance.monsters[i].MonExp);
             }
 
+            BattleResultWinText();
+            for (int i = 0; i < GameManager.Instance.monsters.Count; i++)
+            {
+                subExp = 0;
+                subExp += GameManager.Instance.monsters[i].MonExp;
+            }
+
+            Console.WriteLine($"\n경험치{subExp} 획득 (현재 {CharacterManager.Instance.player.Exp} / 필요 {CharacterManager.Instance.player.GetRequiredExp()})");
             DaumText();
 
             WhileInput0();
@@ -86,10 +91,12 @@
                             Console.Clear();
 
                             BattleResultWinText();
-                            /* 
-                             - 레벨업 시 출력되던 내역 누락됨(수정 필요)
-                               경험치 관련 코드를 그대로 사용 시 경험치가 중복 획득되는 오류가 있음
-                             */
+                            for (int i = 0; i < GameManager.Instance.monsters.Count; i++)
+                            {
+                                subExp = 0;
+                                subExp += GameManager.Instance.monsters[i].MonExp;
+                            }
+                            Console.WriteLine($"\n경험치{subExp} 획득 (현재 {CharacterManager.Instance.player.Exp} / 필요 {CharacterManager.Instance.player.GetRequiredExp()})");
                             DaumText();
                             Console.WriteLine("잘못된 입력입니다.");
                             Console.WriteLine();

@@ -70,7 +70,6 @@
         public void AddExp(int getExp)
         {
             Exp += getExp;
-            Console.WriteLine($"\n경험치{getExp} 획득 (현재 {Exp} / 필요 {GetRequiredExp()})");
 
             while (true)
             {
@@ -84,7 +83,7 @@
 
         }
         // 경험치 반환
-        private int GetRequiredExp() =>
+        public int GetRequiredExp() =>
 
             ExpTable.ContainsKey(Level) ? ExpTable[Level] : int.MaxValue;
 
