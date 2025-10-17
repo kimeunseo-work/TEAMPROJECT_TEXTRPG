@@ -8,55 +8,64 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
 
         public void Start()
         {
-            Console.Clear();
-            Console.WriteLine("**Battle!!**\n");
-            ShowMonsters();
-            Console.WriteLine("\n0. 취소\n");
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("**Battle!!**\n");
+                ShowMonsters();
+                Console.WriteLine("\n0. 취소\n");
 
-            string input = Console.ReadLine();
+                int input = InputHandler.GetUserActionInputInBattle();
 
-            if (input == "0")
-            {
-                Console.WriteLine("전투를 취소했습니다.");
-                GameManager.Instance.currentState = GameState.Home;
-            }
-            int targetIndex;
-            if (!int.TryParse(input, out targetIndex) || targetIndex < 1 || targetIndex > GameManager.Instance.monsters.Count)
-            {
-                Console.WriteLine("잘못된 입력입니다.");
-                return;
-            }
-            Monster target = GameManager.Instance.monsters[targetIndex - 1];
+                if (input == 0)
+                {
+                    Console.WriteLine("행동 선택 화면으로 돌아갑니다.");
+                    Console.ReadKey();
+                    break;
+                }
 
-            if (target.Hp <= 0)
-            {
-                Console.WriteLine("이미 죽은 몬스터입니다.");
-                return;
+                int targetIndex = input -1;
+
+                if (targetIndex < 1 || targetIndex > GameManager.Instance.monsters.Count)
+                {
+                    Console.WriteLine("잘못된 입력입니다.");
+                    Console.ReadKey();
+                    break;
+                }
+
+                Monster target = GameManager.Instance.monsters[targetIndex];
+
+                if (target.Hp <= 0)
+                {
+                    Console.WriteLine("이미 죽은 몬스터입니다.");
+                    Console.ReadKey();
+                }
+                Console.WriteLine("\n무엇을 하시겠습니까?");
+                Console.WriteLine("1. 기본 공격");
+                Console.WriteLine("2. 스킬 사용");
+                Console.Write(">>");
+                string action = Console.ReadLine();
+                if (action == "1")
+                {
+                    PlayerAttack(target);
+                }
+                else if (action == "2")
+                {
+                    var player = CharacterManager.Instance.player;
+                    SkillAction.HaveSkill(player, target);
+                }
+                else if (action == "0")
+                {
+                    Console.WriteLine("다시 몬스터를 선택합니다.");
+                    Console.ReadKey();
+                    Start();
+                }
+                else
+                {
+                    Console.WriteLine("잘못된 입력입니다.");
+                    Console.ReadKey();
+                }
             }
-            Console.WriteLine("\n무엇을 하시겠습니까?");
-            Console.WriteLine("1. 기본 공격");
-            Console.WriteLine("2. 스킬 사용");
-            Console.Write(">>");
-            string action = Console.ReadLine();
-            if (action == "1")
-            {
-                PlayerAttack(target);
-            }
-            else if (action == "2")
-            {
-                var player = CharacterManager.Instance.player;
-                SkillAction.HaveSkill(player, target);
-            }
-            else if (action == "0")
-            {
-                Console.WriteLine("다시 몬스터를 선택합니다.");
-                Start();
-            }
-            else
-            {
-                Console.WriteLine("잘못된 입력입니다.");
-            }
-            
         }
         private void PlayerAttack(Monster target)
         {
