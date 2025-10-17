@@ -86,6 +86,10 @@
                             Console.Clear();
 
                             BattleResultWinText();
+                            /* 
+                             - 레벨업 시 출력되던 내역 누락됨(수정 필요)
+                               경험치 관련 코드를 그대로 사용 시 경험치가 중복 획득되는 오류가 있음
+                             */
                             DaumText();
                             Console.WriteLine("잘못된 입력입니다.");
                             Console.WriteLine();
