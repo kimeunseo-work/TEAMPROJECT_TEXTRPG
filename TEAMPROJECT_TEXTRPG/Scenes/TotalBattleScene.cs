@@ -57,10 +57,7 @@
         /* Handler */
         //============================================================//
 
-        private void BattleSceneHandler()
-        {
-            BattleManager.Instance.ChangeBattleState();
-        }
+        private void BattleSceneHandler() => BattleManager.Instance.ChangeBattleState();
 
         /* Displays */
         //============================================================//

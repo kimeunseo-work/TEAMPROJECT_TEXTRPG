@@ -100,6 +100,7 @@ namespace TEAMPROJECT_TEXTRPG
                     // 현재 상태가 승리 또는 패배라면
                     // 배틀 상태가 아니므로 None
                     ChangeBattleState(NewBattleState.None);
+                    GameManager.Instance.ChangeGameState(GameState.Home);
                     break;
             }
         }
