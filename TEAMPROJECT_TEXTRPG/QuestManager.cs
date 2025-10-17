@@ -46,6 +46,8 @@ namespace TEAMPROJECT_TEXTRPG
         public Monster monster;
         public Monsters monsters;
         public Quest Quest;
+        public List<KeyValuePair<QuestType, Quest>> QuestList;
+        public List<KeyValuePair<QuestType, Quest>> OngoingQuestList;
 
 
         private QuestManager()
@@ -54,24 +56,19 @@ namespace TEAMPROJECT_TEXTRPG
 
             
             monsters = new Monsters();
-            Quest = new MonsterKillQuest(monsters);
+          
             Quests = new Dictionary<QuestType, Quest>();
             items = new Items();
 
 
             Quests.Add(QuestType.Monster, new MonsterKillQuest(monsters));
-
+            QuestList = Quests.ToList();
 
         }
            
 
-        public void settingMonster()
-        {
-
-
-           
-            
-        }
+       
+        
          //quest 생성자가 함수인데 이제 필드로 선언만했을때는 this가 완성되지 않아서 프로그램이 알 방법이없다. 그래서 함수 안에서 선언을 해서 
         //함수가 실행될때 선언되도록
         /// <summary>
@@ -118,6 +115,23 @@ namespace TEAMPROJECT_TEXTRPG
 
         }
 
+        internal void SelectShow()
+        {
+            Console.WriteLine("1. 수락");
+            Console.WriteLine("2. 거절");
+            Console.WriteLine("원하시는 행동을 입력해주세요");
+            Console.Write(">>");
+        }
+
+        internal void OngoingShow()
+        {
+            Console.WriteLine("1. 보상받기");
+            Console.WriteLine("2. 돌아가기");
+            Console.WriteLine("원하시는 행동을 입력해주세요");
+            Console.Write(">>");
+        }
+
+
 
 
 
@@ -125,16 +139,99 @@ namespace TEAMPROJECT_TEXTRPG
         public void CheckBestLevel() { }
 
 
-        public void QuestScene()
+        public void CurrentQuestScene()
         {
-           
+
+            Console.WriteLine("Quest!!");
+            Console.WriteLine();
+
+            for (int i = 0; i < QuestList.Count; i++) 
+            {
+                Console.WriteLine($"{i+1}. {QuestList[i].Value.Name}");
+            }
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("원하시는 퀘스트를 선택해주세요.");
+            Console.Write(">>");
+            string input = Console.ReadLine();
+
+            if ( input == "1")
+            {
 
 
+
+
+
+
+
+            }
 
 
         }
 
 
+        public void SelectQuestScene() 
+        { 
+        
+        
+        
+
+
+
+
+
+        
+        
+        }
+        public void SelectCategory()
+        {
+
+            Console.Clear();
+
+            Console.WriteLine("1. 현재 진행중인 퀘스트");
+            Console.WriteLine();
+            Console.WriteLine("2. 퀘스트 선택");
+            Console.WriteLine();
+            Console.WriteLine("원하시는 행동을 입력해주세요");
+            Console.Write(">>");
+
+            while (true)
+            {
+
+                string input = Console.ReadLine();
+
+                if (input == "1")
+                {
+
+
+                    CurrentQuestScene();
+                    break;
+
+
+                }
+                else if (input == "2")
+                {
+
+                    SelectQuestScene();
+                    break;
+
+                }
+                else
+                {
+                    Console.WriteLine("잘못된 입력입니다.");
+                    Console.Write(">>");
+
+                    continue;
+
+                }
+
+
+
+
+            }
+           
+
+        }
 
 
 

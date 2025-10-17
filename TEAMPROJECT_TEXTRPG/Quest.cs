@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TEAMPROJECT_TEXTRPG
 {
-    internal abstract class Quest
+    internal class Quest
     {
         public string Name;
 
@@ -20,7 +20,8 @@ namespace TEAMPROJECT_TEXTRPG
 
         public int ExpReward;
 
-        public bool isclear = false;
+        public bool isSelected = false;
+        public bool isClear = false;
 
 
         public int _count;
@@ -28,6 +29,8 @@ namespace TEAMPROJECT_TEXTRPG
 
         public Monsters monsters;
         public List<Monster> monsterlist;
+
+        public bool QuestSelected = false;
 
         public Quest()
         {
@@ -54,7 +57,12 @@ namespace TEAMPROJECT_TEXTRPG
 
 
 
-        internal abstract void Show();
+        internal virtual void SelectShow() 
+        {
+            
+        }
+
+        internal virtual void Show() { }
 
 
 
@@ -79,7 +87,7 @@ namespace TEAMPROJECT_TEXTRPG
         : base()
         {
 
-            QuestMonster = monsterlist[0];
+            QuestMonster = monsterlist[0]; //미니언 몬스터 할당
 
             Name = "마을을 위협하는 미니언 처치";
 
@@ -102,9 +110,112 @@ namespace TEAMPROJECT_TEXTRPG
 
 
         }
+        public void UpdateQuest()
+        {
+            
+            if (isClear)
+                return;
 
+            // 살아있는 몬스터 중 목표 이름 가진 애 세기
+            int deadCount = GameManager.Instance.monsters
+                .Count(m => m.Name == QuestMonster.Name && m.IsDead);
+
+            count = deadCount;
+
+            if (count >= 5)
+            {
+                isClear = true;
+                ShowQuestClear();
+            }
+        }
+
+        public void CountChange()
+        {
+
+            if (GameManager.Instance.monsters.All(x => x.IsDead) && GameManager.Instance.monsters.Contains(QuestMonster))
+            {
+
+                int MonsterCount = GameManager.Instance.monsters.Count(m => m.Name == QuestMonster.Name);
+
+                Count += MonsterCount;
+
+
+            }
+
+
+
+
+        }
+
+        public void CountStop()
+        {
+
+            if(_count <5)
+            {
+                while (true)
+                {
+
+                    CountChange();
+
+
+                }
+
+
+
+            }
+            else if(_count>=5)
+            {
+
+
+                isClear = true;
+
+
+            }
+
+
+
+
+        }
+   
        
+        void Except()
+        {
 
+            
+            while (true)
+            {
+
+                string input = Console.ReadLine();
+
+
+                if (input == "1")
+                {
+
+
+
+
+
+                    break;
+                }
+                else if (input == "2")
+                {
+
+
+
+                    break;
+
+                }
+                else
+                {
+                    Console.WriteLine("잘못 입력하셨습니다");
+                    Console.Write(">>");
+                    continue;
+
+                }
+
+            }
+          
+        }
        
 
 
@@ -123,14 +234,15 @@ namespace TEAMPROJECT_TEXTRPG
             Console.WriteLine($"- {QuestInfo}");
             Console.WriteLine();
             Console.WriteLine("-보상-");
-            Console.WriteLine($"{ItemReward.itemName}");
-
-
+            Console.WriteLine($"{ItemReward.itemName} x 1");
+            Console.WriteLine($"{GoldReward}G");
+            Console.WriteLine();
+            
 
 
 
         }
-
+        
 
 
     }
