@@ -104,7 +104,7 @@ namespace TEAMPROJECT_TEXTRPG
 
             ExpReward = 100;
 
-            ItemReward = QuestManager.Instance.items.equipItem;
+            ItemReward = QuestManager.Instance.items.equipItem1;
 
             GetMonster(monsters);
 
@@ -120,7 +120,7 @@ namespace TEAMPROJECT_TEXTRPG
             int deadCount = GameManager.Instance.monsters
                 .Count(m => m.Name == QuestMonster.Name && m.IsDead);
 
-            Count = deadCount;
+            Count += deadCount;
 
             if (Count >= 5)
             {
@@ -129,53 +129,9 @@ namespace TEAMPROJECT_TEXTRPG
             }
         }
 
-        public void CountChange()
-        {
+       
 
-            if (GameManager.Instance.monsters.All(x => x.IsDead) && GameManager.Instance.monsters.Contains(QuestMonster))
-            {
-
-                int MonsterCount = GameManager.Instance.monsters.Count(m => m.Name == QuestMonster.Name);
-
-                Count += MonsterCount;
-
-
-            }
-
-
-
-
-        }
-
-        public void CountStop()
-        {
-
-            if(_count <5)
-            {
-                while (true)
-                {
-
-                    CountChange();
-
-
-                }
-
-
-
-            }
-            else if(_count>=5)
-            {
-
-
-                isClear = true;
-
-
-            }
-
-
-
-
-        }
+     
    
        
         void Except()
