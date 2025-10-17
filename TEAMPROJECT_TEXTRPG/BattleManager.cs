@@ -11,8 +11,9 @@ namespace TEAMPROJECT_TEXTRPG
         Start,// 전투 시작. 몬스터 소환
         PlayerTurn,
         MonsterTurn,
-        Victory,
-        Lose
+        //Victory,
+        //Lose
+        Result,
     }
 
     internal class BattleManager
@@ -56,6 +57,10 @@ namespace TEAMPROJECT_TEXTRPG
         private Monsters monsterList = new Monsters();
         // 현재 스폰된 몬스터
         internal List<Monster> CurrentMonsters;
+
+        // 배틀 결과
+        internal bool? isLastBattleWin = null;
+
         /* 상태 관련 메서드 */
         //============================================================//
 
@@ -86,27 +91,35 @@ namespace TEAMPROJECT_TEXTRPG
                     break;
                 case NewBattleState.PlayerTurn:
                     if (IsMonstersAllDead())
+                    {
                         // 플레이어 턴에서 몬스터가 다 죽었으면 승리
-                        ChangeBattleState(NewBattleState.Victory);
+                        ChangeBattleState(NewBattleState.Result);
+                        //ChangeBattleState(NewBattleState.Victory);
+                    }
                     else
                         // 아니면 몬스터 턴으로
                         ChangeBattleState(NewBattleState.MonsterTurn);
                     break;
                 case NewBattleState.MonsterTurn:
                     if (IsPlayerDead())
+                    {
                         // 몬스터 턴에서 플레이어가 죽었으면 패배
-                        ChangeBattleState(NewBattleState.Lose);
+                        ChangeBattleState(NewBattleState.Result);
+                        //ChangeBattleState(NewBattleState.Lose);
+                    }
                     else
                         // 아니면 몬스터 턴으로
                         ChangeBattleState(NewBattleState.PlayerTurn);
                     break;
-                case NewBattleState.Victory:
-                case NewBattleState.Lose:
-                    // 현재 상태가 승리 또는 패배라면
-                    // 배틀 상태가 아니므로 None
-                    ChangeBattleState(NewBattleState.None);
-                    GameManager.Instance.ChangeGameState(GameState.Home);
-                    break;
+                //case NewBattleState.Result:
+                //    ChangeBattleState(NewBattleState.None);
+                //    break;
+                //case NewBattleState.Victory:
+                //case NewBattleState.Lose:
+                //    // 현재 상태가 승리 또는 패배라면
+                //    // 배틀 상태가 아니므로 None
+                //    ChangeBattleState(NewBattleState.None);
+                //    break;
             }
         }
 
@@ -135,10 +148,26 @@ namespace TEAMPROJECT_TEXTRPG
                 // 몬스터가 공격하는 로직
                 MonsterTurn();
             }
-            else if (CurrentBattleState == NewBattleState.Victory || CurrentBattleState == NewBattleState.Lose)
+            else if (CurrentBattleState == NewBattleState.Result)
             {
-                // 화면 호출
+                // 결과 창으로 전환 위해 상태 변경
+                GameManager.Instance.ChangeGameState(GameState.BattleResult);
             }
+        }
+
+        /// <summary>
+        /// 배틀 결과를 전달하는 메서드
+        /// </summary>
+        internal bool? GetBattleResult()
+        {
+            Task.Run(async () =>
+            {
+                await Task.Delay(3000);
+                ChangeBattleState(NewBattleState.None);
+                isLastBattleWin = null;
+            });
+
+            return isLastBattleWin;
         }
 
         /* 내부 로직 */
