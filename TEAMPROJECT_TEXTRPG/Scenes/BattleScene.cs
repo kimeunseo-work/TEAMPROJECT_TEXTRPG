@@ -10,7 +10,18 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
         public void Start()
         {
             Console.Clear();
+            Console.ResetColor();
             Console.WriteLine("**Battle!!**\n");
+            var Player = CharacterManager.Instance.player;
+            Console.WriteLine($"플레이어 정보");
+            Console.WriteLine($"이름: {Player.Name}");
+            Console.WriteLine($"레벨: {Player.Level}");
+            Console.WriteLine($"직업: {Player.CurrentJob.Name}");
+            Console.WriteLine($"HP: {Player.Hp}/{Player.MaxHP}");
+            Console.WriteLine($"MP: {Player.Mp}/{Player.MaxMP}");
+            Console.WriteLine();
+
+            Console.WriteLine("몬스터 정보");
             ShowMonsters();
             Console.WriteLine("\n0. 취소\n");
 
@@ -41,6 +52,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
             Console.WriteLine("\n무엇을 하시겠습니까?");
             Console.WriteLine("1. 기본 공격");
             Console.WriteLine("2. 스킬 사용");
+            Console.WriteLine("0. 돌아가기");
             Console.Write(">>");
             string action = Console.ReadLine();
             if (action == "1")
