@@ -83,22 +83,22 @@
     internal class Items
     {
         // 새롭게 생성한 장비 Item
-        EquipItem equipItemDefault0 = new EquipItem(0, "", 0, 0, 0, "", false); // 기본 값
-        EquipItem equipItem1 = new EquipItem(1, "낡은 검", 1, 1, 5, "", false);
-        EquipItem equipItem2 = new EquipItem(2, "냄비 뚜껑", 2, 2, 2, "", false);
+        public EquipItem equipItemDefault0 = new EquipItem(0, "", 0, 0, 0, "", false); // 기본 값
+        public EquipItem equipItem1 = new EquipItem(1, "낡은 검", 1, 1, 5, "", false);
+        public EquipItem equipItem2 = new EquipItem(2, "냄비 뚜껑", 2, 2, 2, "", false);
 
         // 새롭게 생성한 소비 Item
-        UseItem useItemDefault0 = new UseItem(0, "", 0, 0, ""); // 기본 값
-        UseItem useItem0 = new UseItem(1, "체력 회복 포션", 1, 30, "");
-        UseItem useItem1 = new UseItem(2, "마나 회복 포션", 2, 20, "");
+        public UseItem useItemDefault0 = new UseItem(0, "", 0, 0, ""); // 기본 값
+        public UseItem useItem0 = new UseItem(1, "체력 회복 포션", 1, 30, "");
+        public UseItem useItem1 = new UseItem(2, "마나 회복 포션", 2, 20, "");
 
         // 새롭게 생성한 기타 Item
-        EtcItem etcItemDefault0 = new EtcItem(0, "", ""); // 기본 값
-        EtcItem etcItem1 = new EtcItem(1, "전리품 A", ""); // '미니언'이 드랍할 전리품
-        EtcItem etcItem2 = new EtcItem(2, "전리품 B", ""); // '공허충'이 드랍할 전리품
-        EtcItem etcItem3 = new EtcItem(3, "전리품 C", ""); // '대포 미니언'이 드랍할 전리품
-        EtcItem etcItem4 = new EtcItem(4, "전리품 D", ""); // '돌거북'이 드랍할 전리품
-        EtcItem etcItem5 = new EtcItem(5, "전리품 E", ""); // '고대 돌거북'이 드랍할 전리품
-        EtcItem etcItem6 = new EtcItem(6, "전리품 F", ""); // '칼날부리'가 드랍할 전리품
+        public EtcItem etcItemDefault0 = new EtcItem(0, "", ""); // 기본 값
+        public EtcItem etcItem1 = new EtcItem(1, "전리품 A", ""); // '미니언'이 드랍할 전리품
+        public EtcItem etcItem2 = new EtcItem(2, "전리품 B", ""); // '공허충'이 드랍할 전리품
+        public EtcItem etcItem3 = new EtcItem(3, "전리품 C", ""); // '대포 미니언'이 드랍할 전리품
+        public EtcItem etcItem4 = new EtcItem(4, "전리품 D", ""); // '돌거북'이 드랍할 전리품
+        public EtcItem etcItem5 = new EtcItem(5, "전리품 E", ""); // '고대 돌거북'이 드랍할 전리품
+        public EtcItem etcItem6 = new EtcItem(6, "전리품 F", ""); // '칼날부리'가 드랍할 전리품
     }
 }
