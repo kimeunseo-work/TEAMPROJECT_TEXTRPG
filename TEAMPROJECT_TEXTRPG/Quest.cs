@@ -22,6 +22,7 @@ namespace TEAMPROJECT_TEXTRPG
 
         public bool isSelected = false;
         public bool isClear = false;
+        public bool getRewarded = false;
 
 
         public int _count;
