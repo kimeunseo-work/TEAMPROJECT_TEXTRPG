@@ -152,6 +152,31 @@ namespace TEAMPROJECT_TEXTRPG
 
             OnMonsterSpawned?.Invoke(CurrentMonsters);
         }
+
+        /// <summary>
+        /// 몬스터 공격 처리
+        /// </summary>
+        private void MonsterTurn()
+        {
+            foreach(var monster in CurrentMonsters)
+            {
+                if (monster.IsDead) continue;
+
+                // 회피
+                var chance = new Random().Next(0, 100);
+                if( chance < 10)
+                {
+                    OnMonsterActioned?.Invoke(monster, null, true);
+                    return;
+                }
+
+                var playerOldHp = CharacterManager.Instance.player.Hp;
+                monster.Attack(CharacterManager.Instance.player);
+
+                OnMonsterActioned?.Invoke(monster, playerOldHp, false);
+            }
+        }
+
         /* 유틸리티 */
         //============================================================//
         private void ChangeBattleState(NewBattleState state) => CurrentBattleState = state;
