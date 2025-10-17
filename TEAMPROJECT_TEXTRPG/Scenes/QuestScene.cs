@@ -14,7 +14,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
 
 
 
-            throw new NotImplementedException();
+           
         }
     }
 }

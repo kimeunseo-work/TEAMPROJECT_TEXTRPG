@@ -192,6 +192,7 @@ namespace TEAMPROJECT_TEXTRPG
             Console.WriteLine();
             Console.WriteLine("2. 퀘스트 선택");
             Console.WriteLine();
+            Console.WriteLine("0. 나가기");
             Console.WriteLine("원하시는 행동을 입력해주세요");
             Console.Write(">>");
 
@@ -214,6 +215,11 @@ namespace TEAMPROJECT_TEXTRPG
 
                     SelectQuestScene();
                     break;
+
+                }
+                else if (input == "0")
+                {
+                    GameManager.Instance.currentState = GameState.Home;
 
                 }
                 else
