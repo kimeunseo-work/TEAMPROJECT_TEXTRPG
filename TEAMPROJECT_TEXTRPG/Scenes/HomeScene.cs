@@ -24,6 +24,7 @@
                 Console.WriteLine("||                                                                                                        ||");
                 Console.WriteLine("|| 1. 상태 보기                                                                                           ||");
                 Console.WriteLine("|| 2. 전투 시작                                                                                           ||");
+                Console.WriteLine("|| 3. 퀘스트 보기                                                                                           ||");
                 Console.WriteLine("|| 0. 게임 종료                                                                                           ||");
                 Console.WriteLine("||                                                                                                        ||");
                 Console.WriteLine("============================================================================================================");
@@ -42,6 +43,11 @@
                         isValidInput = true;
                         Console.WriteLine("전투를 선택하셨습니다.");
                         GameManager.Instance.currentState = GameState.BattleStart;
+                        break;
+                    case 3:
+                        isValidInput = true;
+                        Console.WriteLine("퀘스트를 선택하셨습니다.");
+                        GameManager.Instance.currentState = GameState.Quest;
                         break;
 
                     case 0: // 0. 게임 종료

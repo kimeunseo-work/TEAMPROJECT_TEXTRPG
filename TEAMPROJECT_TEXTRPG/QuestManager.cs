@@ -46,7 +46,7 @@ namespace TEAMPROJECT_TEXTRPG
         public Monster monster;
         public Monsters monsters;
         public Quest Quest;
-        public List<KeyValuePair<QuestType, Quest>> QuestList;
+        public List<KeyValuePair<QuestType, Quest>> QuestList; //그냥 퀘스트 리스트
         public List<KeyValuePair<QuestType, Quest>> OngoingQuestList;
 
 
