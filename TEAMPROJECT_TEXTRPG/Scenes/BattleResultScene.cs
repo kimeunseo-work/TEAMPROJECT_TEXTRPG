@@ -9,24 +9,15 @@
         internal void BattleResultWin()
         {
             Console.Clear();
-            Console.WriteLine("Battle!! - Result");
-            Console.WriteLine();
-            Console.WriteLine("Victory!!");
-            Console.WriteLine();
-            Console.WriteLine($"던전에서 몬스터 {GameManager.Instance.monsters.Count}마리를 잡았습니다.");
-            Console.WriteLine($"Lv.{CharacterManager.Instance.player.Level} {CharacterManager.Instance.player.Name}");
-            Console.WriteLine($"HP { CharacterManager.Instance.player.hped} -> { CharacterManager.Instance.player.Hp}");
-            Console.WriteLine();
+
+            BattleResultWinText();
 
             for (int i = 0; i < GameManager.Instance.monsters.Count; i++)
             {
                 CharacterManager.Instance.player.AddExp(GameManager.Instance.monsters[i].MonExp);
             }
 
-            Console.WriteLine();
-            Console.WriteLine("0. 다음");
-            Console.WriteLine();
-            Console.Write(">> ");
+            DaumText();
 
             WhileInput0();
         }
@@ -35,6 +26,28 @@
         internal void BattleResultLose()
         {
             Console.Clear();
+
+            BattleResultLoseText();
+
+            DaumText();
+
+            WhileInput0();
+        }
+
+        private void BattleResultWinText()
+        {
+            Console.WriteLine("Battle!! - Result");
+            Console.WriteLine();
+            Console.WriteLine("Victory!!");
+            Console.WriteLine();
+            Console.WriteLine($"던전에서 몬스터 {GameManager.Instance.monsters.Count}마리를 잡았습니다.");
+            Console.WriteLine($"Lv.{CharacterManager.Instance.player.Level} {CharacterManager.Instance.player.Name}");
+            Console.WriteLine($"HP {CharacterManager.Instance.player.hped} -> {CharacterManager.Instance.player.Hp}");
+            Console.WriteLine();
+        }
+
+        private void BattleResultLoseText()
+        {
             Console.WriteLine("Battle!! - Result");
             Console.WriteLine();
             Console.WriteLine("You Lose..");
@@ -42,11 +55,14 @@
             Console.WriteLine($"Lv.{CharacterManager.Instance.player.Level} {CharacterManager.Instance.player.Name}");
             Console.WriteLine($"HP {CharacterManager.Instance.player.hped} -> 0");
             Console.WriteLine();
+        }
+
+        private void DaumText()
+        {
+            Console.WriteLine();
             Console.WriteLine("0. 다음");
             Console.WriteLine();
             Console.WriteLine(">> ");
-
-            WhileInput0();
         }
 
         // Input 값이 '0' 일 때까지 반복하는 메서드
@@ -65,9 +81,30 @@
                         GameManager.Instance.currentState = GameState.Home;
                         break;
                     default:
-                        Console.WriteLine("잘못된 입력입니다.");
-                        Console.WriteLine();
-                        Console.Write(">> ");
+                        if (CharacterManager.Instance.player.Hp > 0)
+                        {
+                            Console.Clear();
+
+                            BattleResultWinText();
+                            /* 
+                             - 레벨업 시 출력되던 내역 누락됨(수정 필요)
+                               경험치 관련 코드를 그대로 사용 시 경험치가 중복 획득되는 오류가 있음
+                             */
+                            DaumText();
+                            Console.WriteLine("잘못된 입력입니다.");
+                            Console.WriteLine();
+                            Console.Write(">> ");
+                        }
+                        else if (CharacterManager.Instance.player.Hp <= 0)
+                        {
+                            Console.Clear();
+
+                            BattleResultLoseText();
+                            DaumText();
+                            Console.WriteLine("잘못된 입력입니다.");
+                            Console.WriteLine();
+                            Console.Write(">> ");
+                        }
                         break;
                 }
             }
