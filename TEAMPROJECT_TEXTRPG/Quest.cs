@@ -27,6 +27,8 @@ namespace TEAMPROJECT_TEXTRPG
 
         public int _count;
 
+        public int itemGivingCount;
+
 
         public Monsters monsters;
         public List<Monster> monsterlist;
@@ -87,7 +89,7 @@ namespace TEAMPROJECT_TEXTRPG
         public MonsterKillQuest(Monsters monsters)
         : base()
         {
-
+            GetMonster(monsters);
             QuestMonster = monsterlist[0]; //미니언 몬스터 할당
 
             Name = "마을을 위협하는 미니언 처치";
@@ -96,10 +98,10 @@ namespace TEAMPROJECT_TEXTRPG
                 "마을주민들의 안전을 위해서라도 저것들 수를 좀 줄여야 한다고!\r\n" +
                 "모험가인 자네가 좀 처치해주게!";
 
-            QuestInfo = "미니언 5마리 처치 (0/5)";
+            QuestInfo = $"미니언 5마리 처치 ({Count}/5)";
 
 
-
+            itemGivingCount = 1;
 
             GoldReward = 5;
 
@@ -107,7 +109,7 @@ namespace TEAMPROJECT_TEXTRPG
 
             ItemReward = QuestManager.Instance.items.equipItem1;
 
-            GetMonster(monsters);
+            
 
 
         }

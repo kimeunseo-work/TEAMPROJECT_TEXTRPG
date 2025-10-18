@@ -11,10 +11,9 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
         internal override void Show()
         {
 
+            QuestManager.Instance.SelectCategory();
 
 
-
-           
         }
     }
 }

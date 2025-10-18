@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace TEAMPROJECT_TEXTRPG
 {
@@ -34,8 +35,9 @@ namespace TEAMPROJECT_TEXTRPG
                 }
                 return instance;
             }
-        }
-
+            set { }
+        }//싱글톤 용 프로퍼티
+        private bool initialized;
         public Dictionary<QuestType, Quest> Quests;
         public List<Quest> AbleQuests;
         public Quest CurrentQuest;
@@ -55,22 +57,30 @@ namespace TEAMPROJECT_TEXTRPG
 
 
             
-            monsters = new Monsters();
-          
-            Quests = new Dictionary<QuestType, Quest>();
-            items = new Items();
-
-
-            Quests.Add(QuestType.Monster, new MonsterKillQuest(monsters));
-            QuestList = Quests.ToList();
-
         }
-           
 
-       
-        
-         //quest 생성자가 함수인데 이제 필드로 선언만했을때는 this가 완성되지 않아서 프로그램이 알 방법이없다. 그래서 함수 안에서 선언을 해서 
-        //함수가 실행될때 선언되도록
+
+        internal void InitOnce()
+        {
+            if (initialized)
+            {
+                return;
+            }
+            initialized = true;
+
+            monsters = new Monsters();
+            items = new Items();
+            Quests = new Dictionary<QuestType, Quest>(); 
+
+            // ⚠ MonsterKillQuest 안에서 QuestManager.Instance 사용하지 않도록 주의!
+            Quests.Add(QuestType.Monster, new MonsterKillQuest(monsters)); 
+
+            QuestList = Quests.ToList(); 
+        }
+
+
+
+     
         /// <summary>
         /// 생성자 매개변수때 왜 매개변수를 왜 변수필드때 못넣는지
         /// </summary>
@@ -79,26 +89,22 @@ namespace TEAMPROJECT_TEXTRPG
 
 
 
-        
 
 
-       
+
+
 
         public void AddMonsterCount() 
         {
 
-            if(GameManager.Instance.monsters.All(x => x.IsDead) )  //퀘스트 몬스터가 있을시 )
+            if(GameManager.Instance.monsters.All(x => x.IsDead))
             {
 
-                // 여기서 이제 몬스터 카운트가 올라감
-                //그니까 이제 퀘스트에 몬스터 카운트가 올라가는건데 
 
-                //그니까 이제 그 죽은 몬스터가 퀘스트 몬스터였던거임;;;
-                //그러면 이제 퀘스트에 있는 몬스터였다 그러면
-                //이제 그 퀘스트 완료조건의 그 몬스터 카운트를
 
-                //이제 이 함수를 실행해서
-                //그 퀘스트 완료조건을 채울수있게 하는거임
+            } 
+
+           
 
 
 
@@ -107,97 +113,159 @@ namespace TEAMPROJECT_TEXTRPG
 
             }
             
-
-
-
-
-
-
-        }
-
-        internal void SelectShow()
-        {
-            Console.WriteLine("1. 수락");
-            Console.WriteLine("2. 거절");
-            Console.WriteLine("원하시는 행동을 입력해주세요");
-            Console.Write(">>");
-        }
-
-        internal void OngoingShow()
-        {
-            Console.WriteLine("1. 보상받기");
-            Console.WriteLine("2. 돌아가기");
-            Console.WriteLine("원하시는 행동을 입력해주세요");
-            Console.Write(">>");
-        }
-
-
-
-
-
+   
         public void CheckBestStat() { }
         public void CheckBestLevel() { }
 
 
-        public void CurrentQuestScene()
+        public void CurrentQuestScene() // 현재 진행중인 퀘스트
         {
-
-            Console.WriteLine("Quest!!");
-            Console.WriteLine();
-
-            for (int i = 0; i < QuestList.Count; i++) 
-            {
-                Console.WriteLine($"{i+1}. {QuestList[i].Value.Name}");
-            }
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("원하시는 퀘스트를 선택해주세요.");
-            Console.Write(">>");
-            string input = Console.ReadLine();
-
-            if ( input == "1")
-            {
-
-
-
-
-
-
-
-            }
-
-
-        }
-
-
-        public void SelectQuestScene() 
-        { 
-        
-        
-        
-
-
-
-
-
-        
-        
-        }
-        public void SelectCategory()
-        {
-
-            Console.Clear();
-
-            Console.WriteLine("1. 현재 진행중인 퀘스트");
-            Console.WriteLine();
-            Console.WriteLine("2. 퀘스트 선택");
-            Console.WriteLine();
-            Console.WriteLine("0. 나가기");
-            Console.WriteLine("원하시는 행동을 입력해주세요");
-            Console.Write(">>");
-
             while (true)
             {
+
+
+                Console.Clear();
+                Console.WriteLine("Quest!!");
+                Console.WriteLine();
+                if (OngoingQuestList != null) //진행중인 퀘스트가 있을때
+                {
+
+
+                    for (int i = 0; i < OngoingQuestList.Count; i++)
+                    {
+                        Console.WriteLine($"{i + 1}. {OngoingQuestList[i].Value.Name}");
+                    }
+                    Console.WriteLine();
+                    Console.WriteLine();
+                    Console.WriteLine("원하시는 퀘스트를 선택해주세요.(퀘스트 숫자 입력");
+                    Console.WriteLine("\n\n");
+                    Console.WriteLine("0. 나가기");
+                    Console.Write(">>");
+
+
+                    if (int.TryParse(Console.ReadLine(), out int input) && input <= OngoingQuestList.Count && input > 0)
+                    {
+
+                        Console.Clear();
+                        Console.WriteLine("Quest!!");
+                        Console.WriteLine();
+                        Console.WriteLine($"{OngoingQuestList[input].Value.Name}");
+                        Console.WriteLine();
+                        Console.WriteLine($"{OngoingQuestList[input].Value.Description}");
+                        Console.WriteLine();
+                        Console.WriteLine($"- {OngoingQuestList[input].Value.QuestInfo}");
+                        Console.WriteLine();
+                        Console.WriteLine("-보상-");
+                        Console.WriteLine($"{OngoingQuestList[input].Value.ItemReward.itemName} x {OngoingQuestList[input].Value.itemGivingCount}");
+                        Console.WriteLine($"{OngoingQuestList[input].Value.GoldReward}G");
+                        Console.WriteLine();
+                        Console.WriteLine("1. 보상받기");
+                        Console.WriteLine("2. 돌아가기");
+                        Console.WriteLine("원하시는 행동을 입력해주세요");
+                        Console.Write(">>");
+
+                        string input2 = Console.ReadLine();
+                        if (input2 == "1")
+                        {
+                            //플레이어 인벤토리에 아이템이 들어갈 자리
+                            OngoingQuestList[input].Value.getRewarded = true;
+
+                        }
+                        else if (input2 == "2")
+                        {
+                            Console.Clear();
+
+                            continue;
+
+
+                        }
+
+                    }
+                    else if (input == 0)
+                    {
+
+                        Console.Clear();
+                        SelectCategory();
+
+
+                    }
+                    else //퀘스트 리스트에서 퀘스트 번호 선택했을때 퀘스트가 있어서
+                    {
+                        Console.WriteLine("잘못된 입력입니다.");
+                        Console.ReadKey();
+                        continue;
+
+
+                    }
+
+
+                }
+                else if (OngoingQuestList == null)
+                {
+                    Console.Clear();
+                    Console.WriteLine();
+                    Console.WriteLine("\n\n\n");
+                    Console.WriteLine("-- 현재 진행중인 퀘스트가 없습니다 --");
+                    Console.WriteLine("\n\n\n");
+                    Console.WriteLine();
+
+                    Console.WriteLine("0. 나가기");
+                    Console.Write(">>");
+                    string input = Console.ReadLine();
+
+                    if (input == "0")
+                    {
+
+                        SelectCategory(); //진행중인 퀘스트가 없어서 진행할 퀘스트를 고를수도 있기 때문에 0번으로 선택퀘스트있는 창으로 돌아감
+                        break;
+
+                    }
+                }
+
+
+
+            }
+            
+           
+        
+
+
+        }
+
+
+        public void SelectQuestScene()  // 퀘스트 선택
+        {
+
+
+
+            
+
+            Console.WriteLine("1. 수락");
+            Console.WriteLine("2. 거절");
+            Console.WriteLine("원하시는 행동을 입력해주세요");
+
+
+
+
+        }
+        public void SelectCategory() //퀘스트선택창 1번
+        {
+            while (true) 
+            {
+
+                Console.Clear();
+                Console.WriteLine("\n\n");
+                Console.WriteLine("1. 현재 진행중인 퀘스트");
+                Console.WriteLine("\n\n");
+                Console.WriteLine("2. 퀘스트 선택");
+                Console.WriteLine("\n\n");
+                Console.WriteLine("0. 나가기");
+                Console.WriteLine("");
+                Console.WriteLine("원하시는 행동을 입력해주세요");
+                Console.Write(">>");
+
+
+
 
                 string input = Console.ReadLine();
 
@@ -220,12 +288,13 @@ namespace TEAMPROJECT_TEXTRPG
                 else if (input == "0")
                 {
                     GameManager.Instance.currentState = GameState.Home;
+                    break;
 
                 }
                 else
                 {
                     Console.WriteLine("잘못된 입력입니다.");
-                    Console.Write(">>");
+                    Console.ReadKey();
 
                     continue;
 
@@ -233,8 +302,12 @@ namespace TEAMPROJECT_TEXTRPG
 
 
 
-
             }
+            
+
+
+
+         
            
 
         }
