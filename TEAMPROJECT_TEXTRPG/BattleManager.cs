@@ -39,6 +39,13 @@ namespace TEAMPROJECT_TEXTRPG
 
         // 몬스터 소환, ShowBattleStart
         internal Action<List<Monster>, Func<int, BattleInput>> OnMonsterSpawned;
+        // 플레이어 턴, ShowPlayerTurn
+        internal Action<
+            List<Monster>,
+            Func<int, BattleInput>,
+            Func<int, (BattleInput, List<Skill>?)>,
+            Func<int, (string, SelectAttackBasicResult)>,
+            Func<int, int,(BattleInput, SkillAttackResult[]?)>> OnPlayerTurn;
         // 몬스터 턴, ShowMonsterTurn
         internal Action<Monster, int?, bool> OnMonsterActioned;
 
@@ -50,12 +57,23 @@ namespace TEAMPROJECT_TEXTRPG
         // 몬스터 리스트 원본
         private Monsters monsterList = new Monsters();
         // 현재 스폰된 몬스터
-        internal List<Monster> CurrentMonsters;
-
+        private List<Monster> CurrentMonsters { get; set; }
         // 현재 직업에 따른 스킬
         private List<Skill> CurrentSkills { get; set; }
         // 배틀 결과
         internal bool? isLastBattleWin = null;
+
+        #region Test
+        /* 테스트 전용 */
+        //============================================================//
+
+        internal void Test()
+        {
+            UIColorUtility.WriteColoredLine("냐호", ConsoleColor.DarkBlue);
+            Console.WriteLine("진짜?");
+            UIColorUtility.WriteColoredLine("야호", ConsoleColor.Blue);
+        }
+        #endregion
 
         /* 상태 관련 메서드 */
         //============================================================//
@@ -141,7 +159,12 @@ namespace TEAMPROJECT_TEXTRPG
             }
             else if (CurrentBattleState == NewBattleState.PlayerTurn)
             {
-                // 플레이어 공격 입력 받고 처리해야 함.
+                // 플레이어 턴 화면 호출
+                OnPlayerTurn?.Invoke(CurrentMonsters,
+                    GetVaildMonsterSelection,
+                    GetAttackType,
+                    GetBasicAttackResult,
+                    GetSkillAttackResult);
             }
             else if (CurrentBattleState == NewBattleState.MonsterTurn)
             {
@@ -208,6 +231,81 @@ namespace TEAMPROJECT_TEXTRPG
             }
         }
 
+        /// <summary>
+        /// 일반 공격
+        /// </summary>
+        /// <param name="monster"></param>
+        /// <returns></returns>
+        private (bool, int) AttackByBasicToMonster(Monster monster)
+        {
+            var attackDamage = 0;
+            if (IsCritical())
+            {
+                attackDamage = CharacterManager.Instance.player.AttackCritical(monster);
+                return (true, attackDamage);
+            }
+            attackDamage = CharacterManager.Instance.player.AttackBasic(monster);
+            return (false, attackDamage);
+        }
+
+        /// <summary>
+        /// 스킬 공격
+        /// </summary>
+        /// <param name="skill"></param>
+        /// <param name="monsterIndex"></param>
+        /// <returns></returns>
+        private (string, int, bool)[] AttackBySkillToMonster(Skill skill, int monsterIndex)
+        {
+            var playerAtk = CharacterManager.Instance.player.Attack;
+            int damage = (int)(playerAtk * skill.Multiple); // 실행시 데미지 계산
+
+            if (!skill.IsRandom)
+            {
+                var monster = CurrentMonsters[monsterIndex - 1];
+                ApplyDamage(monster, damage);
+                return [(monster.Name, damage, monster.IsDead)];
+            }
+
+            //복수 대상
+            //살아있는 몬스터만 대상으로
+            var aliveMonsters = CurrentMonsters
+                                .Where(m => !m.IsDead)
+                                .ToList();
+
+            // 반환용
+            var tempList = new List<(string, int, bool)>();
+            // 실제 타격 수는 Count와 생존 수 중 작은 값으로
+            var count = Math.Min(skill.Count, aliveMonsters.Count);
+            var random = new Random();
+            for (int i = 0; i < count; i++)
+            {
+                if (aliveMonsters.Count == 0) break;
+                // aliveMonsters 에서만 대상 선정
+                var index = random.Next(aliveMonsters.Count);
+                var targetMonster = aliveMonsters[index];
+
+                //같은 대상 중복 방지
+                aliveMonsters.RemoveAt(index);
+
+                ApplyDamage(targetMonster, damage);
+
+                tempList.Add((targetMonster.Name, damage, targetMonster.IsDead));
+            }
+
+            return tempList.ToArray();
+        }
+
+        private void ApplyDamage(Monster target, int damage)
+        {
+            target.Hp -= damage;
+
+            if (target.Hp <= 0)
+            {
+                target.Hp = 0;
+                target.IsDead = true;
+            }
+        }
+
         /* 이벤트용 */
         //============================================================//
 
@@ -231,6 +329,110 @@ namespace TEAMPROJECT_TEXTRPG
             // 잘못된 입력
             else
                 return BattleInput.None;
+        }
+
+        /// <summary>
+        /// ShowPlayerTurn, 몬스터 고를지 나갈지
+        /// </summary>
+        private BattleInput GetVaildMonsterSelection(int input)
+        {
+            // 배틀 취소
+            if (input == 0)
+            {
+                GameManager.Instance.ChangeGameState(GameState.Home);
+                return BattleInput.IsValid | BattleInput.IsQuit;
+            }
+            else if (input >= 1 && input <= CurrentMonsters.Count)
+            {
+                // 몬스터를 골랐는데 죽은 몬스터일 때
+                if (CurrentMonsters[input - 1].IsDead)
+                {
+                    return BattleInput.IsValid | BattleInput.IsDead;
+                }
+                return BattleInput.IsValid;
+            }
+            else
+                return BattleInput.None;
+        }
+
+        /// <summary>
+        /// ShowPlayerTurn, 스킬 선택할지 뒤로 갈지
+        /// </summary>
+        private (BattleInput, List<Skill>?) GetAttackType(int input)
+        {
+            // 몬스터 다시 고르기
+            if (input == 0)
+            {
+                return (BattleInput.IsValid | BattleInput.IsQuit, null);
+            }
+            // 기본 공격
+            else if (input == 1)
+            {
+                return (BattleInput.IsValid | BattleInput.IsBasicAttack, null);
+            }
+            // 스킬 공격
+            else if (input == 2)
+            {
+                return (BattleInput.IsValid, CurrentSkills);
+            }
+            else
+                return (BattleInput.None, null);
+        }
+
+        /// <summary>
+        /// ShowPlayerTurn, 기본 공격 선택시
+        /// </summary>
+        internal (string, SelectAttackBasicResult) GetBasicAttackResult(int index)
+        {
+            var targetMonster = CurrentMonsters[index - 1];
+            var oldHp = targetMonster.Hp;
+
+            (bool isCritical, int attackPower) = AttackByBasicToMonster(targetMonster);
+
+            var targetName = targetMonster.Name;
+            var attackResult = new SelectAttackBasicResult(isCritical, attackPower, oldHp, targetMonster.Hp, targetMonster.IsDead);
+            var tuple = (targetName, attackResult);
+            return tuple;
+        }
+
+        /// <summary>
+        /// ShowPlayerTurn, 스킬 공격 선택시
+        /// </summary>
+        internal (BattleInput, SkillAttackResult[]?) GetSkillAttackResult(int skillIndex, int monsterIndex)
+        {
+            // 뒤로 가기
+            if(skillIndex == 0)
+            {
+                return (BattleInput.IsValid | BattleInput.IsQuit, null);
+            }
+            else if (skillIndex > 0 && skillIndex <= CurrentSkills.Count)
+            {
+                var skill = CurrentSkills[skillIndex - 1];
+                if (!IsMpEnough(skill.Mp))
+                {
+                    return (BattleInput.IsValid, null);
+                }
+
+                //MP 차감
+                CharacterManager.Instance.player.Mp -= skill.Mp;
+                (string targetName, int damage, bool isDead)[] results = AttackBySkillToMonster(skill, monsterIndex);
+                var skillAttackResult = new List<SkillAttackResult>();
+                foreach (var result in results)
+                {
+                    skillAttackResult
+                        .Add(new SkillAttackResult(
+                            result.targetName, 
+                            skill.Name, 
+                            skill.Description, 
+                            result.damage, 
+                            result.isDead
+                            ));
+                }
+
+                return (BattleInput.IsValid | BattleInput.IsSkillAttack, skillAttackResult.ToArray());
+            }
+            else
+                return (BattleInput.None, null);
         }
 
         /* 결과창 전용 */
@@ -258,6 +460,54 @@ namespace TEAMPROJECT_TEXTRPG
         private void ChangeBattleState(NewBattleState state) => CurrentBattleState = state;
         private bool IsMonstersAllDead() => CurrentMonsters.All(monster => monster.IsDead == true);
         private bool IsPlayerDead() => CharacterManager.Instance.player.Hp <= 0;
+        private bool IsCritical() => new Random().Next(100) < 15;
+        private bool IsMpEnough(int skillMp) => CharacterManager.Instance.player.Mp >= skillMp;
+    }
+}
+
+internal readonly struct SelectAttackBasicResult
+{
+    internal readonly bool IsCritical { get; }
+    internal readonly int AttackPower { get; }
+    internal readonly int OldHp { get; }
+    internal readonly int NewHp { get; }
+    internal readonly bool IsDead { get; }
+
+    internal SelectAttackBasicResult(bool isCritical, int attackPower, int oldHp,int newHp, bool isDead)
+    {
+        if (attackPower < 0)
+            throw new ArgumentException("AttackPower는 0 이상이어야 한다.");
+        if (oldHp <= 0)
+            throw new ArgumentException("OldHp 1 이상이어야 한다.");
+
+        IsCritical = isCritical;
+        AttackPower = attackPower;
+        OldHp = oldHp;
+        NewHp = newHp;
+        IsDead = isDead;
+    }
+}
+
+internal readonly struct SkillAttackResult
+{
+    internal readonly string TargetName { get; }
+    internal readonly string SkillName { get; }
+    internal readonly string SkillDesc { get; }
+    internal readonly int Damage { get; }
+    internal readonly bool IsDead { get; }
+
+    internal SkillAttackResult(string targetName, string skillName, string skillDesc, int damage, bool isDead)
+    {
+        if (damage < 0)
+        {
+            throw new ArgumentException("스킬 데미지가 음수입니다.");
+        }
+
+        TargetName = targetName;
+        SkillName = skillName;
+        SkillDesc = skillDesc;
+        Damage = damage;
+        IsDead = isDead;
     }
 }
 
