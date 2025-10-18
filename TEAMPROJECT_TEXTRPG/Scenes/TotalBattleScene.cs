@@ -103,6 +103,8 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                 if (!isBattleStart.HasFlag(BattleInput.IsValid))
                 {
                     Console.WriteLine("잘못된 입력입니다.");
+                    Console.ReadKey();
+                    ConsoleUtility.ClearLine(Console.CursorTop, 4);
                 }
                 else break;
             }
