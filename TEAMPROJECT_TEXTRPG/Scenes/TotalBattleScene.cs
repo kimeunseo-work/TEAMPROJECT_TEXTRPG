@@ -1,4 +1,6 @@
-﻿namespace TEAMPROJECT_TEXTRPG.Scenes
+﻿using TEAMPROJECT_TEXTRPG.Skills;
+
+namespace TEAMPROJECT_TEXTRPG.Scenes
 {
     internal class TotalBattleScene : Scene
     {
@@ -34,10 +36,10 @@
             OnEnter();
 
             // 현재 씬이 배틀일 때 반복
-            while (GameManager.Instance.currentState == GameState.Battle)
+            while (GameManager.Instance.currentState == GameState.TotalBattle)
             {
-                BattleSceneHandler();
-                
+                HandleBattleScene();
+
                 //// 현재 배틀 상태가 None = 배틀 상태 아님 이면 화면 출력 안함
                 //// 몬스터만 출력한 상태는 Start
                 //if (BattleManager.Instance.CurrentBattleState != BattleState.None)
@@ -57,13 +59,18 @@
         /* Handler */
         //============================================================//
 
-        private void BattleSceneHandler() => BattleManager.Instance.ChangeBattleState();
+        private void HandleBattleScene() => BattleManager.Instance.ChangeBattleState();
 
         /* Displays */
         //============================================================//
 
-        private void ShowBattleStart(List<Monster> CurrentMonsters)
+        private void ShowBattleStart(
+            List<Monster> CurrentMonsters,
+            Func<int, BattleInput> GetBattleStart
+            )
         {
+            var isBattleStart = new BattleInput();
+
             Console.Clear();
             Console.WriteLine("Battle!!");
             Console.WriteLine();
@@ -78,7 +85,7 @@
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("[내정보]");
-            Console.WriteLine($"Lv.{CharacterManager.Instance.player.Level}  {CharacterManager.Instance.player.Name} ({CharacterManager.Instance.player.CurrentJob})");
+            Console.WriteLine($"Lv.{CharacterManager.Instance.player.Level}  {CharacterManager.Instance.player.Name} ({CharacterManager.Instance.player.CurrentJob.Name})");
             Console.WriteLine($"HP {CharacterManager.Instance.player.Hp}/{CharacterManager.Instance.player.MaxHP}");
             Console.WriteLine();
             Console.WriteLine("1. 공격");
@@ -87,17 +94,19 @@
             while (true)
             {
                 var input = InputHandler.GetUserActionInput();
+                isBattleStart = GetBattleStart(input);
 
-                if (input == 0)
+                if (!isBattleStart.HasFlag(BattleInput.IsValid))
                 {
-                    GameManager.Instance.ChangeGameState(GameState.Home);
-                    break;
+                    Console.WriteLine("잘못된 입력입니다.");
                 }
-                else if (input == 1)
-                {
-                    GameManager.Instance.ChangeGameState(GameState.Battle);
-                    break;
-                }
+                else break;
+            }
+
+            if (isBattleStart.HasFlag(BattleInput.IsQuit))
+            {
+                Console.WriteLine("메인 화면으로 돌아갑니다.");
+                Console.ReadKey();
             }
         }
         private void ShowPlayerTurn()
@@ -126,7 +135,7 @@
             else
             {
                 Console.WriteLine($"{CharacterManager.Instance.player.Name} 을(를) 맞췄습니다. [데미지 : {monster.Atk}]");
-                Console.WriteLine($"Lv.{CharacterManager.Instance.player.Level} {CharacterManager.Instance.player.Name} ({CharacterManager.Instance.player.CurrentJob})");
+                Console.WriteLine($"Lv.{CharacterManager.Instance.player.Level} {CharacterManager.Instance.player.Name} ({CharacterManager.Instance.player.CurrentJob.Name})");
                 Console.WriteLine($"HP {playerOldHp} → {CharacterManager.Instance.player.Hp}");
             }
 
