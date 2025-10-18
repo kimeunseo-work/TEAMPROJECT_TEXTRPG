@@ -4,7 +4,20 @@
     {
         public string Name { get; set; }
         public int Level { get; set; }
-        public int Hp { get; set; }
+        private int hp;
+        public int Hp
+        {
+            get => hp;
+            set
+            {
+                if (value <= 0)
+                {
+                    IsDead = true;
+                    hp = 0;
+                }
+                else hp = value;
+            }
+        }
         public int Atk { get; set; }
         public int MonExp { get; set; }
         public bool IsDead { get; set; }
@@ -32,15 +45,8 @@
 
         }
 
-        /// <summary>
-        /// 몬스터 일반 공격
-        /// </summary>
         internal void Attack(Player player) => player.TakeDamage(Atk);
-        internal void TakeDamage(int amount)
-        {
-            Hp -= amount;
-            if (Hp <= 0) IsDead = false;
-        }
+        internal void TakeDamage(int amount) => Hp -= amount;
     }
 
     internal class Monsters
