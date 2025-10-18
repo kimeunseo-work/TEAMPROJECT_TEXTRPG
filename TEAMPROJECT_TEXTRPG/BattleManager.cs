@@ -45,7 +45,7 @@ namespace TEAMPROJECT_TEXTRPG
             Func<int, BattleInput>,
             Func<int, (BattleInput, List<Skill>?)>,
             Func<int, (string, SelectAttackBasicResult)>,
-            Func<int, int,(BattleInput, SkillAttackResult[]?)>> OnPlayerTurn;
+            Func<int, int, (BattleInput, SkillAttackResult[]?)>> OnPlayerTurn;
         // 몬스터 턴, ShowMonsterTurn
         internal Action<Monster, int?, bool> OnMonsterActioned;
 
@@ -401,7 +401,7 @@ namespace TEAMPROJECT_TEXTRPG
         internal (BattleInput, SkillAttackResult[]?) GetSkillAttackResult(int skillIndex, int monsterIndex)
         {
             // 뒤로 가기
-            if(skillIndex == 0)
+            if (skillIndex == 0)
             {
                 return (BattleInput.IsValid | BattleInput.IsQuit, null);
             }
@@ -421,10 +421,10 @@ namespace TEAMPROJECT_TEXTRPG
                 {
                     skillAttackResult
                         .Add(new SkillAttackResult(
-                            result.targetName, 
-                            skill.Name, 
-                            skill.Description, 
-                            result.damage, 
+                            result.targetName,
+                            skill.Name,
+                            skill.Description,
+                            result.damage,
                             result.isDead
                             ));
                 }
@@ -473,7 +473,7 @@ internal readonly struct SelectAttackBasicResult
     internal readonly int NewHp { get; }
     internal readonly bool IsDead { get; }
 
-    internal SelectAttackBasicResult(bool isCritical, int attackPower, int oldHp,int newHp, bool isDead)
+    internal SelectAttackBasicResult(bool isCritical, int attackPower, int oldHp, int newHp, bool isDead)
     {
         if (attackPower < 0)
             throw new ArgumentException("AttackPower는 0 이상이어야 한다.");
