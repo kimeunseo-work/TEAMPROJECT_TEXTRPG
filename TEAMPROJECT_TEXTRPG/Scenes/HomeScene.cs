@@ -1,4 +1,7 @@
-﻿namespace TEAMPROJECT_TEXTRPG.Scenes
+﻿using TEAMPROJECT_TEXTRPG.Managers;
+using TEAMPROJECT_TEXTRPG.Utility;
+
+namespace TEAMPROJECT_TEXTRPG.Scenes
 {
     internal class HomeScene : Scene
     {
@@ -42,7 +45,7 @@
                     case 2: // 2. 전투 시작
                         isValidInput = true;
                         Console.WriteLine("전투를 선택하셨습니다.");
-                        GameManager.Instance.currentState = GameState.BattleStart;
+                        GameManager.Instance.currentState = GameState.TotalBattle;
                         break;
                     case 3:
                         isValidInput = true;

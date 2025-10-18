@@ -1,4 +1,4 @@
-﻿namespace TEAMPROJECT_TEXTRPG.Scenes
+﻿namespace TEAMPROJECT_TEXTRPG.Utility
 {
     internal static class UIColorUtility
     {

@@ -1,6 +1,9 @@
-﻿using TEAMPROJECT_TEXTRPG.Skills;
+﻿using TEAMPROJECT_TEXTRPG.Core;
+using TEAMPROJECT_TEXTRPG.Lagacy.Skills;
+using TEAMPROJECT_TEXTRPG.Managers;
+using TEAMPROJECT_TEXTRPG.Scenes;
 
-namespace TEAMPROJECT_TEXTRPG.Scenes
+namespace TEAMPROJECT_TEXTRPG.Lagacy.Scenes
 {
     internal class BattleScene : Scene
     {
@@ -40,7 +43,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                 Console.WriteLine("잘못된 입력입니다.");
                 return;
             }
-           
+
             Monster target = GameManager.Instance.monsters[targetIndex - 1]; //리스트는 0부터 시작하기 때문에 -1 추가
 
             if (target.Hp <= 0)
@@ -73,7 +76,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
             {
                 Console.WriteLine("잘못된 입력입니다.");
             }
-            
+
         }
         //플레이어 공격(치명타)
         private void PlayerAttack(Monster target)
@@ -94,7 +97,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
             int oldHP = target.Hp;
             target.Hp -= attackPower;
 
-            
+
 
             if (target.Hp <= 0)
             {
@@ -122,7 +125,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                 GameManager.Instance.currentState = GameState.EnemyTurn;
             }
         }
-        
+
         // 랜덤 공격력
         private int GetRandomAttack(double baseattack)
         {

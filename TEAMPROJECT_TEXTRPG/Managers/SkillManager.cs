@@ -1,16 +1,9 @@
-﻿namespace TEAMPROJECT_TEXTRPG.Skills
+﻿using TEAMPROJECT_TEXTRPG.Core;
+
+namespace TEAMPROJECT_TEXTRPG.Managers
 {
-    internal struct Skill
-    {
-        public string Name {  get; set; }
-        public int Mp {  get; set; }
-        public double Multiple {  get; set; }
-        public bool IsRandom {  get; set; }
-        public int Count {  get; set; }
-        public string Description {  get; set; }
-    }   
-        //스킬 데이터베이스 (싱글톤)
-        internal class SkillDatabase
+    //스킬 데이터베이스 (싱글톤)
+    internal class SkillDatabase
     {
         //유일한 저장 공간
         private static SkillDatabase instance;

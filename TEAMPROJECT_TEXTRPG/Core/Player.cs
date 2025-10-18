@@ -1,6 +1,4 @@
-﻿using System.Threading;
-
-namespace TEAMPROJECT_TEXTRPG
+﻿namespace TEAMPROJECT_TEXTRPG.Core
 {
     internal class Player
     {

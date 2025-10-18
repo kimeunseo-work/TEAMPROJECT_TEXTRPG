@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace TEAMPROJECT_TEXTRPG
+namespace TEAMPROJECT_TEXTRPG.Utility
 {
     public static class InputHandler
     {

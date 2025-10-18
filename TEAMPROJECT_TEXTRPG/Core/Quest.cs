@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TEAMPROJECT_TEXTRPG.Managers;
 
-namespace TEAMPROJECT_TEXTRPG
+namespace TEAMPROJECT_TEXTRPG.Core
 {
     internal class Quest
     {
@@ -35,9 +31,9 @@ namespace TEAMPROJECT_TEXTRPG
 
         public Quest()
         {
-            
+
         }
-     
+
 
         //이렇게 생성자에서 Monsters를 받아올 수 있게 하면 Monsters의 클래스의 변수를 가져올수있는건가요 이 quest에서
         //
@@ -46,7 +42,7 @@ namespace TEAMPROJECT_TEXTRPG
         public void GetMonster(Monsters monsters)
         {
             this.monsters = monsters;
-            this.monsterlist = monsters.monster;
+            monsterlist = monsters.monster;
 
 
 
@@ -58,9 +54,9 @@ namespace TEAMPROJECT_TEXTRPG
 
 
 
-        internal virtual void SelectShow() 
+        internal virtual void SelectShow()
         {
-            
+
         }
 
         internal virtual void Show() { }
@@ -74,9 +70,9 @@ namespace TEAMPROJECT_TEXTRPG
     internal class MonsterKillQuest : Quest
     {
 
-        
 
-         // 실제 저장되는 공간 (필드)
+
+        // 실제 저장되는 공간 (필드)
         public int Count
         {
             get => _count;                  // 읽을 때 실행되는 코드
@@ -113,7 +109,7 @@ namespace TEAMPROJECT_TEXTRPG
         }
         public void UpdateQuest()
         {
-            
+
             if (isClear)
                 return;
 
@@ -126,19 +122,19 @@ namespace TEAMPROJECT_TEXTRPG
             if (Count >= 5)
             {
                 isClear = true;
-               
+
             }
         }
 
-       
 
-     
-   
-       
+
+
+
+
         void Except()
         {
 
-            
+
             while (true)
             {
 
@@ -171,13 +167,13 @@ namespace TEAMPROJECT_TEXTRPG
                 }
 
             }
-          
+
         }
-       
 
 
 
-     
+
+
 
         internal override void Show()
         {
@@ -194,12 +190,12 @@ namespace TEAMPROJECT_TEXTRPG
             Console.WriteLine($"{ItemReward.itemName} x 1");
             Console.WriteLine($"{GoldReward}G");
             Console.WriteLine();
-            
+
 
 
 
         }
-        
+
 
 
     }

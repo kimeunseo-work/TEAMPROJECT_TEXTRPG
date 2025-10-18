@@ -1,4 +1,6 @@
-namespace TEAMPROJECT_TEXTRPG
+using TEAMPROJECT_TEXTRPG.Core;
+
+namespace TEAMPROJECT_TEXTRPG.Managers
 {
     internal class CharacterManager
     {
@@ -9,7 +11,7 @@ namespace TEAMPROJECT_TEXTRPG
         {
             get
             {
-                if(instance == null)
+                if (instance == null)
                 {
                     instance = new CharacterManager();
                 }

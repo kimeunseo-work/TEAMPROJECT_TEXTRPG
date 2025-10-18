@@ -1,4 +1,7 @@
-﻿namespace TEAMPROJECT_TEXTRPG.Scenes
+﻿using TEAMPROJECT_TEXTRPG.Managers;
+using TEAMPROJECT_TEXTRPG.Utility;
+
+namespace TEAMPROJECT_TEXTRPG.Scenes
 {
     internal class PlayerInfoScene : Scene
     {

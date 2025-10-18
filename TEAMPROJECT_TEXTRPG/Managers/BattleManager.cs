@@ -1,7 +1,7 @@
-﻿using TEAMPROJECT_TEXTRPG.Scenes;
-using TEAMPROJECT_TEXTRPG.Skills;
+﻿using TEAMPROJECT_TEXTRPG.Core;
+using TEAMPROJECT_TEXTRPG.Utility;
 
-namespace TEAMPROJECT_TEXTRPG
+namespace TEAMPROJECT_TEXTRPG.Managers
 {
     /// <summary>
     /// 배틀 결과 상태

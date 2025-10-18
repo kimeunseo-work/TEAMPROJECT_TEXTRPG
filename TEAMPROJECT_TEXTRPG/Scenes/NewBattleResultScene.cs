@@ -1,4 +1,6 @@
-﻿namespace TEAMPROJECT_TEXTRPG.Scenes
+﻿using TEAMPROJECT_TEXTRPG.Managers;
+
+namespace TEAMPROJECT_TEXTRPG.Scenes
 {
     internal class NewBattleResultScene : Scene
     {

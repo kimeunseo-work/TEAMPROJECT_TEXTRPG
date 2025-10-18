@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TEAMPROJECT_TEXTRPG.Core;
 
-namespace TEAMPROJECT_TEXTRPG
+namespace TEAMPROJECT_TEXTRPG.Managers
 {
 
     internal enum QuestType
@@ -54,9 +50,9 @@ namespace TEAMPROJECT_TEXTRPG
         {
 
 
-            
+
             monsters = new Monsters();
-          
+
             Quests = new Dictionary<QuestType, Quest>();
             items = new Items();
 
@@ -65,11 +61,11 @@ namespace TEAMPROJECT_TEXTRPG
             QuestList = Quests.ToList();
 
         }
-           
 
-       
-        
-         //quest 생성자가 함수인데 이제 필드로 선언만했을때는 this가 완성되지 않아서 프로그램이 알 방법이없다. 그래서 함수 안에서 선언을 해서 
+
+
+
+        //quest 생성자가 함수인데 이제 필드로 선언만했을때는 this가 완성되지 않아서 프로그램이 알 방법이없다. 그래서 함수 안에서 선언을 해서 
         //함수가 실행될때 선언되도록
         /// <summary>
         /// 생성자 매개변수때 왜 매개변수를 왜 변수필드때 못넣는지
@@ -79,15 +75,15 @@ namespace TEAMPROJECT_TEXTRPG
 
 
 
-        
 
 
-       
 
-        public void AddMonsterCount() 
+
+
+        public void AddMonsterCount()
         {
 
-            if(GameManager.Instance.monsters.All(x => x.IsDead) )  //퀘스트 몬스터가 있을시 )
+            if (GameManager.Instance.monsters.All(x => x.IsDead))  //퀘스트 몬스터가 있을시 )
             {
 
                 // 여기서 이제 몬스터 카운트가 올라감
@@ -106,7 +102,7 @@ namespace TEAMPROJECT_TEXTRPG
 
 
             }
-            
+
 
 
 
@@ -145,9 +141,9 @@ namespace TEAMPROJECT_TEXTRPG
             Console.WriteLine("Quest!!");
             Console.WriteLine();
 
-            for (int i = 0; i < QuestList.Count; i++) 
+            for (int i = 0; i < QuestList.Count; i++)
             {
-                Console.WriteLine($"{i+1}. {QuestList[i].Value.Name}");
+                Console.WriteLine($"{i + 1}. {QuestList[i].Value.Name}");
             }
             Console.WriteLine();
             Console.WriteLine();
@@ -155,7 +151,7 @@ namespace TEAMPROJECT_TEXTRPG
             Console.Write(">>");
             string input = Console.ReadLine();
 
-            if ( input == "1")
+            if (input == "1")
             {
 
 
@@ -170,18 +166,18 @@ namespace TEAMPROJECT_TEXTRPG
         }
 
 
-        public void SelectQuestScene() 
-        { 
-        
-        
-        
+        public void SelectQuestScene()
+        {
 
 
 
 
 
-        
-        
+
+
+
+
+
         }
         public void SelectCategory()
         {
@@ -229,7 +225,7 @@ namespace TEAMPROJECT_TEXTRPG
 
 
             }
-           
+
 
         }
 

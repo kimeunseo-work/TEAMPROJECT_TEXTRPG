@@ -1,4 +1,6 @@
-﻿namespace TEAMPROJECT_TEXTRPG
+﻿using TEAMPROJECT_TEXTRPG.Core;
+
+namespace TEAMPROJECT_TEXTRPG.Managers
 {
     internal class JobManager
     {
@@ -13,10 +15,10 @@
                 new Job("도적", 120, 70, 10, 5, 10, 10, 0.5, 0.5)
             };
         }
-        
+
         public static Job GetJob(int index)
         {
-            if (index >0 && index < AllJobs.Count)
+            if (index > 0 && index < AllJobs.Count)
             {
                 return AllJobs[index];
             }

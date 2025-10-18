@@ -1,4 +1,6 @@
-﻿using TEAMPROJECT_TEXTRPG.Skills;
+﻿using TEAMPROJECT_TEXTRPG.Core;
+using TEAMPROJECT_TEXTRPG.Managers;
+using TEAMPROJECT_TEXTRPG.Utility;
 
 namespace TEAMPROJECT_TEXTRPG.Scenes
 {

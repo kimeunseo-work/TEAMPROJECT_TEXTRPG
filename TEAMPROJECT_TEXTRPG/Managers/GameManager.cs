@@ -1,6 +1,7 @@
-﻿using TEAMPROJECT_TEXTRPG.Scenes;
+﻿using TEAMPROJECT_TEXTRPG.Core;
+using TEAMPROJECT_TEXTRPG.Scenes;
 
-namespace TEAMPROJECT_TEXTRPG
+namespace TEAMPROJECT_TEXTRPG.Managers
 {
     /// <summary>
     /// 게임 화면 상태

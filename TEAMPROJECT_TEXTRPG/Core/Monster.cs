@@ -1,15 +1,13 @@
-﻿using System;
-
-namespace TEAMPROJECT_TEXTRPG
+﻿namespace TEAMPROJECT_TEXTRPG.Core
 {
     internal class Monster
     {
-        public string Name { get;  set; }
+        public string Name { get; set; }
         public int Level { get; set; }
-        public int Hp { get;  set; }
+        public int Hp { get; set; }
         public int Atk { get; set; }
-        public int MonExp {  get; set; }
-        public bool IsDead { get;  set; }
+        public int MonExp { get; set; }
+        public bool IsDead { get; set; }
         public bool IsAttackComplete { get; private set; }
 
         public Monster(string name, int level, int hp, int atk, int monExp, bool isDead = false)
@@ -41,7 +39,7 @@ namespace TEAMPROJECT_TEXTRPG
         internal void TakeDamage(int amount)
         {
             Hp -= amount;
-            if(Hp <= 0) IsDead = false;
+            if (Hp <= 0) IsDead = false;
         }
     }
 

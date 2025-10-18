@@ -1,4 +1,7 @@
-﻿namespace TEAMPROJECT_TEXTRPG.Scenes
+﻿using TEAMPROJECT_TEXTRPG.Managers;
+using TEAMPROJECT_TEXTRPG.Scenes;
+
+namespace TEAMPROJECT_TEXTRPG.Lagacy.Scenes
 {
     internal class BattleResultScene : Scene
     {
