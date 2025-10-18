@@ -218,8 +218,3 @@
         }
     }
 }
-
-/* Player 클래스 내
-{int GetRequiredExp() =>} -> public 으로 변경하기
-AddExp(int getExp), LevelUp() 내 Console.WriteLine 코드 주석 처리하기
- */
