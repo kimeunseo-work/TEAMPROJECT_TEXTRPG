@@ -27,7 +27,7 @@
 
             //스킬 목록 출력
 
-            Console.WriteLine($"\n[사용 가능 스킬 목록][현재 마나: {player.Mp}]");
+            Console.WriteLine($"\n[사용 가능 스킬 목록]");
             for (int i = 0; i < skills.Count; i++)
             {
                 var s= skills[i];
