@@ -1,4 +1,6 @@
-﻿namespace TEAMPROJECT_TEXTRPG
+﻿using System;
+
+namespace TEAMPROJECT_TEXTRPG
 {
     internal class Monster
     {
@@ -33,9 +35,14 @@
         }
 
         /// <summary>
-        /// 몬스터 공격
+        /// 몬스터 일반 공격
         /// </summary>
         internal void Attack(Player player) => player.TakeDamage(Atk);
+        internal void TakeDamage(int amount)
+        {
+            Hp -= amount;
+            if(Hp <= 0) IsDead = false;
+        }
     }
 
     internal class Monsters

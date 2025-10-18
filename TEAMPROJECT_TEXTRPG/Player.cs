@@ -1,4 +1,6 @@
-﻿namespace TEAMPROJECT_TEXTRPG
+﻿using System.Threading;
+
+namespace TEAMPROJECT_TEXTRPG
 {
     internal class Player
     {
@@ -108,5 +110,32 @@
         }
 
         internal void TakeDamage(int amount) => Hp -= amount;
+
+        /// <summary>
+        /// 플레이어 일반 공격
+        /// </summary>
+        internal int AttackBasic(Monster monster)
+        {
+            var damageErrorValue = (int)Math.Ceiling(Attack * 0.1d);
+            var actualDamage = new Random().Next((int)Attack - damageErrorValue, (int)Attack + damageErrorValue + 1);
+
+            monster.TakeDamage(actualDamage);
+            return actualDamage;
+        }
+
+        /// <summary>
+        /// 플레이어 크리티컬 공격
+        /// </summary>
+        /// <param name="player"></param>
+        internal int AttackCritical(Monster monster)
+        {
+            var damageErrorValue = (int)Math.Ceiling(Attack * 0.1d);
+            var actualDamage = new Random().Next((int)Attack - damageErrorValue, (int)Attack + damageErrorValue + 1);
+
+            actualDamage = (int)(actualDamage * 1.6d);
+            monster.TakeDamage(actualDamage);
+
+            return actualDamage;
+        }
     }
 }

@@ -16,7 +16,9 @@ namespace TEAMPROJECT_TEXTRPG
         BattleResult,//전투 결과
         BattleStart,// 전투
         EnemyTurn,
-        Quest
+        Quest,
+        TotalBattle,
+        NewBattleResult
     }
 
     /// <summary>
@@ -75,6 +77,8 @@ namespace TEAMPROJECT_TEXTRPG
             scenes.Add(GameState.Battle, new BattleScene());
             scenes.Add(GameState.EnemyTurn, new EnemyTurnScene());
             scenes.Add(GameState.Quest, new QuestScene());
+            scenes.Add(GameState.TotalBattle, new TotalBattleScene());
+            scenes.Add(GameState.NewBattleResult, new NewBattleResultScene());
         }
 
         internal void Run()
