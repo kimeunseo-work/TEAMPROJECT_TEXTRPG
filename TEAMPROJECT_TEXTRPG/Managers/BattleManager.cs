@@ -318,12 +318,13 @@ namespace TEAMPROJECT_TEXTRPG.Managers
             if (input == 0)
             {
                 GameManager.Instance.ChangeGameState(GameState.Home);
+                ChangeBattleState();
                 return BattleInput.IsValid | BattleInput.IsQuit;
             }
             // 전투 시작
             else if (input == 1)
             {
-                GameManager.Instance.ChangeGameState(GameState.TotalBattle);
+                ChangeBattleState();
                 return BattleInput.IsValid;
             }
             // 잘못된 입력
