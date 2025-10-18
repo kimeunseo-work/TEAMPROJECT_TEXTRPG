@@ -15,6 +15,12 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
         //    battleDisplays.Add(BattleState.MonsterTurn, ShowMonsterTurn);
         //}
 
+        private Player player;
+        internal TotalBattleScene()
+        {
+            player = CharacterManager.Instance.player;
+        }
+
         /* 생명 주기 */
         //============================================================//
 
@@ -83,14 +89,13 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
             {
                 Console.WriteLine($"Lv.{CurrentMonsters[i].Level} {CurrentMonsters[i].Name} HP {CurrentMonsters[i].Hp}");
             }
-
             Console.WriteLine();
 
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("[내정보]");
-            Console.WriteLine($"Lv.{CharacterManager.Instance.player.Level}  {CharacterManager.Instance.player.Name} ({CharacterManager.Instance.player.CurrentJob.Name})");
-            Console.WriteLine($"HP {CharacterManager.Instance.player.Hp}/{CharacterManager.Instance.player.MaxHP}");
+            Console.WriteLine($"Lv.{player.Level}  {player.Name} ({player.CurrentJob.Name})");
+            Console.WriteLine($"HP {player.Hp}/{player.MaxHP}");
             Console.WriteLine();
             Console.WriteLine("1. 공격");
             Console.WriteLine("0. 나가기");
@@ -124,7 +129,6 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
             Func<int, int, (BattleInput, SkillAttackResult[]?)> GetSkillAttackResult
             )
         {
-
             var input = 0;
             var monsterIndex = 0;
 
@@ -136,12 +140,21 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
             while (true)
             {
                 Console.Clear();
+                Console.ResetColor();
                 Console.WriteLine("**Battle!!**\n");
+                Console.WriteLine($"플레이어 정보");
+                Console.WriteLine($"이름: {player.Name}");
+                Console.WriteLine($"레벨: {player.Level}");
+                Console.WriteLine($"직업: {player.CurrentJob.Name}");
+                Console.WriteLine($"HP: {player.Hp}/{player.MaxHP}");
+                Console.WriteLine($"MP: {player.Mp}/{player.MaxMP}");
+                Console.WriteLine();
 
                 /* 몬스터 선택창 */
                 //============================================================//
 
                 // ShowMonsters()
+                Console.WriteLine("몬스터 정보");
                 for (int i = 0; i < currentMonsters.Count; i++)
                 {
                     var monster = currentMonsters[i];
@@ -214,7 +227,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                             UIColorUtility.WriteColoredLine("\n 치명타 공격!!", ConsoleColor.Red);
                         }
 
-                        Console.WriteLine($"\n{CharacterManager.Instance.player.Name}의 공격");
+                        Console.WriteLine($"\n{player.Name}의 공격");
                         Console.WriteLine($"{attackResult.targetName}을(를) 맞췄습니다. [데미지 : {attackResult.result.AttackPower}]");
                         Console.WriteLine($"\n{attackResult.targetName}");
 
@@ -240,7 +253,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                     var currentSkills = attackType.skills ?? throw new ArgumentNullException(nameof(attackType.skills));
 
                     //스킬 목록 출력
-                    Console.WriteLine($"\n[사용 가능 스킬 목록][현재 마나: {CharacterManager.Instance.player.Mp}]");
+                    Console.WriteLine($"\n[사용 가능 스킬 목록][현재 마나: {player.Mp}]");
                     for (int i = 0; i < currentSkills.Count; i++)
                     {
                         var skill = currentSkills[i];
@@ -261,7 +274,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                         }
                         else if (!skillResult.inputResult.HasFlag(BattleInput.IsSkillAttack))
                         {
-                            Console.WriteLine($"{CharacterManager.Instance.player.Name}의 MP가 부족합니다.");
+                            Console.WriteLine($"{player.Name}의 MP가 부족합니다.");
                             Console.ReadKey();
                         }
                         else break;
@@ -278,10 +291,11 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                     // 스킬 실행 출력
                     var skillResultData = skillResult.results ?? throw new ArgumentNullException(nameof(skillResult.results));
 
+                    Console.WriteLine($"{player.Name}이(가) {skillResultData[0].SkillName}을 사용했습니다!");
+                    Console.WriteLine($">>{skillResultData[0].SkillDesc}");
+
                     foreach (var result in skillResultData)
                     {
-                        Console.WriteLine($"{CharacterManager.Instance.player.Name}이(가) {result.SkillName}을 사용했습니다!");
-                        Console.WriteLine($">>{result.SkillDesc}");
                         Console.WriteLine($"{result.TargetName}에게 {result.Damage}의 피해를 입혔습니다.");
                         if (result.IsDead)
                         {
@@ -315,13 +329,13 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
             // 회피 출력
             if (isDodge)
             {
-                Console.WriteLine($"{CharacterManager.Instance.player.Name}이 피했습니다!");
+                Console.WriteLine($"{player.Name}이 피했습니다!");
             }
             else
             {
-                Console.WriteLine($"{CharacterManager.Instance.player.Name} 을(를) 맞췄습니다. [데미지 : {monster.Atk}]");
-                Console.WriteLine($"Lv.{CharacterManager.Instance.player.Level} {CharacterManager.Instance.player.Name} ({CharacterManager.Instance.player.CurrentJob.Name})");
-                Console.WriteLine($"HP {playerOldHp} → {CharacterManager.Instance.player.Hp}");
+                Console.WriteLine($"{player.Name} 을(를) 맞췄습니다. [데미지 : {monster.Atk}]");
+                Console.WriteLine($"Lv.{player.Level} {player.Name} ({player.CurrentJob.Name})");
+                Console.WriteLine($"HP {playerOldHp} → {player.Hp}");
             }
 
             Console.WriteLine();
