@@ -38,7 +38,11 @@ namespace TEAMPROJECT_TEXTRPG
         /// 몬스터 일반 공격
         /// </summary>
         internal void Attack(Player player) => player.TakeDamage(Atk);
-        internal void TakeDamage(int amount) => Hp -= amount;
+        internal void TakeDamage(int amount)
+        {
+            Hp -= amount;
+            if(Hp <= 0) IsDead = false;
+        }
     }
 
     internal class Monsters
