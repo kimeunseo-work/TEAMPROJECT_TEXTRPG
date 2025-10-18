@@ -208,17 +208,20 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                     Console.WriteLine("1. 기본 공격");
                     Console.WriteLine("2. 스킬 사용");
                     Console.WriteLine("0. 돌아가기");
-                    Console.Write(">>");
+                    Console.WriteLine();
 
                     // 스킬 선택할지 뒤로 갈지
                     while (true)
                     {
+                        Console.WriteLine("선택지를 입력해 주세요.");
                         input = InputHandler.GetInputToInt();
                         attackType = GetAttackType(input);
 
                         if (!attackType.inputResult.HasFlag(BattleInput.IsValid))
                         {
                             Console.WriteLine("잘못된 입력입니다.");
+                            Console.ReadKey();
+                            ConsoleUtility.ClearLine(Console.CursorTop, 3);
                         }
                         else
                             break;
