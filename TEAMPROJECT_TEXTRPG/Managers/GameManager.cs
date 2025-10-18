@@ -13,10 +13,6 @@ namespace TEAMPROJECT_TEXTRPG.Managers
         SelectJob,//캐릭터 직업 선택 화면
         Home,// 메인 화면
         Stat,// 상태창
-        Battle,// 전투
-        BattleResult,//전투 결과
-        BattleStart,// 전투
-        EnemyTurn,
         Quest,
         TotalBattle,
         NewBattleResult
@@ -73,10 +69,6 @@ namespace TEAMPROJECT_TEXTRPG.Managers
             scenes.Add(GameState.SelectJob, new SelectJobScene());
             scenes.Add(GameState.Home, new HomeScene());
             scenes.Add(GameState.Stat, new PlayerInfoScene());
-            scenes.Add(GameState.BattleResult, new BattleResultScene());
-            scenes.Add(GameState.BattleStart, new BattleStartScene());
-            scenes.Add(GameState.Battle, new BattleScene());
-            scenes.Add(GameState.EnemyTurn, new EnemyTurnScene());
             scenes.Add(GameState.Quest, new QuestScene());
             scenes.Add(GameState.TotalBattle, new TotalBattleScene());
             scenes.Add(GameState.NewBattleResult, new NewBattleResultScene());

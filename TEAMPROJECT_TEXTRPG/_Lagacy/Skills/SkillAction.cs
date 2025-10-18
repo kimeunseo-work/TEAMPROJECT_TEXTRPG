@@ -1,4 +1,5 @@
-﻿using TEAMPROJECT_TEXTRPG.Core;
+﻿#if false
+using TEAMPROJECT_TEXTRPG.Core;
 using TEAMPROJECT_TEXTRPG.Managers;
 using TEAMPROJECT_TEXTRPG.Utility;
 
@@ -140,3 +141,4 @@ namespace TEAMPROJECT_TEXTRPG.Lagacy.Skills
         }
     }
 }
+# endif

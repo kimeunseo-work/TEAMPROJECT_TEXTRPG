@@ -1,4 +1,5 @@
-﻿using TEAMPROJECT_TEXTRPG.Core;
+﻿#if false
+using TEAMPROJECT_TEXTRPG.Core;
 using TEAMPROJECT_TEXTRPG.Utility;
 
 namespace TEAMPROJECT_TEXTRPG.Managers
@@ -525,3 +526,4 @@ internal enum BattleInput
     IsBasicAttack = 1 << 3,
     IsSkillAttack = 1 << 4,
 }
+#endif
