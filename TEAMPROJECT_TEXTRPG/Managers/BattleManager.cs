@@ -175,13 +175,13 @@ namespace TEAMPROJECT_TEXTRPG.Managers
             {
                 // 결과 창으로 전환 위해 상태 변경
                 isLastBattleWin = true;
-                GameManager.Instance.ChangeGameState(GameState.BattleResult);
+                GameManager.Instance.ChangeGameState(GameState.NewBattleResult);
             }
             else if (CurrentBattleState == NewBattleState.Lose)
             {
                 // 결과 창으로 전환 위해 상태 변경
                 isLastBattleWin = false;
-                GameManager.Instance.ChangeGameState(GameState.BattleResult);
+                GameManager.Instance.ChangeGameState(GameState.NewBattleResult);
             }
         }
 
