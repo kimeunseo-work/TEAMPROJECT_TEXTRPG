@@ -341,6 +341,7 @@ namespace TEAMPROJECT_TEXTRPG.Managers
             if (input == 0)
             {
                 GameManager.Instance.ChangeGameState(GameState.Home);
+                ChangeBattleState();
                 return BattleInput.IsValid | BattleInput.IsQuit;
             }
             else if (input >= 1 && input <= CurrentMonsters.Count)

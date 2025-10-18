@@ -167,6 +167,9 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                     Console.WriteLine(text);
                 }
 
+                Console.WriteLine();
+                Console.WriteLine("0. 돌아가기");
+
                 // 몬스터 고를지 나갈지
                 while (true)
                 {
@@ -176,16 +179,25 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                     if (!battleStartResult.HasFlag(BattleInput.IsValid))
                     {
                         Console.WriteLine("잘못된 입력입니다.");
+                        Console.ReadKey();
+                        ConsoleUtility.ClearLine(Console.CursorTop, 4);
                     }
                     else if (battleStartResult.HasFlag(BattleInput.IsDead))
                     {
                         Console.WriteLine("이미 죽은 몬스터입니다.");
+                        Console.ReadKey();
+                        ConsoleUtility.ClearLine(Console.CursorTop, 4);
                     }
                     else break;
                 }
 
                 // 배틀 취소
-                if (battleStartResult.HasFlag(BattleInput.IsQuit)) break;
+                if (battleStartResult.HasFlag(BattleInput.IsQuit))
+                {
+                    Console.WriteLine("마을로 돌아갑니다.");
+                    Console.ReadKey();
+                    break;
+                }
 
                 /* 공격 방식 선택창 */
                 //============================================================//
@@ -195,7 +207,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                     Console.WriteLine("\n무엇을 하시겠습니까?");
                     Console.WriteLine("1. 기본 공격");
                     Console.WriteLine("2. 스킬 사용");
-                    Console.WriteLine("0. 나가기");
+                    Console.WriteLine("0. 돌아가기");
                     Console.Write(">>");
 
                     // 스킬 선택할지 뒤로 갈지
