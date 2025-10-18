@@ -3,7 +3,7 @@
     internal class BattleResultScene : Scene
     {
         string input;           // Player 의 입력을 받아올 값에 대한 선언 (= 입력 좀 해줄래?)
-        int subExp;         // 랜덤으로 생성한 몬스터들의 경험치의 합 연산 값을 정의하기 위한 선언 (= 경험치 {subExp} 획득!)
+        int subExp;             // 랜덤으로 생성한 몬스터들의 경험치의 합 연산 값을 정의하기 위한 선언 (= 경험치 {subExp} 획득!)
         int leveled;            // 레벨업 전 레벨 값 정의를 위한 선언 (= 레벨_이었던 것)
         int leveling;           // 레벨업 후 레벨 값 정의를 위한 선언 (= 지금 레벨인 것)
 
@@ -168,7 +168,7 @@
             if (leveled != leveling)
             {
                 Console.WriteLine($"레벨 업! 현재 레벨: {CharacterManager.Instance.player.Level}");
-                Console.WriteLine($"공격력 + {" 직업 별 레벨업 시 추가되는 공격력 "} -> {CharacterManager.Instance.player.BaseAttack}, 방어력 + {" 직업 별 레벨업 시 추가되는 방어력 "} -> {CharacterManager.Instance.player.BaseDefense}");
+                Console.WriteLine($"공격력 + {CharacterManager.Instance.player.CurrentJob.LvUpAttack} -> {CharacterManager.Instance.player.BaseAttack}, 방어력 + {CharacterManager.Instance.player.CurrentJob.LvUpDefense} -> {CharacterManager.Instance.player.BaseDefense}");
             }
         }
 

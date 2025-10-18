@@ -12,6 +12,8 @@
         public double BaseDefense { get; set; }
         public double Attack { get; set; }
         public double Defense { get; set; }
+        public double LvUpAttack { get; set; }
+        public double LvUpDefense { get; set; }
 
         public int Exp { get; set; }
 
@@ -51,6 +53,8 @@
             Defense = BaseDefense;
             Hp = MaxHP;
             Mp = MaxMP;
+            LvUpAttack = 0;
+            LvUpDefense = 0;
         }
 
         public void SetJobsStat(Job selectedJob)
@@ -65,12 +69,13 @@
             Defense = BaseDefense;
             Hp = MaxHP;
             Mp = MaxMP;
+            LvUpAttack = CurrentJob.LvUpAttack;
+            LvUpDefense = CurrentJob.LvUpDefense;
         }
 
         public void AddExp(int getExp)
         {
             Exp += getExp;
-            // Console.WriteLine($"\n경험치{getExp} 획득 (현재 {Exp} / 필요 {GetRequiredExp()})");
 
             while (true)
             {
@@ -102,10 +107,6 @@
 
             Hp = MaxHP;
             Mp = MaxMP;
-
-            // Console.WriteLine($"\n 레벨 업! 현재 레벨: {Level}");
-            // Console.WriteLine($"공격력 + {CurrentJob.LvUpAttack} -> {BaseAttack}, 방어력 + {CurrentJob.LvUpDefense} -> {BaseDefense}");
-
         }
 
         internal void TakeDamage(int amount) => Hp -= amount;
