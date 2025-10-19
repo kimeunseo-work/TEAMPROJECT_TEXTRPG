@@ -5,7 +5,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
 {
     internal class PlayerInfoScene : Scene
     {
-        internal override void Show()
+        public override void Show()
         {
             DisplayPlayerInfo();
         }
@@ -26,7 +26,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                 if (input == 0)
                 {
                     keep = false;
-                    GameManager.Instance.currentState = GameState.Home;
+                    GameManager.Instance.CurrentState = GameState.Home;
                 }
                 else
                 {

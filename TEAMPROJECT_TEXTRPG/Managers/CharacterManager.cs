@@ -7,7 +7,7 @@ namespace TEAMPROJECT_TEXTRPG.Managers
         /* 싱글톤 */
         //============================================================//
         private static CharacterManager instance;
-        internal static CharacterManager Instance
+        public static CharacterManager Instance
         {
             get
             {
@@ -18,6 +18,6 @@ namespace TEAMPROJECT_TEXTRPG.Managers
                 return instance;
             }
         }
-        internal Player player = new();
+        public Player player = new();
     }
 }

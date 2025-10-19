@@ -5,7 +5,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
 {
     internal class InitCharacterScene : Scene
     {
-        internal override void Show()
+        public override void Show()
         {
             DisplayCreate();
         }
@@ -52,7 +52,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                         Console.WriteLine($"'{playerInputName}'(으)로 캐릭터 이름이 성공적으로 설정되었습니다.");
                         Console.WriteLine("\n아무 키나 눌러 다음으로 진행해주세요.");
                         Console.ReadKey();
-                        GameManager.Instance.currentState = GameState.SelectJob;
+                        GameManager.Instance.CurrentState = GameState.SelectJob;
                         break;
                     }
 
