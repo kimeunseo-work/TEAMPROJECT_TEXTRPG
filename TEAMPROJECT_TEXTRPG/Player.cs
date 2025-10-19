@@ -1,4 +1,6 @@
-﻿namespace TEAMPROJECT_TEXTRPG
+﻿using System.Threading;
+
+namespace TEAMPROJECT_TEXTRPG
 {
     internal class Player
     {
@@ -12,6 +14,8 @@
         public double BaseDefense { get; set; }
         public double Attack { get; set; }
         public double Defense { get; set; }
+        public double LvUpAttack { get; set; }
+        public double LvUpDefense { get; set; }
 
         public int Exp { get; set; }
 
@@ -51,6 +55,8 @@
             Defense = BaseDefense;
             Hp = MaxHP;
             Mp = MaxMP;
+            LvUpAttack = 0;
+            LvUpDefense = 0;
         }
 
         public void SetJobsStat(Job selectedJob)
@@ -65,12 +71,13 @@
             Defense = BaseDefense;
             Hp = MaxHP;
             Mp = MaxMP;
+            LvUpAttack = CurrentJob.LvUpAttack;
+            LvUpDefense = CurrentJob.LvUpDefense;
         }
 
         public void AddExp(int getExp)
         {
             Exp += getExp;
-            Console.WriteLine($"\n경험치{getExp} 획득 (현재 {Exp} / 필요 {GetRequiredExp()})");
 
             while (true)
             {
@@ -84,7 +91,7 @@
 
         }
         // 경험치 반환
-        private int GetRequiredExp() =>
+        public int GetRequiredExp() =>
 
             ExpTable.ContainsKey(Level) ? ExpTable[Level] : int.MaxValue;
 
@@ -102,12 +109,35 @@
 
             Hp = MaxHP;
             Mp = MaxMP;
-
-            Console.WriteLine($"\n 레벨 업! 현재 레벨: {Level}");
-            Console.WriteLine($"공격력 + {CurrentJob.LvUpAttack} -> {BaseAttack}, 방어력 + {CurrentJob.LvUpDefense} -> {BaseDefense}");
-
         }
 
         internal void TakeDamage(int amount) => Hp -= amount;
+
+        /// <summary>
+        /// 플레이어 일반 공격
+        /// </summary>
+        internal int AttackBasic(Monster monster)
+        {
+            var damageErrorValue = (int)Math.Ceiling(Attack * 0.1d);
+            var actualDamage = new Random().Next((int)Attack - damageErrorValue, (int)Attack + damageErrorValue + 1);
+
+            monster.TakeDamage(actualDamage);
+            return actualDamage;
+        }
+
+        /// <summary>
+        /// 플레이어 크리티컬 공격
+        /// </summary>
+        /// <param name="player"></param>
+        internal int AttackCritical(Monster monster)
+        {
+            var damageErrorValue = (int)Math.Ceiling(Attack * 0.1d);
+            var actualDamage = new Random().Next((int)Attack - damageErrorValue, (int)Attack + damageErrorValue + 1);
+
+            actualDamage = (int)(actualDamage * 1.6d);
+            monster.TakeDamage(actualDamage);
+
+            return actualDamage;
+        }
     }
 }

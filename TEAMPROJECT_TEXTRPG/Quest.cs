@@ -119,7 +119,7 @@ namespace TEAMPROJECT_TEXTRPG
 
             ExpReward = 100;
 
-            ItemReward = QuestManager.Instance.items.equipItem1;
+            // ItemReward = QuestManager.Instance.items.equipItem1;
 
             
 
