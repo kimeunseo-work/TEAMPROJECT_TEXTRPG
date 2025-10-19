@@ -412,6 +412,7 @@ namespace TEAMPROJECT_TEXTRPG.Managers
                 var skill = CurrentSkills[skillIndex - 1];
                 if (!IsMpEnough(skill.Mp))
                 {
+                    // 유효하지만 마나 없음
                     return (BattleInput.IsValid, null);
                 }
 
@@ -431,6 +432,7 @@ namespace TEAMPROJECT_TEXTRPG.Managers
                             ));
                 }
 
+                // 유효하고 스킬맞음
                 return (BattleInput.IsValid | BattleInput.IsSkillAttack, skillAttackResult.ToArray());
             }
             else

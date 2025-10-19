@@ -274,6 +274,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                         var skill = currentSkills[i];
                         Console.WriteLine($"{i + 1}. {skill.Name} (Mp: {skill.Mp}) - {skill.Description})");
                     }
+                    Console.WriteLine("\n0. 뒤로 가기");
 
                     // 스킬 선택 입력할지 공격 방식 선택하는 창으로 돌아갈지.
                     while (true)
@@ -286,11 +287,13 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                         {
                             Console.WriteLine("잘못된 입력입니다.");
                             Console.ReadKey();
+                            ConsoleUtility.ClearLine(Console.CursorTop, 4);
                         }
-                        else if (!skillResult.inputResult.HasFlag(BattleInput.IsSkillAttack))
+                        else if (!skillResult.inputResult.HasFlag(BattleInput.IsSkillAttack) && !skillResult.inputResult.HasFlag(BattleInput.IsQuit))
                         {
                             Console.WriteLine($"{player.Name}의 MP가 부족합니다.");
                             Console.ReadKey();
+                            ConsoleUtility.ClearLine(Console.CursorTop, 4);
                         }
                         else break;
                     }
