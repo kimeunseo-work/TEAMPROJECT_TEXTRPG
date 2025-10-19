@@ -101,7 +101,7 @@ namespace TEAMPROJECT_TEXTRPG.Core
 
             ExpReward = 100;
 
-            ItemReward = QuestManager.Instance.items.equipItem1;
+            // ItemReward = QuestManager.Instance.items.equipItem1;
 
             GetMonster(monsters);
 
