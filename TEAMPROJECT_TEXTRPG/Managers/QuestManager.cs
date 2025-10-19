@@ -1,4 +1,5 @@
-﻿using TEAMPROJECT_TEXTRPG.Core;
+﻿#if false
+using TEAMPROJECT_TEXTRPG.Core;
 
 namespace TEAMPROJECT_TEXTRPG.Managers
 {
@@ -149,3 +150,4 @@ namespace TEAMPROJECT_TEXTRPG.Managers
         }
     }
 }
+#endif

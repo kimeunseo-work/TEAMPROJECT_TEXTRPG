@@ -27,6 +27,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
         private void OnExit()
         {
             BattleManager.Instance.OnBattleStateChanged -= HandleBattleScene;
+
             //BattleManager.Instance.OnMonsterSpawned -= ShowBattleStart;
             //BattleManager.Instance.OnPlayerTurn -= ShowPlayerTurn;
             //BattleManager.Instance.OnMonsterActioned -= ShowMonsterTurn;
@@ -42,17 +43,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
             // 현재 씬이 배틀일 때 반복
             while (GameManager.Instance.CurrentState == GameState.TotalBattle)
             {
-                //// 현재 배틀 상태가 None = 배틀 상태 아님 이면 화면 출력 안함
-                //// 몬스터만 출력한 상태는 Start
-                //if (BattleManager.Instance.CurrentBattleState != BattleState.None)
-                //{
-                //    var action = BattleSceneHandler();
-                //    action();
-                //}
-
-                //// 현재 배틀 상태 및 조건들(몬스터 IsDead, 플레이어 Hp) 검사해서
-                //// 적절한 배틀 상태 할당
-                //BattleManager.Instance.ChangeBattleState();
+                Thread.Sleep(100);
             }
 
             OnExit();
@@ -63,27 +54,42 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
 
         private void HandleBattleScene(NewBattleState newBattleState, object? o)
         {
-
-            //BattleManager.Instance.ChangeBattleState();
+            if(newBattleState == NewBattleState.Start)
+            {
+                var sender = o as BattleStartDto;
+                ShowBattleStart(sender);
+            }
+            else if (newBattleState == NewBattleState.PlayerTurn)
+            {
+                var sender = o as PlayerTurnDto;
+                ShowPlayerTurn(sender);
+            }
+            else if (newBattleState == NewBattleState.MonsterTurn)
+            {
+                var sender = o as MonsterTurnDto;
+                ShowMonsterTurn(sender);
+            }
         }
 
         /* Displays */
         //============================================================//
 
-        private void ShowBattleStart(
-            List<Monster> CurrentMonsters,
-            Func<int, BattleInput> GetBattleStart
-            )
+        private void ShowBattleStart(BattleStartDto sender)
         {
+            // 현재 몬스터
+            var currentMonsters = sender.CurrentMonsters;
+            // ShowBattleStart의 선택지
+            var GetBattleStart = sender.GetBattleStart;
+
             var isBattleStart = new BattleInput();
 
             Console.Clear();
             Console.WriteLine("Battle!!");
             Console.WriteLine();
 
-            for (int i = 0; i < CurrentMonsters.Count; i++)
+            for (int i = 0; i < currentMonsters.Count; i++)
             {
-                Console.WriteLine($"Lv.{CurrentMonsters[i].Level} {CurrentMonsters[i].Name} HP {CurrentMonsters[i].Hp}");
+                Console.WriteLine($"Lv.{currentMonsters[i].Level} {currentMonsters[i].Name} HP {currentMonsters[i].Hp}");
             }
             Console.WriteLine();
 
@@ -117,16 +123,16 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
             }
         }
 
-        private void ShowPlayerTurn(
-            List<Monster> currentMonsters,
-            Func<int, BattleInput> GetVaildMonsterSelection,
-            Func<int, (BattleInput, List<Skill>?)> GetAttackType,
-            Func<int, (string, SelectAttackBasicResult)> GetBasicAttackResult,
-            Func<int, int, (BattleInput, SkillAttackResult[]?)> GetSkillAttackResult
-            )
+        private void ShowPlayerTurn(PlayerTurnDto sender)
         {
             var input = 0;
             var monsterIndex = 0;
+
+            var currentMonsters = sender.CurrentMonsters;
+            var GetVaildMonsterSelection = sender.GetVaildMonsterSelection;
+            var GetAttackType = sender.GetAttackType;
+            var GetBasicAttackResult = sender.GetBasicAttackResult;
+            var GetSkillAttackResult = sender.GetSkillAttackResult;
 
             BattleInput battleStartResult = default;
             (BattleInput inputResult, List<Skill>? skills) attackType = default;
@@ -333,8 +339,12 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
             }
         }
 
-        private void ShowMonsterTurn(Monster monster, int? playerOldHp, bool isDodge)
+        private void ShowMonsterTurn(MonsterTurnDto sender)
         {
+            var monster = sender.Monster;
+            var isDodge = sender.IsDodge;
+            var playerOldHp = sender.PlayerOldHp;
+
             Console.Clear();
             Console.WriteLine("Battle");
             Console.WriteLine();

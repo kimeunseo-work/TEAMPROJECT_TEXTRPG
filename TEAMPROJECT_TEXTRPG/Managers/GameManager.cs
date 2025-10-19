@@ -1,5 +1,4 @@
-﻿using TEAMPROJECT_TEXTRPG.Core;
-using TEAMPROJECT_TEXTRPG.Scenes;
+﻿using TEAMPROJECT_TEXTRPG.Scenes;
 
 namespace TEAMPROJECT_TEXTRPG.Managers
 {
@@ -13,19 +12,9 @@ namespace TEAMPROJECT_TEXTRPG.Managers
         SelectJob,//캐릭터 직업 선택 화면
         Home,// 메인 화면
         Stat,// 상태창
-        Quest,
         TotalBattle,
-        NewBattleResult
-    }
-
-    /// <summary>
-    /// 배틀 결과 상태
-    /// </summary>
-    internal enum BattleState
-    {
-        None,
-        Victory,
-        Defeat
+        NewBattleResult,
+        Quest,
     }
 
     internal class GameManager
@@ -33,7 +22,6 @@ namespace TEAMPROJECT_TEXTRPG.Managers
         /* 싱글톤 */
         //============================================================//
         private static GameManager instance;
-        internal static GameManager Instance
         public static GameManager Instance
         {
             get
@@ -46,53 +34,68 @@ namespace TEAMPROJECT_TEXTRPG.Managers
             }
         }
 
+        /* 이벤트 */
+        //============================================================//
+
+        // BattleManager
+        public Func<Task> OnBattleEntered;
+
         /* 게임 상태 */
         //============================================================//
-        internal GameState currentState;
-        internal BattleState currentBattleState;
-        internal Dictionary<GameState, Scene> scenes;
-        internal List<Monster> monsters = new List<Monster>();
+        private GameState currentState;
+        public GameState CurrentState
+        {
+            get => currentState;
+            set
+            {
+                if (value == GameState.TotalBattle)
+                {
+                    OnBattleEntered.Invoke();
+                }
+                currentState = value;
+            }
+        }
         public Dictionary<GameState, Scene> scenes;
+        public Scene currentScene;
 
         /* 생성자 */
         //============================================================//
-        internal GameManager()
         public GameManager()
         {
-            // 예제 확인하려면 currentState = GameState.Example1
-            monsters = new List<Monster>();
-            var characterMgr = CharacterManager.Instance;
-            currentState = GameState.CharacterCreate;
-            currentBattleState = BattleState.None;
-            scenes = new Dictionary<GameState, Scene>();
-            //Player player = new Player();// 플레이어 객채
+            // 첫 시작 게임 상태
+            CurrentState = GameState.CharacterCreate;
 
-            // 씬을 매니저에 추가하는 방법 예시
-            scenes.Add(GameState.CharacterCreate, new InitCharacterScene());
-            scenes.Add(GameState.SelectJob, new SelectJobScene());
-            scenes.Add(GameState.Home, new HomeScene());
-            scenes.Add(GameState.Stat, new PlayerInfoScene());
-            scenes.Add(GameState.Quest, new QuestScene());
-            scenes.Add(GameState.TotalBattle, new TotalBattleScene());
-            scenes.Add(GameState.NewBattleResult, new NewBattleResultScene());
+            // 화면 모음
+            scenes = new Dictionary<GameState, Scene>
+            {
+                { GameState.CharacterCreate, new InitCharacterScene() },
+                { GameState.SelectJob, new SelectJobScene() },
+                { GameState.Home, new HomeScene() },
+                { GameState.Stat, new PlayerInfoScene() },
+                { GameState.TotalBattle, new TotalBattleScene() },
+                { GameState.NewBattleResult, new NewBattleResultScene() },
+                { GameState.Quest, new QuestScene() }
+            };
         }
 
-        internal void Run()
         /// <summary>
         /// 씬을 로드하는 메서드
         /// </summary>
         public void Run()
         {
-            while (currentState != GameState.None)
-            {
-                scenes[currentState].Show();
-            }
-        }
+            // 이벤트 구독
+            BattleManager.Instance.OnBattleEnd += () => CurrentState = GameState.NewBattleResult;
+            BattleManager.Instance.OnBattleQuit += () => CurrentState = GameState.Home;
 
-        internal void ChangeGameState(GameState state) => currentState = state;
-        /// <summary>
-        /// 상태를 바꾸는 메서드
-        /// </summary>
-        public void ChangeGameState(GameState state) => CurrentState = state;
+            while (CurrentState != GameState.None)
+            {
+                currentScene = scenes[CurrentState];
+                currentScene.Show();
+            }
+
+            // 이벤트 해지
+            BattleManager.Instance.OnBattleEnd -= () => CurrentState = GameState.NewBattleResult;
+            BattleManager.Instance.OnBattleQuit -= () => CurrentState = GameState.Home;
+        }
     }
 }

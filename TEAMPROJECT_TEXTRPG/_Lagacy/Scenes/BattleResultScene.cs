@@ -1,4 +1,5 @@
-﻿using TEAMPROJECT_TEXTRPG.Managers;
+﻿#if false
+using TEAMPROJECT_TEXTRPG.Managers;
 using TEAMPROJECT_TEXTRPG.Scenes;
 
 namespace TEAMPROJECT_TEXTRPG.Lagacy.Scenes
@@ -224,3 +225,4 @@ namespace TEAMPROJECT_TEXTRPG.Lagacy.Scenes
         }
     }
 }
+#endif

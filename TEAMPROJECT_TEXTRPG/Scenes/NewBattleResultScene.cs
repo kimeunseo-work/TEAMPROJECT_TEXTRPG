@@ -7,6 +7,30 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
         string input;
         int parsedInput;
         bool isParsedSuccess;
+        
+        public override void Show()
+        {
+            BattleManager.Instance.OnBattleResultReady += HandleResult;
+
+            while (GameManager.Instance.CurrentState == GameState.NewBattleResult)
+            {
+                Thread.Sleep(100);
+            }
+
+            BattleManager.Instance.OnBattleResultReady -= HandleResult;
+        }
+
+        private void HandleResult(NewBattleState result, int[] monsterExps)
+        {
+            if (result == NewBattleState.Victory)
+            {
+                BattleResultWin(monsterExps);
+            }
+            else if (result == NewBattleState.Lose)
+            {
+                BattleResultLose(monsterExps.Length);
+            }
+        }
 
         public void BattleResultWin(int[] monsterExps)
         {
@@ -22,8 +46,6 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
 
             WhileInput0(monsterExps.Length);
         }
-
-
 
         public void BattleResultLose(int count)
         {
@@ -125,19 +147,6 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
             else
             {
                 parsedInput = -1;
-            }
-        }
-
-        public override void Show()
-        {
-            (bool? isWin, int[] monsterExps) = BattleManager.Instance.GetBattleResult();
-            if (isWin == true)
-            {
-                BattleResultWin(monsterExps);
-            }
-            else if (isWin == false)
-            {
-                BattleResultLose(monsterExps.Length);
             }
         }
     }
