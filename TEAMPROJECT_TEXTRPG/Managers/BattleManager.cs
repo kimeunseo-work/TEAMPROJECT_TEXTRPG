@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using TEAMPROJECT_TEXTRPG.Core;
+﻿using TEAMPROJECT_TEXTRPG.Core;
 
 namespace TEAMPROJECT_TEXTRPG.Managers
 {
@@ -20,7 +19,7 @@ namespace TEAMPROJECT_TEXTRPG.Managers
     {
         private readonly GameManager gameManager;
         private readonly Player player;
-        
+
         public BattleManager()
         {
             // 가독성 살리기 위해
@@ -52,7 +51,7 @@ namespace TEAMPROJECT_TEXTRPG.Managers
 
         // GameManager 상태 구독용 이벤트
         public Action OnBattleEnd;
-        public Action OnBattleQuit;
+        public Action OnBattleExit;
 
         // BattleResult 전달용 이벤트
         public Action<NewBattleState, int[]> OnBattleResultReady;
@@ -64,8 +63,7 @@ namespace TEAMPROJECT_TEXTRPG.Managers
         #region /* 필드 */
         //============================================================//
 
-        // 현재 배틀 상태
-        //private NewBattleState currentBattleState = NewBattleState.None;
+        // 현재 상태
         private NewBattleState CurrentBattleState { get; set; } = NewBattleState.None;
         // 몬스터 리스트 원본
         private readonly Monsters monsterList = new();
@@ -73,9 +71,7 @@ namespace TEAMPROJECT_TEXTRPG.Managers
         private List<Monster>? CurrentMonsters { get; set; } = new List<Monster>();
         // 현재 직업에 따른 스킬
         private List<Skill> CurrentSkills { get; set; } = new List<Skill>();
-        // 배틀 결과
-        private bool? isLastBattleWin = null;
-        // zz
+        // 화면 출력이 끝났는지 체크
         private bool hasScreenCallEnded = false;
         #endregion
 
@@ -143,9 +139,9 @@ namespace TEAMPROJECT_TEXTRPG.Managers
                 }
             }
         }
-        
+
         /// <summary>
-        /// 배틀 종료
+        /// 배틀 결과
         /// </summary>
         private async Task ExitBattle()
         {
@@ -233,7 +229,7 @@ namespace TEAMPROJECT_TEXTRPG.Managers
                             CurrentBattleState,
                             new BattleStartDto(
                                 CurrentMonsters,
-                                GetBattleStart));
+                                HandleBattleStartInput));
                     break;
                 case NewBattleState.PlayerTurn:
                     // 플레이어 턴 화면 호출
@@ -242,10 +238,10 @@ namespace TEAMPROJECT_TEXTRPG.Managers
                             CurrentBattleState,
                             new PlayerTurnDto(
                                 CurrentMonsters,
-                                GetVaildMonsterSelection,
-                                GetAttackType,
-                                GetBasicAttackResult,
-                                GetSkillAttackResult));
+                                HandleMonsterSelectionInput,
+                                HandleAttackTypeInput,
+                                HandleBasicAttackInput,
+                                HandleSkillAttackInput));
                     break;
                 case NewBattleState.MonsterTurn:
                     // 몬스터 수 만큼 반복
@@ -266,7 +262,7 @@ namespace TEAMPROJECT_TEXTRPG.Managers
                     ExitBattle();
                     break;
             }
-            
+
             hasScreenCallEnded = true;
         }
         #endregion
@@ -275,79 +271,71 @@ namespace TEAMPROJECT_TEXTRPG.Managers
         //============================================================//
 
         /// <summary>
-        /// ShowBattleStart 선택지
+        /// ShowBattleStart, 배틀 시작할지 홈으로 나갈지
         /// </summary>
-        private BattleInput GetBattleStart(int input)
+        private BattleInput HandleBattleStartInput(int input)
         {
             // 전투 취소
-            if (input == 0)
+            switch (input)
             {
-                OnBattleQuit.Invoke();
-                return BattleInput.IsValid | BattleInput.IsQuit;
+                // 나가기
+                case 0:
+                    ChangeBattleState(NewBattleState.None);
+                    return BattleInput.IsValid | BattleInput.IsQuit;
+                // 전투 시작
+                case 1:
+                    return BattleInput.IsValid;
+                // 잘못된 입력
+                default:
+                    return BattleInput.None;
             }
-            // 전투 시작
-            else if (input == 1)
-            {
-                return BattleInput.IsValid;
-            }
-            // 잘못된 입력
-            else
-                return BattleInput.None;
         }
 
         /// <summary>
-        /// ShowPlayerTurn, 몬스터 고를지 나갈지
+        /// ShowPlayerTurn, 몬스터 고를지 홈으로 나갈지
         /// </summary>
-        private BattleInput GetVaildMonsterSelection(int input)
+        private BattleInput HandleMonsterSelectionInput(int input)
         {
             // 배틀 취소
-            if (input == 0)
+            switch (input)
             {
-                OnBattleQuit.Invoke();
-                ChangeBattleState();
-                return BattleInput.IsValid | BattleInput.IsQuit;
-            }
-            else if (input >= 1 && input <= CurrentMonsters.Count)
-            {
-                // 몬스터를 골랐는데 죽은 몬스터일 때
-                if (CurrentMonsters[input - 1].IsDead)
-                {
+                // 나가기
+                case 0:
+                    ChangeBattleState(NewBattleState.None);
+                    return BattleInput.IsValid | BattleInput.IsQuit;
+                // 몬스터 선택
+                case >= 1 when input <= CurrentMonsters.Count:
+                    // 생존 몬스터
+                    if (!CurrentMonsters[input - 1].IsDead)
+                    {
+                        return BattleInput.IsValid;
+                    }
                     return BattleInput.IsValid | BattleInput.IsDead;
-                }
-                return BattleInput.IsValid;
+                // 잘못된 입력
+                default:
+                    return BattleInput.None;
             }
-            else
-                return BattleInput.None;
         }
 
         /// <summary>
         /// ShowPlayerTurn, 스킬 선택할지 뒤로 갈지
         /// </summary>
-        private (BattleInput, List<Skill>?) GetAttackType(int input)
+        private (BattleInput, List<Skill>?) HandleAttackTypeInput(int input)
         {
             // 몬스터 다시 고르기
-            if (input == 0)
+            return input switch
             {
-                return (BattleInput.IsValid | BattleInput.IsQuit, null);
-            }
-            // 기본 공격
-            else if (input == 1)
-            {
-                return (BattleInput.IsValid | BattleInput.IsBasicAttack, null);
-            }
-            // 스킬 공격
-            else if (input == 2)
-            {
-                return (BattleInput.IsValid, CurrentSkills);
-            }
-            else
-                return (BattleInput.None, null);
+                0 => (BattleInput.IsValid | BattleInput.IsQuit, null),
+                1 => (BattleInput.IsValid | BattleInput.IsBasicAttack, null),
+                2 => (BattleInput.IsValid, CurrentSkills),
+                _ => (BattleInput.None, null)
+            };
         }
 
         /// <summary>
         /// ShowPlayerTurn, 기본 공격 선택시
         /// </summary>
-        public (string, SelectAttackBasicResult) GetBasicAttackResult(int index)
+        public (string, SelectAttackBasicResult) HandleBasicAttackInput(int index)
         {
             var targetMonster = CurrentMonsters[index - 1];
             var oldHp = targetMonster.Hp;
@@ -363,7 +351,7 @@ namespace TEAMPROJECT_TEXTRPG.Managers
         /// <summary>
         /// ShowPlayerTurn, 스킬 공격 선택시
         /// </summary>
-        public (BattleInput, SkillAttackResult[]?) GetSkillAttackResult(int skillIndex, int monsterIndex)
+        public (BattleInput, SkillAttackResult[]?) HandleSkillAttackInput(int skillIndex, int monsterIndex)
         {
             // 뒤로 가기
             if (skillIndex == 0)
@@ -505,8 +493,8 @@ namespace TEAMPROJECT_TEXTRPG.Managers
         //============================================================//
         private void ChangeBattleState(NewBattleState state) => CurrentBattleState = state;
         private bool IsMonstersAllDead() => CurrentMonsters.All(monster => monster.IsDead == true);
-        private bool IsPlayerDead() => CharacterManager.Instance.player.Hp <= 0;
+        private bool IsPlayerDead() => player.Hp <= 0;
         private bool IsCritical() => new Random().Next(100) < 15;
-        private bool IsMpEnough(int skillMp) => CharacterManager.Instance.player.Mp >= skillMp;
+        private bool IsMpEnough(int skillMp) => player.Mp >= skillMp;
     }
 }

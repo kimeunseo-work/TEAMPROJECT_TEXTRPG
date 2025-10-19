@@ -16,14 +16,14 @@
     }
 
     /// <summary>
-    /// 배틀 시작 Dto
+    /// Battle Start Dto
     /// </summary>
     internal class BattleStartDto
     {
         public List<Monster> CurrentMonsters { get; }
-        public Func<int, BattleInput> GetBattleStart { get; }
+        public Func<int, BattleInput> HandleBattleStartInput { get; }
 
-        public BattleStartDto(List<Monster> currentMonsters, Func<int, BattleInput> getBattleStart)
+        public BattleStartDto(List<Monster> currentMonsters, Func<int, BattleInput> handleBattleStartInput)
         {
             if (currentMonsters.Count <= 0)
             {
@@ -31,7 +31,7 @@
             }
 
             CurrentMonsters = currentMonsters;
-            GetBattleStart = getBattleStart;
+            HandleBattleStartInput = handleBattleStartInput;
         }
     }
 
@@ -41,16 +41,16 @@
     internal class PlayerTurnDto
     {
         public List<Monster> CurrentMonsters { get; }
-        public Func<int, BattleInput> GetVaildMonsterSelection { get; }
-        public Func<int, (BattleInput, List<Skill>?)> GetAttackType { get; }
-        public Func<int, (string, SelectAttackBasicResult)> GetBasicAttackResult { get; }
-        public Func<int, int, (BattleInput, SkillAttackResult[]?)> GetSkillAttackResult { get; }
+        public Func<int, BattleInput> HandleMonsterSelectionInput { get; }
+        public Func<int, (BattleInput, List<Skill>?)> HandleAttackTypeInput { get; }
+        public Func<int, (string, SelectAttackBasicResult)> HandleBasicAttackInput { get; }
+        public Func<int, int, (BattleInput, SkillAttackResult[]?)> HandleSkillAttackInput { get; }
         public PlayerTurnDto(
             List<Monster> currentMonsters,
-            Func<int, BattleInput> getVaildMonsterSelection,
+            Func<int, BattleInput> handleMonsterSelectionInput,
             Func<int, (BattleInput, List<Skill>?)> getAttackType,
-            Func<int, (string, SelectAttackBasicResult)> getBasicAttackResult,
-            Func<int, int, (BattleInput, SkillAttackResult[]?)> getSkillAttackResult)
+            Func<int, (string, SelectAttackBasicResult)> handleBasicAttackInput,
+            Func<int, int, (BattleInput, SkillAttackResult[]?)> handleSkillAttackInput)
         {
             if (currentMonsters.Count <= 0)
             {
@@ -58,10 +58,10 @@
             }
 
             CurrentMonsters = currentMonsters;
-            GetVaildMonsterSelection = getVaildMonsterSelection;
-            GetAttackType = getAttackType;
-            GetBasicAttackResult = getBasicAttackResult;
-            GetSkillAttackResult = getSkillAttackResult;
+            HandleMonsterSelectionInput = handleMonsterSelectionInput;
+            HandleAttackTypeInput = getAttackType;
+            HandleBasicAttackInput = handleBasicAttackInput;
+            HandleSkillAttackInput = handleSkillAttackInput;
         }
     }
 

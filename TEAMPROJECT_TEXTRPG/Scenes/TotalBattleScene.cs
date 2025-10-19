@@ -12,33 +12,12 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
             player = CharacterManager.Instance.player;
         }
 
-        /* 생명 주기 */
-        //============================================================//
-
-        private void OnEnter()
-        {
-            BattleManager.Instance.OnBattleStateChanged += HandleBattleScene;
-
-            //BattleManager.Instance.OnMonsterSpawned += ShowBattleStart;
-            //BattleManager.Instance.OnPlayerTurn += ShowPlayerTurn;
-            //BattleManager.Instance.OnMonsterActioned += ShowMonsterTurn;
-        }
-
-        private void OnExit()
-        {
-            BattleManager.Instance.OnBattleStateChanged -= HandleBattleScene;
-
-            //BattleManager.Instance.OnMonsterSpawned -= ShowBattleStart;
-            //BattleManager.Instance.OnPlayerTurn -= ShowPlayerTurn;
-            //BattleManager.Instance.OnMonsterActioned -= ShowMonsterTurn;
-        }
-
         /* Show */
         //============================================================//
 
         public override void Show()
         {
-            OnEnter();
+            BattleManager.Instance.OnBattleStateChanged += HandleBattleScene;
 
             // 현재 씬이 배틀일 때 반복
             while (GameManager.Instance.CurrentState == GameState.TotalBattle)
@@ -46,7 +25,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                 Thread.Sleep(100);
             }
 
-            OnExit();
+            BattleManager.Instance.OnBattleStateChanged -= HandleBattleScene;
         }
 
         /* Handler */
@@ -79,7 +58,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
             // 현재 몬스터
             var currentMonsters = sender.CurrentMonsters;
             // ShowBattleStart의 선택지
-            var GetBattleStart = sender.GetBattleStart;
+            var handleBattleStartInput = sender.HandleBattleStartInput;
 
             var isBattleStart = new BattleInput();
 
@@ -105,7 +84,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
             while (true)
             {
                 var input = InputHandler.GetUserActionInput();
-                isBattleStart = GetBattleStart(input);
+                isBattleStart = handleBattleStartInput(input);
 
                 if (!isBattleStart.HasFlag(BattleInput.IsValid))
                 {
@@ -129,10 +108,10 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
             var monsterIndex = 0;
 
             var currentMonsters = sender.CurrentMonsters;
-            var GetVaildMonsterSelection = sender.GetVaildMonsterSelection;
-            var GetAttackType = sender.GetAttackType;
-            var GetBasicAttackResult = sender.GetBasicAttackResult;
-            var GetSkillAttackResult = sender.GetSkillAttackResult;
+            var handleMonsterSelectionInput = sender.HandleMonsterSelectionInput;
+            var handleAttackTypeInput = sender.HandleAttackTypeInput;
+            var handleBasicAttackInput = sender.HandleBasicAttackInput;
+            var handleSkillAttackInput = sender.HandleSkillAttackInput;
 
             BattleInput battleStartResult = default;
             (BattleInput inputResult, List<Skill>? skills) attackType = default;
@@ -176,7 +155,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                 while (true)
                 {
                     monsterIndex = InputHandler.GetUserActionInputInBattle();
-                    battleStartResult = GetVaildMonsterSelection(monsterIndex);
+                    battleStartResult = handleMonsterSelectionInput(monsterIndex);
 
                     if (!battleStartResult.HasFlag(BattleInput.IsValid))
                     {
@@ -217,7 +196,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                     {
                         Console.WriteLine("선택지를 입력해 주세요.");
                         input = InputHandler.GetInputToInt();
-                        attackType = GetAttackType(input);
+                        attackType = handleAttackTypeInput(input);
 
                         if (!attackType.inputResult.HasFlag(BattleInput.IsValid))
                         {
@@ -237,7 +216,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
 
                     if (attackType.inputResult.HasFlag(BattleInput.IsBasicAttack))
                     {
-                        attackResult = GetBasicAttackResult(monsterIndex);
+                        attackResult = handleBasicAttackInput(monsterIndex);
 
                         if (attackResult.result.IsCritical)
                         {
@@ -283,7 +262,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                     {
                         //사용할 스킬 번호 입력
                         input = InputHandler.GetUserActionInput();
-                        skillResult = GetSkillAttackResult(input, monsterIndex);
+                        skillResult = handleSkillAttackInput(input, monsterIndex);
 
                         if (!skillResult.inputResult.HasFlag(BattleInput.IsValid))
                         {

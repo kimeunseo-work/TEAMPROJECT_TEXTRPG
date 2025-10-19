@@ -74,7 +74,7 @@ namespace TEAMPROJECT_TEXTRPG.Managers
                 { GameState.Stat, new PlayerInfoScene() },
                 { GameState.TotalBattle, new TotalBattleScene() },
                 { GameState.NewBattleResult, new NewBattleResultScene() },
-                { GameState.Quest, new QuestScene() }
+                //{ GameState.Quest, new QuestScene() }
             };
         }
 
@@ -85,7 +85,7 @@ namespace TEAMPROJECT_TEXTRPG.Managers
         {
             // 이벤트 구독
             BattleManager.Instance.OnBattleEnd += () => CurrentState = GameState.NewBattleResult;
-            BattleManager.Instance.OnBattleQuit += () => CurrentState = GameState.Home;
+            BattleManager.Instance.OnBattleExit += () => CurrentState = GameState.Home;
 
             while (CurrentState != GameState.None)
             {
@@ -95,7 +95,7 @@ namespace TEAMPROJECT_TEXTRPG.Managers
 
             // 이벤트 해지
             BattleManager.Instance.OnBattleEnd -= () => CurrentState = GameState.NewBattleResult;
-            BattleManager.Instance.OnBattleQuit -= () => CurrentState = GameState.Home;
+            BattleManager.Instance.OnBattleExit -= () => CurrentState = GameState.Home;
         }
     }
 }

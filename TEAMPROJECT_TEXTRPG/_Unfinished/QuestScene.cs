@@ -1,4 +1,6 @@
-﻿namespace TEAMPROJECT_TEXTRPG.Scenes
+﻿using TEAMPROJECT_TEXTRPG.Scenes;
+
+namespace TEAMPROJECT_TEXTRPG._Unfinished
 {
     internal class QuestScene : Scene
     {

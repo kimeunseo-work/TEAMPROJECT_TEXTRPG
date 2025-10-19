@@ -1,4 +1,4 @@
-﻿namespace TEAMPROJECT_TEXTRPG.Core
+﻿namespace TEAMPROJECT_TEXTRPG._Unfinished
 {
     public class Item
     {
@@ -54,12 +54,12 @@
 
         public EquipItem(Item other)
         {
-            this.itemName = other.itemName;
-            this.itemType = other.itemType;
-            this.itemStat = other.itemStat;
-            this.itemStatValue = other.itemStatValue;
-            this.itemExplanation = other.itemExplanation;
-            this.isEquip = other.isEquip;
+            itemName = other.itemName;
+            itemType = other.itemType;
+            itemStat = other.itemStat;
+            itemStatValue = other.itemStatValue;
+            itemExplanation = other.itemExplanation;
+            isEquip = other.isEquip;
         }
     }
 
@@ -76,10 +76,10 @@
 
         public UseItem(Item other)
         {
-            this.itemName = other.itemName;
-            this.itemStat = other.itemStat;
-            this.itemStatValue = other.itemStatValue;
-            this.itemExplanation = other.itemExplanation;
+            itemName = other.itemName;
+            itemStat = other.itemStat;
+            itemStatValue = other.itemStatValue;
+            itemExplanation = other.itemExplanation;
         }
     }
 
@@ -94,8 +94,8 @@
 
         public EtcItem(Item other)
         {
-            this.itemName = other.itemName;
-            this.itemExplanation = other.itemExplanation;
+            itemName = other.itemName;
+            itemExplanation = other.itemExplanation;
         }
     }
 
