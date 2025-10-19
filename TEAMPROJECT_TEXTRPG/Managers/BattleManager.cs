@@ -132,8 +132,15 @@ namespace TEAMPROJECT_TEXTRPG.Managers
                 }
 
                 // 게임 종료 조건
-                if (CurrentBattleState == NewBattleState.Victory 
+                if (CurrentBattleState == NewBattleState.Victory
                     || CurrentBattleState == NewBattleState.Lose) break;
+
+                // 중간에 나가기
+                if (CurrentBattleState == NewBattleState.None)
+                {
+                    OnBattleExit?.Invoke();
+                    break;
+                }
             }
         }
         
