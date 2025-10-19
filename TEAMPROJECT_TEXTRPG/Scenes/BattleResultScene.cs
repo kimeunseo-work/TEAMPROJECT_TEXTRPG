@@ -159,7 +159,7 @@
             Console.WriteLine();
             Console.WriteLine($"던전에서 몬스터 {GameManager.Instance.monsters.Count}마리를 잡았습니다.");
             Console.WriteLine($"Lv.{CharacterManager.Instance.player.Level} {CharacterManager.Instance.player.Name}");
-            Console.WriteLine($"HP {CharacterManager.Instance.player.hped} -> {CharacterManager.Instance.player.Hp}");
+            Console.WriteLine($"HP {CharacterManager.Instance.player.Hped} -> {CharacterManager.Instance.player.Hp}");
             Console.WriteLine();
             Console.WriteLine($"경험치{subExp} 획득 (현재 {CharacterManager.Instance.player.Exp} / 필요 {CharacterManager.Instance.player.GetRequiredExp()})");
             Console.WriteLine();
@@ -181,7 +181,7 @@
             Console.WriteLine("You Lose..");
             Console.WriteLine();
             Console.WriteLine($"Lv.{CharacterManager.Instance.player.Level} {CharacterManager.Instance.player.Name}");
-            Console.WriteLine($"HP {CharacterManager.Instance.player.hped} -> 0");
+            Console.WriteLine($"HP {CharacterManager.Instance.player.Hped} -> 0");
             Console.WriteLine();
         }
 

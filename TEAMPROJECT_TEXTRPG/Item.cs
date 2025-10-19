@@ -57,14 +57,14 @@
         }
 
         // 장비 Item 복제에 참고할 메서드 생성
-        public EquipItem(Item other)
+        public EquipItem(Item clone)
         {
-            this.itemName = other.itemName;
-            this.itemType = other.itemType;
-            this.itemStat = other.itemStat;
-            this.itemStatValue = other.itemStatValue;
-            this.itemExplanation = other.itemExplanation;
-            this.isEquip = other.isEquip;
+            this.itemName = clone.itemName;
+            this.itemType = clone.itemType;
+            this.itemStat = clone.itemStat;
+            this.itemStatValue = clone.itemStatValue;
+            this.itemExplanation = clone.itemExplanation;
+            this.isEquip = clone.isEquip;
         }
     }
 
@@ -81,12 +81,12 @@
         }
 
         // 소비 Item 복제에 참고할 메서드 생성
-        public UseItem(Item other)
+        public UseItem(Item clone)
         {
-            this.itemName = other.itemName;
-            this.itemStat = other.itemStat;
-            this.itemStatValue = other.itemStatValue;
-            this.itemExplanation = other.itemExplanation;
+            this.itemName = clone.itemName;
+            this.itemStat = clone.itemStat;
+            this.itemStatValue = clone.itemStatValue;
+            this.itemExplanation = clone.itemExplanation;
         }
     }
 
@@ -101,10 +101,10 @@
         }
 
         // 기타 Item 복제에 참고할 메서드 생성
-        public EtcItem(Item other)
+        public EtcItem(Item clone)
         {
-            this.itemName = other.itemName;
-            this.itemExplanation = other.itemExplanation;
+            this.itemName = clone.itemName;
+            this.itemExplanation = clone.itemExplanation;
         }
     }
 
@@ -176,23 +176,27 @@
             // DropItems 리스트에 Monster 별 드랍할 아이템 삽입
             // '미니언' 드랍 아이템 추가
             monster1Drops.Add(use1); // 체력 포션
-            monster1Drops.Add(etc1); // '미니언'의 잔해
+            monster1Drops.Add(etc1); // 작은 철 조각
 
             // '공허충' 드랍 아이템 추가
-            monster2Drops.Add(etc2); // '공허충'의 잔해
+            monster2Drops.Add(etc2); // 빛나는 조각
 
-            monster3Drops.Add(equip2);
-            monster3Drops.Add(etc3);
-            
-            monster4Drops.Add(etc4);
+            // '대포 미니언' 드랍 아이템 추가
+            monster3Drops.Add(equip2); // 냄비 뚜껑
+            monster3Drops.Add(etc3); // 무언가의 손잡이
 
-            monster5Drops.Add(equip1);
-            monster5Drops.Add(equip2);
-            monster5Drops.Add(etc5);
+            // '돌거북' 드랍 아이템 추가
+            monster4Drops.Add(etc4); // 작은 돌 조각
 
-            monster6Drops.Add(use1);
-            monster6Drops.Add(use2);
-            monster6Drops.Add(etc6);
+            // '고대 돌거북' 드랍 아이템 추가
+            monster5Drops.Add(equip1); // 낡은 검
+            monster5Drops.Add(equip2); // 냄비 뚜껑
+            monster5Drops.Add(etc5); // 돌 조각
+
+            // '칼날부리' 드랍 아이템 추가
+            monster6Drops.Add(use1); // 체력 포션
+            monster6Drops.Add(use2); // 마나 포션
+            monster6Drops.Add(etc6); // 푸르스름한 깃털
         }
     }
 }
