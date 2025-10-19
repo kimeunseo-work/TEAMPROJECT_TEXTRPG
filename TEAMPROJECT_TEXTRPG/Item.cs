@@ -150,12 +150,12 @@
     internal class Drops : Items
     {
         // Monster가 드랍할 DropItems 리스트 생성
-        public List<Item> monster1Drops = new List<Item>();
-        public List<Item> monster2Drops = new List<Item>();
-        public List<Item> monster3Drops = new List<Item>();
-        public List<Item> monster4Drops = new List<Item>();
-        public List<Item> monster5Drops = new List<Item>();
-        public List<Item> monster6Drops = new List<Item>();
+        public List<Item> mon1Drops = new List<Item>();
+        public List<Item> mon2Drops = new List<Item>();
+        public List<Item> mon3Drops = new List<Item>();
+        public List<Item> mon4Drops = new List<Item>();
+        public List<Item> mon5Drops = new List<Item>();
+        public List<Item> mon6Drops = new List<Item>();
 
         public Drops()
         {
@@ -175,28 +175,28 @@
 
             // DropItems 리스트에 Monster 별 드랍할 아이템 삽입
             // '미니언' 드랍 아이템 추가
-            monster1Drops.Add(use1); // 체력 포션
-            monster1Drops.Add(etc1); // 작은 철 조각
+            mon1Drops.Add(use1); // 체력 포션
+            mon1Drops.Add(etc1); // 작은 철 조각
 
             // '공허충' 드랍 아이템 추가
-            monster2Drops.Add(etc2); // 빛나는 조각
+            mon2Drops.Add(etc2); // 빛나는 조각
 
             // '대포 미니언' 드랍 아이템 추가
-            monster3Drops.Add(equip2); // 냄비 뚜껑
-            monster3Drops.Add(etc3); // 무언가의 손잡이
+            mon3Drops.Add(equip2); // 냄비 뚜껑
+            mon3Drops.Add(etc3); // 무언가의 손잡이
 
             // '돌거북' 드랍 아이템 추가
-            monster4Drops.Add(etc4); // 작은 돌 조각
+            mon4Drops.Add(etc4); // 작은 돌 조각
 
             // '고대 돌거북' 드랍 아이템 추가
-            monster5Drops.Add(equip1); // 낡은 검
-            monster5Drops.Add(equip2); // 냄비 뚜껑
-            monster5Drops.Add(etc5); // 돌 조각
+            mon5Drops.Add(equip1); // 낡은 검
+            mon5Drops.Add(equip2); // 냄비 뚜껑
+            mon5Drops.Add(etc5); // 돌 조각
 
             // '칼날부리' 드랍 아이템 추가
-            monster6Drops.Add(use1); // 체력 포션
-            monster6Drops.Add(use2); // 마나 포션
-            monster6Drops.Add(etc6); // 푸르스름한 깃털
+            mon6Drops.Add(use1); // 체력 포션
+            mon6Drops.Add(use2); // 마나 포션
+            mon6Drops.Add(etc6); // 푸르스름한 깃털
         }
     }
 }
