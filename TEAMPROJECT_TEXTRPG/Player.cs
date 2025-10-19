@@ -114,7 +114,7 @@
         internal void TakeDamage(int amount) => Hp -= amount;
 
         // Inven 내 Item 추가 메서드
-        public void AddItemToInventory(Item item)
+        public void AddItemToInven(Item item)
         {
             inven.inven.Add(item);
         }
