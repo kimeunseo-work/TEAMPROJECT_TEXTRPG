@@ -45,13 +45,13 @@
 
         }
 
-        internal void Attack(Player player) => player.TakeDamage(Atk);
-        internal void TakeDamage(int amount) => Hp -= amount;
+        public void Attack(Player player) => player.TakeDamage(Atk);
+        public void TakeDamage(int amount) => Hp -= amount;
     }
 
     internal class Monsters
     {
-        internal List<Monster> monster = new List<Monster>()
+        public List<Monster> monster = new List<Monster>()
         {
             new Monster("미니언", 2, 15, 5, 5),
             new Monster("공허충", 3, 10, 9, 3),
@@ -65,7 +65,7 @@
         /// <summary>
         /// 몬스터 소환 메서드
         /// </summary>
-        internal List<Monster> SpawnRandomMonsters()
+        public List<Monster> SpawnRandomMonsters()
         {
             var monsterCount = new Random().Next(1, 5);
             var monsters = GetRandomMonsters(monsterCount);
@@ -84,7 +84,5 @@
             }
             return monsters;
         }
-
     }
-
 }

@@ -2,13 +2,8 @@
 {
     internal class QuestScene : Scene
     {
-        internal override void Show()
+        public override void Show()
         {
-
-
-
-
-            throw new NotImplementedException();
         }
     }
 }

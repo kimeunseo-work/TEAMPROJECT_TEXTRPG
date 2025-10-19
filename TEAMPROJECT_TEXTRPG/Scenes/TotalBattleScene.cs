@@ -6,17 +6,8 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
 {
     internal class TotalBattleScene : Scene
     {
-        //private Dictionary<BattleState, Action> battleDisplays;
-        //internal TotalBattleScene()
-        //{
-        //    battleDisplays = new Dictionary<BattleState, Action>();
-        //    battleDisplays.Add(BattleState.Start, ShowBattleStart);
-        //    battleDisplays.Add(BattleState.PlayerTurn, ShowPlayerTurn);
-        //    battleDisplays.Add(BattleState.MonsterTurn, ShowMonsterTurn);
-        //}
-
         private Player player;
-        internal TotalBattleScene()
+        public TotalBattleScene()
         {
             player = CharacterManager.Instance.player;
         }
@@ -26,30 +17,31 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
 
         private void OnEnter()
         {
-            BattleManager.Instance.OnMonsterSpawned += ShowBattleStart;
-            BattleManager.Instance.OnPlayerTurn += ShowPlayerTurn;
-            BattleManager.Instance.OnMonsterActioned += ShowMonsterTurn;
+            BattleManager.Instance.OnBattleStateChanged += HandleBattleScene;
+
+            //BattleManager.Instance.OnMonsterSpawned += ShowBattleStart;
+            //BattleManager.Instance.OnPlayerTurn += ShowPlayerTurn;
+            //BattleManager.Instance.OnMonsterActioned += ShowMonsterTurn;
         }
 
         private void OnExit()
         {
-            BattleManager.Instance.OnMonsterSpawned -= ShowBattleStart;
-            BattleManager.Instance.OnPlayerTurn -= ShowPlayerTurn;
-            BattleManager.Instance.OnMonsterActioned -= ShowMonsterTurn;
+            BattleManager.Instance.OnBattleStateChanged -= HandleBattleScene;
+            //BattleManager.Instance.OnMonsterSpawned -= ShowBattleStart;
+            //BattleManager.Instance.OnPlayerTurn -= ShowPlayerTurn;
+            //BattleManager.Instance.OnMonsterActioned -= ShowMonsterTurn;
         }
 
         /* Show */
         //============================================================//
 
-        internal override void Show()
+        public override void Show()
         {
             OnEnter();
 
             // 현재 씬이 배틀일 때 반복
-            while (GameManager.Instance.currentState == GameState.TotalBattle)
+            while (GameManager.Instance.CurrentState == GameState.TotalBattle)
             {
-                HandleBattleScene();
-
                 //// 현재 배틀 상태가 None = 배틀 상태 아님 이면 화면 출력 안함
                 //// 몬스터만 출력한 상태는 Start
                 //if (BattleManager.Instance.CurrentBattleState != BattleState.None)
@@ -69,7 +61,11 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
         /* Handler */
         //============================================================//
 
-        private void HandleBattleScene() => BattleManager.Instance.ChangeBattleState();
+        private void HandleBattleScene(NewBattleState newBattleState, object? o)
+        {
+
+            //BattleManager.Instance.ChangeBattleState();
+        }
 
         /* Displays */
         //============================================================//

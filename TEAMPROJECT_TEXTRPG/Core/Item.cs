@@ -1,6 +1,6 @@
 ﻿namespace TEAMPROJECT_TEXTRPG.Core
 {
-    internal class Item
+    public class Item
     {
         // 주석_아이템 생성 필요하실 때 참고하세요! 아이템은 코드 가장 아랫쪽 class Items 에서 생성하시면 됩니다.
 
@@ -39,7 +39,7 @@
         public bool isEquip = false;
     }
 
-    internal class EquipItem : Item
+    public class EquipItem : Item
     {
         // 장비 Item 생성에 참고할 메서드 생성
         public EquipItem(string itemName, int itemType, int itemStat, int itemStatValue, string itemExplanation, bool isEquip)
@@ -63,7 +63,7 @@
         }
     }
 
-    internal class UseItem : Item
+    public class UseItem : Item
     {
         // 소비 Item 생성에 참고할 메서드 생성
         public UseItem(string itemName, int itemStat, int itemStatValue, string itemExplanation)
@@ -83,7 +83,7 @@
         }
     }
 
-    internal class EtcItem : Item
+    public class EtcItem : Item
     {
         // 기타 Item 생성에 참고할 메서드 생성
         public EtcItem(string itemName, string itemExplanation)
@@ -99,7 +99,7 @@
         }
     }
 
-    internal class Items
+    public class Items
     {
         public List<EquipItem> equipItems = new List<EquipItem>();
         public List<UseItem> useItems = new List<UseItem>();
@@ -128,12 +128,12 @@
         }
     }
 
-    internal class Inven : Items
+    public class Inven : Items
     {
         public List<Items> inven = new List<Items>();
     }
 
-    internal class DropItems : Items
+    public class DropItems : Items
     {
         public List<EtcItem> monster1DropItems = new List<EtcItem>();
 

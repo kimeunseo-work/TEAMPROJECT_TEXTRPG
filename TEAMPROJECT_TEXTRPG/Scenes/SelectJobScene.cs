@@ -6,7 +6,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
 {
     internal class SelectJobScene : Scene
     {
-        internal override void Show()
+        public override void Show()
         {
             DisplayJob();
         }
@@ -51,7 +51,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                         Console.WriteLine($"{CharacterManager.Instance.player.Name} 님 환영합니다.");
                         Console.WriteLine("\n아무 키나 눌러 다음으로 진행해주세요.");
                         Console.ReadKey();
-                        GameManager.Instance.currentState = GameState.Home;
+                        GameManager.Instance.CurrentState = GameState.Home;
                         break;
                     }
                 }

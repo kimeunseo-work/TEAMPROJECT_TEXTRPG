@@ -5,7 +5,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
 {
     internal class HomeScene : Scene
     {
-        internal override void Show()
+        public override void Show()
         {
             DisplayHome();
         }
@@ -39,24 +39,24 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                     case 1: // 1. 상태 보기
                         isValidInput = true;
                         Console.WriteLine("상태보기를 선택하셨습니다.");
-                        GameManager.Instance.currentState = GameState.Stat;
+                        GameManager.Instance.CurrentState = GameState.Stat;
                         break;
 
                     case 2: // 2. 전투 시작
                         isValidInput = true;
                         Console.WriteLine("전투를 선택하셨습니다.");
-                        GameManager.Instance.currentState = GameState.TotalBattle;
+                        GameManager.Instance.CurrentState = GameState.TotalBattle;
                         break;
                     case 3:
                         isValidInput = true;
                         Console.WriteLine("퀘스트를 선택하셨습니다.");
-                        GameManager.Instance.currentState = GameState.Quest;
+                        GameManager.Instance.CurrentState = GameState.Quest;
                         break;
 
                     case 0: // 0. 게임 종료
                         isValidInput = true;
                         Console.WriteLine("게임을 종료합니다.");
-                        GameManager.Instance.currentState = GameState.None;
+                        GameManager.Instance.CurrentState = GameState.None;
                         break;
 
                     default: // 유효하지 않은 입력
@@ -65,7 +65,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                         break;
                 }
 
-                if (isValidInput && GameManager.Instance.currentState != GameState.None)
+                if (isValidInput && GameManager.Instance.CurrentState != GameState.None)
                 {
                     Console.WriteLine("\n아무 키나 눌러 다음으로 진행해주세요.");
                     Console.ReadKey();

@@ -8,7 +8,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
         int parsedInput;
         bool isParsedSuccess;
 
-        internal void BattleResultWin(int[] monsterExps)
+        public void BattleResultWin(int[] monsterExps)
         {
             Console.Clear();
 
@@ -18,14 +18,14 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
             {
                 CharacterManager.Instance.player.AddExp(monsterExps[i]);
             }
-
             DaumText();
 
             WhileInput0(monsterExps.Length);
         }
 
 
-        internal void BattleResultLose(int count)
+
+        public void BattleResultLose(int count)
         {
             Console.Clear();
 
@@ -80,7 +80,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                 {
                     case 0:
                         Console.Clear();
-                        GameManager.Instance.currentState = GameState.Home;
+                        GameManager.Instance.CurrentState = GameState.Home;
                         break;
                     default:
                         if (CharacterManager.Instance.player.Hp > 0)
@@ -128,7 +128,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
             }
         }
 
-        internal override void Show()
+        public override void Show()
         {
             (bool? isWin, int[] monsterExps) = BattleManager.Instance.GetBattleResult();
             if (isWin == true)

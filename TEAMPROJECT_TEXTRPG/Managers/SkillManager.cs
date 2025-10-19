@@ -7,10 +7,8 @@ namespace TEAMPROJECT_TEXTRPG.Managers
     {
         //유일한 저장 공간
         private static SkillDatabase instance;
-
         //외부에서 접근 가능
-
-        internal static SkillDatabase Instance
+        public static SkillDatabase Instance
         {
             get
             {
@@ -23,15 +21,11 @@ namespace TEAMPROJECT_TEXTRPG.Managers
         }
 
         //전사 스킬 종류
-        internal List<Skill> WarriorSkills = new();
-
+        public List<Skill> WarriorSkills = new();
         //법사 스킬 종류
-
-        internal List<Skill> MageSkills = new();
-
+        public List<Skill> MageSkills = new();
         //도적 스킬 종류
-
-        internal List<Skill> ThiefSkills = new();
+        public List<Skill> ThiefSkills = new();
 
         public SkillDatabase()
         {
@@ -99,8 +93,6 @@ namespace TEAMPROJECT_TEXTRPG.Managers
                 Count = 2,
                 Description = "2명의 적에게 랜덤으로 단검을 던져 공격합니다."
             });
-
-
         }
     }
 }

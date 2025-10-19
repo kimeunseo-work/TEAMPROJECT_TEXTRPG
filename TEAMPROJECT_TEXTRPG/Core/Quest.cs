@@ -5,24 +5,17 @@ namespace TEAMPROJECT_TEXTRPG.Core
     internal class Quest
     {
         public string Name;
-
         public string Description;
-
         public string QuestInfo;
-
         public Item ItemReward;
-
         public int GoldReward;
-
         public int ExpReward;
 
         public bool isSelected = false;
         public bool isClear = false;
         public bool getRewarded = false;
 
-
         public int _count;
-
 
         public Monsters monsters;
         public List<Monster> monsterlist;
@@ -43,16 +36,9 @@ namespace TEAMPROJECT_TEXTRPG.Core
         {
             this.monsters = monsters;
             monsterlist = monsters.monster;
-
-
-
-
         }
 
-
         public Monster QuestMonster;
-
-
 
         internal virtual void SelectShow()
         {
@@ -60,26 +46,16 @@ namespace TEAMPROJECT_TEXTRPG.Core
         }
 
         internal virtual void Show() { }
-
-
-
-
-
     }
 
     internal class MonsterKillQuest : Quest
     {
-
-
-
         // 실제 저장되는 공간 (필드)
         public int Count
         {
             get => _count;                  // 읽을 때 실행되는 코드
             set => _count = Math.Clamp(value, 0, 5); // 쓸 때 실행되는 코드
         }
-
-
         public MonsterKillQuest(Monsters monsters)
         : base()
         {
@@ -104,12 +80,9 @@ namespace TEAMPROJECT_TEXTRPG.Core
             // ItemReward = QuestManager.Instance.items.equipItem1;
 
             GetMonster(monsters);
-
-
         }
         public void UpdateQuest()
         {
-
             if (isClear)
                 return;
 
@@ -122,59 +95,30 @@ namespace TEAMPROJECT_TEXTRPG.Core
             if (Count >= 5)
             {
                 isClear = true;
-
             }
         }
-
-
-
-
-
-
         void Except()
         {
-
-
             while (true)
             {
-
                 string input = Console.ReadLine();
-
 
                 if (input == "1")
                 {
-
-
-
-
-
                     break;
                 }
                 else if (input == "2")
                 {
-
-
-
                     break;
-
                 }
                 else
                 {
                     Console.WriteLine("잘못 입력하셨습니다");
                     Console.Write(">>");
                     continue;
-
                 }
-
             }
-
         }
-
-
-
-
-
-
         internal override void Show()
         {
 
@@ -190,14 +134,7 @@ namespace TEAMPROJECT_TEXTRPG.Core
             Console.WriteLine($"{ItemReward.itemName} x 1");
             Console.WriteLine($"{GoldReward}G");
             Console.WriteLine();
-
-
-
-
         }
-
-
-
     }
     internal class MonsterKillQuest2 : Quest
     {
@@ -206,7 +143,6 @@ namespace TEAMPROJECT_TEXTRPG.Core
 
         internal override void Show()
         {
-            throw new NotImplementedException();
         }
     }
 }

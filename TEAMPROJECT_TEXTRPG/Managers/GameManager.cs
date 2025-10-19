@@ -34,6 +34,7 @@ namespace TEAMPROJECT_TEXTRPG.Managers
         //============================================================//
         private static GameManager instance;
         internal static GameManager Instance
+        public static GameManager Instance
         {
             get
             {
@@ -51,10 +52,12 @@ namespace TEAMPROJECT_TEXTRPG.Managers
         internal BattleState currentBattleState;
         internal Dictionary<GameState, Scene> scenes;
         internal List<Monster> monsters = new List<Monster>();
+        public Dictionary<GameState, Scene> scenes;
 
         /* 생성자 */
         //============================================================//
         internal GameManager()
+        public GameManager()
         {
             // 예제 확인하려면 currentState = GameState.Example1
             monsters = new List<Monster>();
@@ -75,6 +78,10 @@ namespace TEAMPROJECT_TEXTRPG.Managers
         }
 
         internal void Run()
+        /// <summary>
+        /// 씬을 로드하는 메서드
+        /// </summary>
+        public void Run()
         {
             while (currentState != GameState.None)
             {
@@ -83,5 +90,9 @@ namespace TEAMPROJECT_TEXTRPG.Managers
         }
 
         internal void ChangeGameState(GameState state) => currentState = state;
+        /// <summary>
+        /// 상태를 바꾸는 메서드
+        /// </summary>
+        public void ChangeGameState(GameState state) => CurrentState = state;
     }
 }
