@@ -108,9 +108,6 @@ namespace TEAMPROJECT_TEXTRPG.Managers
             await Task.Run(RunBattle);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         private async Task RunBattle()
         {
             // 상태에 따른 로직
