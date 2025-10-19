@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -65,8 +66,13 @@ namespace TEAMPROJECT_TEXTRPG
             }
             initialized = true;
 
+            for(int i = 0;i < monsters.monster.Count; i++)
+            {
+                _kills.Add(monsters.monster[i], 0);
+            }
             
-            
+
+
             Quests = new Dictionary<int, Quest>(); 
 
             // ⚠ MonsterKillQuest 안에서 QuestManager.Instance 사용하지 않도록 주의!
@@ -75,6 +81,15 @@ namespace TEAMPROJECT_TEXTRPG
             OngoingQuestList = new List<KeyValuePair<int, Quest>>();
 
             QuestList = Quests.ToList();
+
+
+            foreach (var idf in QuestList) 
+            {
+                if (!_kills.ContainsKey(idf.Value.QuestMonster))
+                    _kills[idf.Value.QuestMonster] = 0;
+
+            }
+            
 
 
         }
@@ -95,23 +110,32 @@ namespace TEAMPROJECT_TEXTRPG
 
 
 
-        public void OnMonsterKilled(Monster monster)
+        public void OnMonsterKilled()
         {
-            // 진행 중인 퀘스트 중에 '이 몬스터를 잡는 퀘스트'가 있는지 확인
+            // 현재 게임 필드에 존재하는 몬스터들
+            var fieldMonsters = GameManager.Instance.monsters;
+
+            // 진행 중인 모든 퀘스트 확인
             foreach (var quest in OngoingQuestList)
             {
-                if (quest.Value.QuestMonster == monster)
+                var questMonster = quest.Value.QuestMonster;
+
+                // GameManager.monsters 중 퀘스트 몬스터가 포함되어 있는지 확인
+                bool existsInField = fieldMonsters.Any(m => m.Name == questMonster.Name);
+
+                if (existsInField)
                 {
                     // Dictionary<Monster, int> _kills에 카운트 증가
-                    if (!_kills.ContainsKey(monster))
-                        _kills[monster] = 0;
-                    _kills[monster]++;
+                    if (!_kills.ContainsKey(questMonster))
+                        _kills[questMonster] = 0;
+
+                    _kills[questMonster]++;
 
                     // 퀘스트 목표 달성 체크
-                    if (_kills[monster] >= quest.Value.KillCount)
+                    if (_kills[questMonster] >= quest.Value.KillCount)
                     {
                         quest.Value.isClear = true;
-                        Console.WriteLine($"퀘스트 완료: {quest.Value.Name}");
+                        Console.WriteLine($"✅ 퀘스트 완료: {quest.Value.Name}");
                     }
                 }
             }
@@ -145,13 +169,14 @@ namespace TEAMPROJECT_TEXTRPG
                 Console.Clear();
                 Console.WriteLine("Quest!!");
                 Console.WriteLine();
-                if (OngoingQuestList != null) //진행중인 퀘스트가 있을때
+
+                if (OngoingQuestList.Count != 0) //진행중인 퀘스트가 있을때
                 {
 
 
                     for (int i = 0; i < OngoingQuestList.Count; i++)
                     {
-                        Console.WriteLine($"{i + 1}. {OngoingQuestList[i].Value.Name}");
+                        Console.WriteLine($"{i + 1}. {OngoingQuestList[i].Value.Name} {OngoingQuestList[i].Value.ClearText}");
                     }
                     Console.WriteLine();
                     Console.WriteLine();
@@ -188,9 +213,35 @@ namespace TEAMPROJECT_TEXTRPG
                         string input2 = Console.ReadLine();
                         if (input2 == "1")
                         {
+                            
+
+
                             //플레이어 인벤토리에 아이템이 들어갈 자리
                             var selectedQuest = OngoingQuestList.Find(kvp => kvp.Key == input).Value;
-                            selectedQuest.getRewarded = true;
+
+                            if(selectedQuest.isClear == true)
+                            {
+
+
+                                selectedQuest.getRewarded = true;
+
+
+
+                            }
+                            else
+                            {
+
+
+
+
+
+
+
+
+                            }
+
+
+                            
 
                         }
                         else if (input2 == "2")
@@ -222,7 +273,7 @@ namespace TEAMPROJECT_TEXTRPG
 
 
                 }
-                else if (OngoingQuestList == null)
+                else if (OngoingQuestList.Count == 0)
                 {
                     Console.Clear();
                     Console.WriteLine();
@@ -366,6 +417,7 @@ namespace TEAMPROJECT_TEXTRPG
             while (true) 
             {
                 InitOnce();
+
                 Console.Clear();
                 Console.WriteLine("\n\n");
                 Console.WriteLine("1. 현재 진행중인 퀘스트");

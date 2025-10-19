@@ -12,7 +12,7 @@
         {
             // 랜덤 몬스터 경험치 합 초기화
             subExp = 0;
-
+            QuestManager.Instance.OnMonsterKilled();
             // 랜덤 몬스터 경험치 합 연산 (반복문)
             for (int i = 0; i < GameManager.Instance.monsters.Count; i++)
             {

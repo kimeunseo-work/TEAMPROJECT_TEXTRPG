@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,11 +24,16 @@ namespace TEAMPROJECT_TEXTRPG
         public bool isSelected = false;
         public bool isClear = false;
         public bool getRewarded = false;
+        public int _kill = QuestManager.Instance._kills.Count;
 
+        public string ClearText => isClear ? "[완료]" : " ";
 
         public int KillCount;
+        public int CurrentkillCount = 0;
 
         public int itemGivingCount;
+
+        
 
 
         public Monsters monsters = new Monsters(); //몬스터 리스트
@@ -98,9 +104,20 @@ namespace TEAMPROJECT_TEXTRPG
         : base()
         {
             KillCount = 5;
+            
 
-            // GameManager에서 Monsters에 몬스터 리스트 가져옴 
+
+            
+           
+           
+         
+
+
+
+                // GameManager에서 Monsters에 몬스터 리스트 가져옴 
             QuestMonster = monsters.monster[0]; //미니언 몬스터 할당
+
+            CurrentkillCount = QuestManager.Instance._kills[QuestMonster];
 
             Name = "마을을 위협하는 미니언 처치";
 
@@ -108,9 +125,9 @@ namespace TEAMPROJECT_TEXTRPG
                 "마을주민들의 안전을 위해서라도 저것들 수를 좀 줄여야 한다고!\r\n" +
                 "모험가인 자네가 좀 처치해주게!";
 
-            QuestInfo = $"미니언 5마리 처치 ({KillCount}/5)";
+            QuestInfo = $"미니언 5마리 처치 ({CurrentkillCount}/5)";
 
-            
+          
 
 
             itemGivingCount = 1;
@@ -161,7 +178,7 @@ namespace TEAMPROJECT_TEXTRPG
 
             Console.WriteLine("Quest!!");
             Console.WriteLine();
-            Console.WriteLine($"{Name}");
+            Console.WriteLine($"{Name}{ClearText}");
             Console.WriteLine();
             Console.WriteLine($"{Description}");
             Console.WriteLine();
