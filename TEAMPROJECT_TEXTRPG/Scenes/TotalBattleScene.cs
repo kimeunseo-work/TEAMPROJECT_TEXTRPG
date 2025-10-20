@@ -66,10 +66,12 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
             Console.WriteLine("Battle!!");
             Console.WriteLine();
 
+            Console.ResetColor();
             for (int i = 0; i < currentMonsters.Count; i++)
             {
                 Console.WriteLine($"Lv.{currentMonsters[i].Level} {currentMonsters[i].Name} HP {currentMonsters[i].Hp}");
             }
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine();
 
             Console.WriteLine();
@@ -121,7 +123,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
             while (true)
             {
                 Console.Clear();
-                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("**Battle!!**\n");
                 Console.WriteLine($"플레이어 정보");
                 Console.WriteLine($"이름: {player.Name}");
@@ -135,7 +137,9 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                 //============================================================//
 
                 // ShowMonsters()
+                Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine("몬스터 정보");
+                Console.ResetColor();
                 for (int i = 0; i < currentMonsters.Count; i++)
                 {
                     var monster = currentMonsters[i];
@@ -148,6 +152,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                     Console.WriteLine(text);
                 }
 
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine();
                 Console.WriteLine("0. 돌아가기");
 

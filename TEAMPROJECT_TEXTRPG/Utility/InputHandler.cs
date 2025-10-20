@@ -78,5 +78,23 @@ namespace TEAMPROJECT_TEXTRPG.Utility
                 return int.MaxValue;
             }
         }
+
+        public static int GetPrintableLength(string str)
+        {
+            int length = 0;
+            foreach (char c in str)
+            {
+                // 유니코드 카테고리가 'OtherLetter'(주로 한글 등 전각 문자)이면 2칸으로 간주
+                if (System.Globalization.CharUnicodeInfo.GetUnicodeCategory(c) == System.Globalization.UnicodeCategory.OtherLetter)
+                {
+                    length += 2;
+                }
+                else
+                {
+                    length += 1; // 그 외(영문, 숫자, 기호 등)는 1칸
+                }
+            }
+            return length;
+        }
     }
 }

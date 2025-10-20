@@ -27,7 +27,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                 Console.WriteLine("||                                                                                                        ||");
                 Console.WriteLine("|| 1. 상태 보기                                                                                           ||");
                 Console.WriteLine("|| 2. 전투 시작                                                                                           ||");
-                Console.WriteLine("|| 3. 퀘스트 보기                                                                                           ||");
+                Console.WriteLine("|| 3. 퀘스트 보기                                                                                         ||");
                 Console.WriteLine("|| 0. 게임 종료                                                                                           ||");
                 Console.WriteLine("||                                                                                                        ||");
                 Console.WriteLine("============================================================================================================");
@@ -38,19 +38,17 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                 {
                     case 1: // 1. 상태 보기
                         isValidInput = true;
-                        Console.WriteLine("상태보기를 선택하셨습니다.");
                         GameManager.Instance.CurrentState = GameState.Stat;
                         break;
 
                     case 2: // 2. 전투 시작
                         isValidInput = true;
-                        Console.WriteLine("전투를 선택하셨습니다.");
                         GameManager.Instance.CurrentState = GameState.TotalBattle;
                         break;
                     case 3:
                         isValidInput = true;
-                        Console.WriteLine("퀘스트를 선택하셨습니다.");
-                        GameManager.Instance.CurrentState = GameState.Quest;
+                        Console.WriteLine("퀘스트는 아직 구현되지 않았습니다.");
+                        //GameManager.Instance.CurrentState = GameState.Quest;
                         break;
 
                     case 0: // 0. 게임 종료
