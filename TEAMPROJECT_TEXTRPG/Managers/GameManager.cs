@@ -58,7 +58,7 @@ namespace TEAMPROJECT_TEXTRPG.Managers
         }
         public Dictionary<GameState, Scene> scenes;
         public Scene currentScene;
-        internal List<Monster> monsters = new List<Monster>();
+       
 
         /* 생성자 */
         //============================================================//
@@ -76,7 +76,7 @@ namespace TEAMPROJECT_TEXTRPG.Managers
                 { GameState.Stat, new PlayerInfoScene() },
                 { GameState.TotalBattle, new TotalBattleScene() },
                 { GameState.NewBattleResult, new NewBattleResultScene() },
-                //{ GameState.Quest, new QuestScene() }
+                { GameState.Quest, new QuestScene() }
             };
         }
 

@@ -45,7 +45,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
         {
             // 랜덤 몬스터 경험치 합 초기화
             subExp = 0;
-
+        
             // 랜덤 몬스터 경험치 합 연산 (반복문)
             for (int i = 0; i < monsterExps.Length; i++)
             {
@@ -69,9 +69,13 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                 // '전투 결과창(승리) Text' 묶음 출력하고
                 BattleResultWinText(monsterExps.Length);
 
+                Console.WriteLine();
+                QuestManager.Instance.OnMonsterKilled();
+                Console.WriteLine();
+                
                 // 'Player 입력 대기 Text' 묶음 출력하고
                 DaumText();
-
+                
                 // Player 입력 값 체크하고
                 input = Console.ReadLine();
 

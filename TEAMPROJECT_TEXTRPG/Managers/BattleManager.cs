@@ -68,7 +68,7 @@ namespace TEAMPROJECT_TEXTRPG.Managers
         // 몬스터 리스트 원본
         private readonly Monsters monsterList = new();
         // 현재 스폰된 몬스터
-        private List<Monster>? CurrentMonsters { get; set; } = new List<Monster>();
+        public List<Monster>? CurrentMonsters { get; set; } = new List<Monster>();
         // 현재 직업에 따른 스킬
         private List<Skill> CurrentSkills { get; set; } = new List<Skill>();
         // 화면 출력이 끝났는지 체크
