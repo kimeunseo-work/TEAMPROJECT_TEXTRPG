@@ -52,8 +52,8 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                     Console.WriteLine("정말 이 직업으로 선택하시겠습니까? ( Y / N ) ");
                     string confirmInput = Console.ReadLine();
 
-                    // Y or y 입력 시 다음으로 진행
-                    if (confirmInput == "Y" || confirmInput == "y")
+                    // Y or y or ㅛ 입력 시 다음으로 진행
+                    if (confirmInput == "Y" || confirmInput == "y" || confirmInput == "ㅛ")
                     {
                         CharacterManager.Instance.player.SetJobsStat(selectJobs[playerSelect - 1]);
                         Console.WriteLine("성공적으로 직업을 선택하셨습니다.");

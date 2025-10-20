@@ -52,8 +52,8 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                     Console.WriteLine("정말 이 이름으로 하시겠습니까? ( Y / N ) ");
                     string confirmInput = Console.ReadLine();
 
-                    // Y or y 입력 시 다음으로 진행
-                    if (confirmInput == "Y" || confirmInput == "y")
+                    // Y or y or ㅛ 입력 시 다음으로 진행
+                    if (confirmInput == "Y" || confirmInput == "y" || confirmInput == "ㅛ")
                     {
                         CharacterManager.Instance.player.Name = playerInputName;
                         Console.WriteLine($"'{playerInputName}'(으)로 캐릭터 이름이 성공적으로 설정되었습니다.");
