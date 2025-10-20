@@ -103,6 +103,8 @@
             MaxMP += CurrentJob.LvUpAddMaxMP;
             BaseAttack += CurrentJob.LvUpAttack;
             BaseDefense += CurrentJob.LvUpDefense;
+            Attack = BaseAttack;
+            Defense = BaseDefense;
 
             //회복
 
