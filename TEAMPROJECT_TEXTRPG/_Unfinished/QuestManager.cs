@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using TEAMPROJECT_TEXTRPG._Unfinished;
+
 //﻿#if false//
 using TEAMPROJECT_TEXTRPG.Core;
 
@@ -23,13 +25,13 @@ namespace TEAMPROJECT_TEXTRPG.Managers
         /// 싱글톤
         /// </summary>
         private static QuestManager instance;
-        public static QuestManager Instance
+        public static QuestManager Instance //아뇨 이건 대문자교
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new QuestManager();
+                    instance = new QuestManager(); //이건 소문자입니다 넵  
                 }
                 return instance;
             }
@@ -40,6 +42,8 @@ namespace TEAMPROJECT_TEXTRPG.Managers
         
         private bool initialized;
         public Dictionary<int, Quest> Quests;
+
+        
             
         public Items items = new(); //Quest클래스에서 보상아이템 빠르게 찾아놓으려고 싱글톤에 인스턴스를 만들어놓음
         public Monster monster;
@@ -324,7 +328,7 @@ namespace TEAMPROJECT_TEXTRPG.Managers
         }
 
 
-        public void SelectQuestScene()  // 퀘스트 선택
+        public void SelectQuestScene()  // 퀘스트 선택 
         {
             Console.Clear();
             Console.WriteLine("Quest!!");
@@ -412,8 +416,8 @@ namespace TEAMPROJECT_TEXTRPG.Managers
                 //퀘스트가 정해지면 그다음에 
             
         }
-        public void SelectQuestScene()
-        {
+       
+        
 
 
 
@@ -453,7 +457,7 @@ namespace TEAMPROJECT_TEXTRPG.Managers
                 }
                 else if (input == "0")
                 {
-                    GameManager.Instance.currentState = GameState.Home;
+                    GameManager.Instance.CurrentState = GameState.Home;
                     return;
 
                 }
