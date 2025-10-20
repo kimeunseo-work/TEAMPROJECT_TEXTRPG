@@ -68,7 +68,7 @@
         }
     }
 
-    // 소비 Item 클래스
+    // 소비 Item 클래스 (Item)
     internal class UseItem : Item
     {
         // 소비 Item 생성에 참고할 메서드 생성
@@ -90,7 +90,7 @@
         }
     }
 
-    // 기타 Item 클래스
+    // 기타 Item 클래스 (Item)
     internal class EtcItem : Item
     {
         // 기타 Item 생성에 참고할 메서드 생성
@@ -108,7 +108,7 @@
         }
     }
 
-    // 게임에서 사용할 Items
+    // 게임에서 사용할 Items 클래스
     internal class Items
     {
         // 아이템 유형 별 Item 리스트 생성
@@ -140,13 +140,15 @@
         }
     }
 
-    // Player 인벤토리  클래스
+    // Player가 사용할 인벤토리 클래스
     internal class Inven : Items
     {
-        // Player 인벤토리로 사용할 inven 리스트 생성
+        // Player 인벤토리로 사용할 Inventory 리스트 생성
         public List<Item> Inventory = new List<Item>();
     }
 
+    /*  구현 실패한 코드..
+    // Monster 드랍 아이템 클래스
     internal class Drops : Items
     {
         // Monster가 드랍할 DropItems 리스트 생성
@@ -156,7 +158,8 @@
         public List<Item> mon4Drops = new List<Item>();
         public List<Item> mon5Drops = new List<Item>();
         public List<Item> mon6Drops = new List<Item>();
-
+    
+        // 게임에서 사용할 DropItems 목록(설계도 ?) 생성
         public Drops()
         {
             // Item 리스트에서 Item 복제
@@ -199,4 +202,5 @@
             mon6Drops.Add(etc6); // 푸르스름한 깃털
         }
     }
+     */
 }
