@@ -16,7 +16,8 @@ namespace TEAMPROJECT_TEXTRPG.Lagacy.Scenes
         {
             // 랜덤 몬스터 경험치 합 초기화
             subExp = 0;
-
+                     
+           
             // 랜덤 몬스터 경험치 합 연산 (반복문)
             for (int i = 0; i < GameManager.Instance.monsters.Count; i++)
             {
@@ -38,9 +39,12 @@ namespace TEAMPROJECT_TEXTRPG.Lagacy.Scenes
 
             // Console 창 Clear
             Console.Clear();
-
+                        
             // '전투 결과창(승리) Text' 묶음 출력하고
             BattleResultWinText();
+
+            QuestManager.Instance.OnMonsterKilled();
+            Console.WriteLine($"_kills = {QuestManager.Instance._kills[0]}");
 
             // 'Player 입력 대기 Text' 묶음 출력하고
             DaumText();

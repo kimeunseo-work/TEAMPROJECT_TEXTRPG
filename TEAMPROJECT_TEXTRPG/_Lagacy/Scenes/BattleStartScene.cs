@@ -46,15 +46,15 @@ namespace TEAMPROJECT_TEXTRPG.Lagacy.Scenes
 
             if (input == 0)
             {
-                GameManager.Instance.currentState = GameState.Home;
+                GameManager.Instance.CurrentState = GameState.Home;
             }
             else if (input == 1)
             {
-                GameManager.Instance.currentState = GameState.Battle;
+                GameManager.Instance.CurrentState = GameState.TotalBattle;
             }
         }
 
-        internal override void Show()
+        public override void Show()
         {
             StartBattle();
         }

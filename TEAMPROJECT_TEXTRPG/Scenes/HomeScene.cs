@@ -48,7 +48,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                     case 3:
                         isValidInput = true;
                         Console.WriteLine("퀘스트는 아직 구현되지 않았습니다.");
-                        //GameManager.Instance.CurrentState = GameState.Quest;
+                        GameManager.Instance.CurrentState = GameState.Quest;
                         break;
 
                     case 0: // 0. 게임 종료

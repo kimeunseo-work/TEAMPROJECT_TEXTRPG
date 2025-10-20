@@ -20,7 +20,7 @@
     /// </summary>
     internal class BattleStartDto
     {
-        public List<Monster> CurrentMonsters { get; }
+        public IReadOnlyList<Monster> CurrentMonsters { get; }
         public Func<int, BattleInput> HandleBattleStartInput { get; }
 
         public BattleStartDto(List<Monster> currentMonsters, Func<int, BattleInput> handleBattleStartInput)
@@ -40,7 +40,7 @@
     /// </summary>
     internal class PlayerTurnDto
     {
-        public List<Monster> CurrentMonsters { get; }
+        public IReadOnlyList<Monster> CurrentMonsters { get; }
         public Func<int, BattleInput> HandleMonsterSelectionInput { get; }
         public Func<int, (BattleInput, List<Skill>?)> HandleAttackTypeInput { get; }
         public Func<int, (string, SelectAttackBasicResult)> HandleBasicAttackInput { get; }

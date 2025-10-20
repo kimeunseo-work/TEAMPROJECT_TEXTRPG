@@ -58,7 +58,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
         {
             // 랜덤 몬스터 경험치 합 값 초기화
             subExp = 0;
-
+        
             // 랜덤 몬스터 경험치 합 연산 (반복문)
             for (int i = 0; i < monsterExps.Length; i++)
             {
@@ -83,9 +83,13 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                 // '전투 결과창(승리) Text' 묶음 출력하고
                 BattleResultWinText(monsterExps.Length);
 
+                Console.WriteLine();
+                QuestManager.Instance.OnMonsterKilled();
+                Console.WriteLine();
+                
                 // 'Player 입력 대기 Text' 묶음 출력하고
                 DaumText();
-
+                
                 // Player 입력 값 체크하고
                 input = Console.ReadLine();
 
@@ -155,10 +159,11 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                 }
             }
 
-            // Console 창 Clear
+            // CharacterCreate 씬 불러오기
             Console.Clear();
-            // Home 씬 불러오기
-            GameManager.Instance.CurrentState = GameState.Home;
+            // 죽으면 초기화하고 캐릭터 생성 화면으로.
+            CharacterManager.Instance.player = new();
+            GameManager.Instance.CurrentState = GameState.CharacterCreate;
         }
 
         // '전투 결과창(승리) Text' 묶음

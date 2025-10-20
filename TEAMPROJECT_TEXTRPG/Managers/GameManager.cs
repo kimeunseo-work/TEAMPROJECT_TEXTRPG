@@ -1,4 +1,5 @@
-﻿using TEAMPROJECT_TEXTRPG.Scenes;
+﻿using TEAMPROJECT_TEXTRPG.Core;
+using TEAMPROJECT_TEXTRPG.Scenes;
 
 namespace TEAMPROJECT_TEXTRPG.Managers
 {
@@ -57,6 +58,7 @@ namespace TEAMPROJECT_TEXTRPG.Managers
         }
         public Dictionary<GameState, Scene> scenes;
         public Scene currentScene;
+       
 
         /* 생성자 */
         //============================================================//
@@ -74,7 +76,7 @@ namespace TEAMPROJECT_TEXTRPG.Managers
                 { GameState.Stat, new PlayerInfoScene() },
                 { GameState.TotalBattle, new TotalBattleScene() },
                 { GameState.NewBattleResult, new NewBattleResultScene() },
-                //{ GameState.Quest, new QuestScene() }
+                { GameState.Quest, new QuestScene() }
             };
         }
 
