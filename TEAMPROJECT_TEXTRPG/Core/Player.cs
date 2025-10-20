@@ -144,14 +144,15 @@ namespace TEAMPROJECT_TEXTRPG.Core
 
             return actualDamage;
         }
-        
-        // Inven 내 Item 추가 메서드
+
+        /*  구현 실패한 코드..
+        // Inventory 내 Item 추가 메서드
         public void AddItemToInven(Item item)
         {
             Inventory.Inventory.Add(item);
         }
 
-        // Inven 출력 메서드
+        // Inventory 출력 메서드
         public void ShowInven()
         {
             foreach (Item item in Inventory.Inventory)
@@ -159,5 +160,6 @@ namespace TEAMPROJECT_TEXTRPG.Core
                 Console.WriteLine($"아이템 이름: {item.itemName}, 설명: {item.itemExplanation}");
             }
         }
+         */
     }
 }
