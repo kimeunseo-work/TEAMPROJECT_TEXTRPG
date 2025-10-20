@@ -17,7 +17,7 @@ namespace TEAMPROJECT_TEXTRPG.Core
         public double Defense { get; set; }
         public double LvUpAttack { get; set; }
         public double LvUpDefense { get; set; }
-        public Inven Inventory; // Player 인벤토리 정의
+        public Inventory Inventory; // Player 인벤토리 정의
 
         public int Exp { get; set; }
 
@@ -59,7 +59,7 @@ namespace TEAMPROJECT_TEXTRPG.Core
             Mp = MaxMP;
             LvUpAttack = 0;
             LvUpDefense = 0;
-            Inventory = new Inven(); // 생성자에 인벤토리 생성
+            Inventory = new Inventory(); // 생성자에 인벤토리 생성
         }
 
         public void SetJobsStat(Job selectedJob)
@@ -145,21 +145,35 @@ namespace TEAMPROJECT_TEXTRPG.Core
             return actualDamage;
         }
 
-        /*  구현 실패한 코드..
         // Inventory 내 Item 추가 메서드
-        public void AddItemToInven(Item item)
+        public void AddItemToInventory(Item item)
         {
-            Inventory.Inventory.Add(item);
+            Inventory.inventory.Add(item);
         }
 
         // Inventory 출력 메서드
-        public void ShowInven()
+        public void ShowInventory()
         {
-            foreach (Item item in Inventory.Inventory)
+            // 반복문_인벤토리 내 Item
+            foreach (Item item in Inventory.inventory)
             {
-                Console.WriteLine($"아이템 이름: {item.itemName}, 설명: {item.itemExplanation}");
+                // Item 유형 판별 식
+                switch (item.itemType)
+                {
+                    // 아이템 유형 == 장비 Item
+                    case 1:
+                        Console.WriteLine($"- 아이템 이름 : {item.itemName} / {item.itemExplanation}");
+                        break;
+                    // 아이템 유형 == 소비 Item
+                    case 2:
+                        Console.WriteLine($"- 아이템 이름 : {item.itemName} / {item.itemExplanation}");
+                        break;
+                    // 아이템 유형 == 기타 Item
+                    case 3:
+                        Console.WriteLine($"- 아이템 이름 : {item.itemName} / {item.itemExplanation}");
+                        break;
+                }
             }
         }
-         */
     }
 }
