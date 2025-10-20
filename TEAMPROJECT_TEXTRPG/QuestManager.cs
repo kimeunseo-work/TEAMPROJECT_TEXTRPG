@@ -39,14 +39,11 @@ namespace TEAMPROJECT_TEXTRPG
             set { }
         }//싱글톤 용 프로퍼티
 
-        public Dictionary<Monster, int> _kills = new();
+        public Dictionary<int, int> _kills = new();
+        
         private bool initialized;
         public Dictionary<int, Quest> Quests;
-        public List<Quest> AbleQuests;
-        public Quest CurrentQuest;
-        public int TotalMonsterKillCount;
-        public int BestEquipmentStat;
-        public int BestLevel;
+            
         public Items items = new(); //Quest클래스에서 보상아이템 빠르게 찾아놓으려고 싱글톤에 인스턴스를 만들어놓음
         public Monster monster;
         public Monsters monsters = new();
@@ -68,7 +65,8 @@ namespace TEAMPROJECT_TEXTRPG
 
             for(int i = 0;i < monsters.monster.Count; i++)
             {
-                _kills.Add(monsters.monster[i], 0);
+                var m = monsters.monster[i];
+                _kills.Add(m.Id, 0);
             }
             
 
@@ -83,12 +81,7 @@ namespace TEAMPROJECT_TEXTRPG
             QuestList = Quests.ToList();
 
 
-            foreach (var idf in QuestList) 
-            {
-                if (!_kills.ContainsKey(idf.Value.QuestMonster))
-                    _kills[idf.Value.QuestMonster] = 0;
-
-            }
+            
             
 
 
@@ -114,50 +107,45 @@ namespace TEAMPROJECT_TEXTRPG
         {
             // 현재 게임 필드에 존재하는 몬스터들
             var fieldMonsters = GameManager.Instance.monsters;
+            var countedMonsterIds = new HashSet<int>();
+
+          
 
             // 진행 중인 모든 퀘스트 확인
             foreach (var quest in OngoingQuestList)
             {
-                var questMonster = quest.Value.QuestMonster;
+                var QuestMonster = quest.Value.QuestMonster; //진행중인 퀘스트의 퀘스트몬스터
+
 
                 // GameManager.monsters 중 퀘스트 몬스터가 포함되어 있는지 확인
-                bool existsInField = fieldMonsters.Any(m => m.Name == questMonster.Name);
+
+                if (countedMonsterIds.Contains(QuestMonster.Id))
+                    continue;
+
+                bool existsInField = fieldMonsters.Any(m => m.Name == QuestMonster.Name);
 
                 if (existsInField)
                 {
                     // Dictionary<Monster, int> _kills에 카운트 증가
-                    if (!_kills.ContainsKey(questMonster))
-                        _kills[questMonster] = 0;
-
-                    _kills[questMonster]++;
+                    if (!_kills.ContainsKey(QuestMonster.Id))
+                        _kills[QuestMonster.Id] = 0;
+                    int sameMonsterCount = fieldMonsters.Count(m => m.Name == QuestMonster.Name);
+                    _kills[QuestMonster.Id]+= sameMonsterCount;
 
                     // 퀘스트 목표 달성 체크
-                    if (_kills[questMonster] >= quest.Value.KillCount)
+                    if (_kills[QuestMonster.Id] >= quest.Value.KillCount)
                     {
                         quest.Value.isClear = true;
                         Console.WriteLine($"✅ 퀘스트 완료: {quest.Value.Name}");
                     }
+
+                    countedMonsterIds.Add(QuestMonster.Id);
                 }
             }
         }
 
 
-        public void QuestAccept()
-        {
-
-
-
-
-
-
-        }
-
-
-
-
-
-        public void CheckBestStat() { }
-        public void CheckBestLevel() { }
+     
 
 
         public void CurrentQuestScene() // 현재 진행중인 퀘스트
@@ -168,6 +156,8 @@ namespace TEAMPROJECT_TEXTRPG
 
                 Console.Clear();
                 Console.WriteLine("Quest!!");
+                Console.WriteLine();
+                Console.WriteLine("진행중인 퀘스트");
                 Console.WriteLine();
 
                 if (OngoingQuestList.Count != 0) //진행중인 퀘스트가 있을때
@@ -180,22 +170,97 @@ namespace TEAMPROJECT_TEXTRPG
                     }
                     Console.WriteLine();
                     Console.WriteLine();
-                    Console.WriteLine("원하시는 퀘스트를 선택해주세요.(퀘스트 숫자 입력");
+                    Console.WriteLine("원하시는 퀘스트를 선택해주세요.(퀘스트 숫자 입력)");
                     Console.WriteLine("\n\n");
                     Console.WriteLine("0. 나가기");
                     Console.Write(">>");
 
 
-                    if (int.TryParse(Console.ReadLine(), out int input) && input <= OngoingQuestList.Count && input > 0)
+                    if (int.TryParse(Console.ReadLine(), out int input) && input <= OngoingQuestList.Count && input > 0) //0이아닌 퀘스트를 눌렀을때
                     {
 
                         Console.Clear();
-                        Console.WriteLine("Quest!!");
-                        if (OngoingQuestList.Any(kvp => kvp.Key == input))
+                        
+                        if (input >= 1 && input -1 <= OngoingQuestList.Count)
                         {
-                            var selectedQuest = OngoingQuestList.Find(kvp => kvp.Key == input).Value;
+                            var selectedQuest = OngoingQuestList[input - 1].Value;
 
                             selectedQuest.Show();
+
+                            Console.WriteLine("1. 보상받기");
+                            Console.WriteLine("2. 돌아가기");
+                            Console.WriteLine("원하시는 행동을 입력해주세요");
+                            while (true)
+                            {
+
+
+                                Console.Write(">>");
+                                string input2 = Console.ReadLine();
+                                if (input2 == "1") //보상받기
+                                {
+
+
+
+                                    //플레이어 인벤토리에 아이템이 들어갈 자리
+
+                                    if(selectedQuest.getRewarded == false)
+                                    {
+
+                                        if (selectedQuest.isClear == true)
+                                        {
+
+
+                                            selectedQuest.getRewarded = true;
+                                            Console.WriteLine("보상이 수령되었습니다! 아무키를 눌러주세요.");
+                                            Console.ReadKey();
+                                            break;
+
+                                        }
+                                        else
+                                        {
+
+                                            Console.WriteLine("아직 퀘스트조건을 완료하지 못했습니다!");
+
+                                            Console.ReadKey();
+
+                                            break;
+
+
+                                        }
+
+                                    }
+                                    else
+                                    {
+
+                                        Console.WriteLine("이미 보상을 수령했습니다!");
+
+                                        Console.ReadKey();
+                                        break;
+                                    }
+                                    
+
+
+
+                                }
+                                else if (input2 == "2") //돌아가기
+                                {
+                                    Console.Clear();
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("잘못된 입력입니다");
+                                    
+                                    continue;
+
+                                }
+
+
+
+                            }
+                            
+
+
 
                         }
                         else
@@ -205,67 +270,23 @@ namespace TEAMPROJECT_TEXTRPG
 
 
 
-                        Console.WriteLine("1. 보상받기");
-                        Console.WriteLine("2. 돌아가기");
-                        Console.WriteLine("원하시는 행동을 입력해주세요");
-                        Console.Write(">>");
-
-                        string input2 = Console.ReadLine();
-                        if (input2 == "1")
-                        {
-                            
-
-
-                            //플레이어 인벤토리에 아이템이 들어갈 자리
-                            var selectedQuest = OngoingQuestList.Find(kvp => kvp.Key == input).Value;
-
-                            if(selectedQuest.isClear == true)
-                            {
-
-
-                                selectedQuest.getRewarded = true;
-
-
-
-                            }
-                            else
-                            {
-
-
-
-
-
-
-
-
-                            }
-
-
-                            
-
-                        }
-                        else if (input2 == "2")
-                        {
-                            Console.Clear();
-
-                            continue;
-
-
-                        }
+                        
+                        
 
                     }
-                    else if (input == 0)
+                    else if (input == 0) //0을 눌렀을때
                     {
 
                         Console.Clear();
                         SelectCategory();
+                        break;
 
 
                     }
                     else //퀘스트 리스트에서 퀘스트 번호 선택했을때 퀘스트가 있어서
                     {
                         Console.WriteLine("잘못된 입력입니다.");
-                        Console.ReadKey();
+                        
                         continue;
 
 
@@ -311,6 +332,7 @@ namespace TEAMPROJECT_TEXTRPG
             Console.Clear();
             Console.WriteLine("Quest!!");
             Console.WriteLine();
+            Console.WriteLine("퀘스트 선택하기");
             Console.WriteLine();
             foreach (var kvp in QuestList)
             {
@@ -318,7 +340,7 @@ namespace TEAMPROJECT_TEXTRPG
             }
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine("원하시는 퀘스트를 선택해주세요.(퀘스트 숫자 입력");
+            Console.WriteLine("원하시는 퀘스트를 선택해주세요.(퀘스트 숫자 입력)");
             Console.WriteLine("\n\n");
             Console.WriteLine("0. 나가기");
             Console.Write(">>");
@@ -328,6 +350,7 @@ namespace TEAMPROJECT_TEXTRPG
 
                 if (QuestList.Any(kvp => kvp.Key == input))
                 {
+                    Console.Clear();
                     var selectedQuest = QuestList.Find(kvp => kvp.Key == input).Value;
 
                     selectedQuest.Show();
@@ -350,57 +373,42 @@ namespace TEAMPROJECT_TEXTRPG
                             OngoingQuestList.Add(QuestList.Find(kvp => kvp.Key == input));
                             Console.WriteLine("수락 되었습니다! 나가려면 아무키나 눌러주세요");
                             Console.ReadKey();
-                            SelectCategory();
-
-
-
-
+                            SelectQuestScene();
+                            break;
                         }
                         else if (input2 == "2")
                         {
 
                             Console.WriteLine("거절 되었습니다! 나가려면 아무키나 눌러주세요");
                             Console.ReadKey();
-                            SelectCategory();
+                            SelectQuestScene();
+                            break;
 
                         }
                         else
                         {
 
                             Console.WriteLine("잘못된 키입니다");
-                            /*Thread.Sleep(1000);
-                            Console.SetCursorPosition(0, Console.CursorTop - 1);
-                            Console.Write(new string(' ', Console.WindowWidth));
-                            Console.SetCursorPosition(0, Console.CursorTop - 1);
-                            Console.Write(">>");*/
+                           
 
                             continue;
-
-
                         }
 
 
                     }
-                    
-
-
-
-
-
-
-
-
+                   
                 }
                 else if (input == 0)
                 {
 
                     SelectCategory();
-                    
+                    return;
 
                 }
                 else
                 {
                     Console.WriteLine("해당 번호의 퀘스트는 없습니다!");
+
                 }
             }
          
@@ -453,7 +461,7 @@ namespace TEAMPROJECT_TEXTRPG
                 else if (input == "0")
                 {
                     GameManager.Instance.currentState = GameState.Home;
-                    break;
+                    return;
 
                 }
                 else
