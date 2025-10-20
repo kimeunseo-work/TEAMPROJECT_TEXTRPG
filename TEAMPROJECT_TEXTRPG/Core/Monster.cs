@@ -1,13 +1,26 @@
-﻿namespace TEAMPROJECT_TEXTRPG
+﻿namespace TEAMPROJECT_TEXTRPG.Core
 {
     internal class Monster
     {
-        public string Name { get;  set; }
+        public string Name { get; set; }
         public int Level { get; set; }
-        public int Hp { get;  set; }
+        private int hp;
+        public int Hp
+        {
+            get => hp;
+            set
+            {
+                if (value <= 0)
+                {
+                    IsDead = true;
+                    hp = 0;
+                }
+                else hp = value;
+            }
+        }
         public int Atk { get; set; }
-        public int MonExp {  get; set; }
-        public bool IsDead { get;  set; }
+        public int MonExp { get; set; }
+        public bool IsDead { get; set; }
         public bool IsAttackComplete { get; private set; }
 
         public Monster(string name, int level, int hp, int atk, int monExp, bool isDead = false)
@@ -32,15 +45,13 @@
 
         }
 
-        /// <summary>
-        /// 몬스터 공격
-        /// </summary>
-        internal void Attack(Player player) => player.TakeDamage(Atk);
+        public void Attack(Player player) => player.TakeDamage(Atk);
+        public void TakeDamage(int amount) => Hp -= amount;
     }
 
     internal class Monsters
     {
-        internal List<Monster> monster = new List<Monster>()
+        public List<Monster> monster = new List<Monster>()
         {
             new Monster("미니언", 2, 15, 5, 5),
             new Monster("공허충", 3, 10, 9, 3),
@@ -54,7 +65,7 @@
         /// <summary>
         /// 몬스터 소환 메서드
         /// </summary>
-        internal List<Monster> SpawnRandomMonsters()
+        public List<Monster> SpawnRandomMonsters()
         {
             var monsterCount = new Random().Next(1, 5);
             var monsters = GetRandomMonsters(monsterCount);
@@ -73,7 +84,5 @@
             }
             return monsters;
         }
-
     }
-
 }

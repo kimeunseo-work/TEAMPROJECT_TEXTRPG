@@ -1,5 +1,6 @@
-﻿namespace TEAMPROJECT_TEXTRPG
+﻿namespace TEAMPROJECT_TEXTRPG.Core
 {
+
     internal class Player
     {
         public int Level { get; set; } = 1;
@@ -111,8 +112,35 @@
             Mp = MaxMP;
         }
 
-        internal void TakeDamage(int amount) => Hp -= amount;
+        public void TakeDamage(int amount) => Hp -= amount;
 
+        /// <summary>
+        /// 플레이어 일반 공격
+        /// </summary>
+        public int AttackBasic(Monster monster)
+        {
+            var damageErrorValue = (int)Math.Ceiling(Attack * 0.1d);
+            var actualDamage = new Random().Next((int)Attack - damageErrorValue, (int)Attack + damageErrorValue + 1);
+
+            monster.TakeDamage(actualDamage);
+            return actualDamage;
+        }
+
+        /// <summary>
+        /// 플레이어 크리티컬 공격
+        /// </summary>
+        /// <param name="player"></param>
+        public int AttackCritical(Monster monster)
+        {
+            var damageErrorValue = (int)Math.Ceiling(Attack * 0.1d);
+            var actualDamage = new Random().Next((int)Attack - damageErrorValue, (int)Attack + damageErrorValue + 1);
+
+            actualDamage = (int)(actualDamage * 1.6d);
+            monster.TakeDamage(actualDamage);
+
+            return actualDamage;
+        }
+        
         // Inven 내 Item 추가 메서드
         public void AddItemToInven(Item item)
         {

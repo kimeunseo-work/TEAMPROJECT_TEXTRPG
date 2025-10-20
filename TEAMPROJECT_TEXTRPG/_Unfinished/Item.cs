@@ -1,4 +1,4 @@
-﻿namespace TEAMPROJECT_TEXTRPG
+﻿namespace TEAMPROJECT_TEXTRPG._Unfinished
 {
     // Item 클래스
     internal class Item

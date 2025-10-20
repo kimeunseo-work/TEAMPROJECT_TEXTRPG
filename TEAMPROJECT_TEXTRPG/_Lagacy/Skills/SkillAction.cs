@@ -1,4 +1,9 @@
-﻿namespace TEAMPROJECT_TEXTRPG.Skills
+﻿#if false
+using TEAMPROJECT_TEXTRPG.Core;
+using TEAMPROJECT_TEXTRPG.Managers;
+using TEAMPROJECT_TEXTRPG.Utility;
+
+namespace TEAMPROJECT_TEXTRPG.Lagacy.Skills
 {
     internal class SkillAction
     {
@@ -30,7 +35,7 @@
             Console.WriteLine($"\n[사용 가능 스킬 목록]");
             for (int i = 0; i < skills.Count; i++)
             {
-                var s= skills[i];
+                var s = skills[i];
                 Console.WriteLine($"{i + 1}. {s.Name} (Mp: {s.Mp}) - {s.Description})");
             }
 
@@ -44,7 +49,7 @@
                 return;
             }
 
-            var selectedSkill = skills[skillIndex -1];
+            var selectedSkill = skills[skillIndex - 1];
 
             // 선택한 스킬 실행
 
@@ -85,14 +90,14 @@
 
                 // 실제 타격 수는 Count와 생존 수 중 작은 값으로
                 var count = Math.Min(skill.Count, aliveMonsters.Count);
-                
+
                 for (int i = 0; i < count; i++)
                 {
                     if (aliveMonsters.Count == 0) break;
                     // aliveMonsters 에서만 대상 선정
                     var idx = random.Next(aliveMonsters.Count);
                     var t = aliveMonsters[idx];
-                    
+
                     //같은 대상 중복 방지
                     aliveMonsters.RemoveAt(idx);
 
@@ -102,7 +107,7 @@
             }
 
             EndPlayerTurn();
-            
+
         }
 
         private static void EndPlayerTurn()
@@ -136,3 +141,4 @@
         }
     }
 }
+# endif
