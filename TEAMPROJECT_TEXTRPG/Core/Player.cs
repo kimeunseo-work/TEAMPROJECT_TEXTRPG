@@ -62,6 +62,7 @@ namespace TEAMPROJECT_TEXTRPG.Core
             Inventory = new Inven(); // 생성자에 인벤토리 생성
         }
 
+        // 직업 선택 시 직업 간 설정 된 스탯으로 변수 다시 초기화
         public void SetJobsStat(Job selectedJob)
         {
             CurrentJob = selectedJob;

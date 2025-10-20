@@ -4,6 +4,7 @@ namespace TEAMPROJECT_TEXTRPG.Utility
 {
     public static class InputHandler
     {
+        // 사용자가 입력한 내용을 int화하고 빈 문자열 혹은 공백 입력 시 제거하는 함수 (유효성 검사)
         public static int GetUserActionInput()
         {
             Console.WriteLine();
@@ -26,7 +27,7 @@ namespace TEAMPROJECT_TEXTRPG.Utility
             }
         }
 
-
+        // 위의 함수를 전투씬에서 사용할 함수
         public static int GetUserActionInputInBattle()
         {
             Console.WriteLine();
@@ -49,6 +50,7 @@ namespace TEAMPROJECT_TEXTRPG.Utility
             }
         }
 
+        // 사용자가 입력한 내용의 공백(띄어쓰기)을 제거하는 함수
         public static string GetUserCharacterName()
         {
             Console.WriteLine("원하시는 이름을 설정해주세요.");
@@ -79,6 +81,7 @@ namespace TEAMPROJECT_TEXTRPG.Utility
             }
         }
 
+        // UI 정렬을 위해 한글이면 2칸 그 외 문자면 1칸을 리턴하는 함수
         public static int GetPrintableLength(string str)
         {
             int length = 0;

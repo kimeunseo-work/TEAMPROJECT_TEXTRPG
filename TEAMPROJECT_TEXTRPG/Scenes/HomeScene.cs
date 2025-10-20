@@ -12,11 +12,13 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
 
         public void DisplayHome()
         {
+            // 사용자 입력을 받을 변수
             int playerSelect;
             bool isValidInput = false;
 
             while (!isValidInput)
             {
+                // 콘솔 출력 부분
                 Console.Clear();
                 Console.ResetColor();
                 Console.ForegroundColor = ConsoleColor.Cyan;

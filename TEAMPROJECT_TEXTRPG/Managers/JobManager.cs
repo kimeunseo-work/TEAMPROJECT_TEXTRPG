@@ -6,6 +6,7 @@ namespace TEAMPROJECT_TEXTRPG.Managers
     {
         public static List<Job> AllJobs { get; private set; }
 
+        // 직업 목록
         static JobManager()
         {
             AllJobs = new List<Job>()

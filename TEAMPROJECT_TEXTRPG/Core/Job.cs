@@ -2,15 +2,15 @@
 {
     internal class Job
     {
-        public string Name { get; private set; }
-        public int MaxHP { get; private set; }
-        public int MaxMP { get; private set; }
-        public double BaseAttack { get; private set; }
-        public double BaseDefense { get; private set; }
-        public int LvUpAddMaxHP { get; private set; }
-        public int LvUpAddMaxMP { get; private set; }
-        public double LvUpAttack { get; private set; }
-        public double LvUpDefense { get; private set; }
+        public string Name { get; private set; }    // 직업명
+        public int MaxHP { get; private set; }      // 직업 간 기초 최대 Hp
+        public int MaxMP { get; private set; }      // 직업 간 기초 최대 Mp
+        public double BaseAttack { get; private set; }  // 직업 간 기본 공격력
+        public double BaseDefense { get; private set; } // 직업 간 기본 방어력
+        public int LvUpAddMaxHP { get; private set; }   // 레벨업 시 직업 간 최대 Hp 증가량
+        public int LvUpAddMaxMP { get; private set; }   // 레벨업 시 직업 간 최대 Mp 증가량
+        public double LvUpAttack { get; private set; }  // 레벨업 시 직업 간 공격력 증가량
+        public double LvUpDefense { get; private set; } // 레벨업 시 직업 간 방어력 증가량
 
         public Job(string name, int maxHP, int maxMP, double baseAttack, double baseDefense, int lvUpAddMaxHP, int lvUpAddMaxMP, double lvUpAttack, double lvUpDefense)
         {
@@ -24,7 +24,5 @@
             LvUpAttack = lvUpAttack;
             LvUpDefense = lvUpDefense;
         }
-
-        // public List<Skill> SkillList { get; private set; } = new List<Skill>();  //직업간의 스킬 목록
     }
 }
