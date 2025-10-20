@@ -159,10 +159,11 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                 }
             }
 
-            // CharacterCreate 씬 불러오기
+            // Console 창 Clear
             Console.Clear();
-            // 죽으면 초기화하고 캐릭터 생성 화면으로.
+            // Player 초기화
             CharacterManager.Instance.player = new();
+            // CharacterCreate 씬 불러오기
             GameManager.Instance.CurrentState = GameState.CharacterCreate;
         }
 
