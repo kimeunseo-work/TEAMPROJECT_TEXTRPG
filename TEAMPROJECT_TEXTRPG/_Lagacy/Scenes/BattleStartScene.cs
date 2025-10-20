@@ -1,4 +1,10 @@
-﻿namespace TEAMPROJECT_TEXTRPG.Scenes
+﻿#if false
+using TEAMPROJECT_TEXTRPG.Core;
+using TEAMPROJECT_TEXTRPG.Managers;
+using TEAMPROJECT_TEXTRPG.Scenes;
+using TEAMPROJECT_TEXTRPG.Utility;
+
+namespace TEAMPROJECT_TEXTRPG.Lagacy.Scenes
 {
     internal class BattleStartScene : Scene
     {
@@ -11,8 +17,8 @@
 
         public void StartBattle()
         {
-            int x = CharacterManager.Instance.player.Hp;
-            CharacterManager.Instance.player.hped = x;
+            int hped = CharacterManager.Instance.player.Hp; // 전투 전 체력 정의
+            CharacterManager.Instance.player.Hped = hped; // 전투 전 체력 값 초기화
 
             Console.Clear();
             Console.WriteLine("Battle!!");
@@ -54,3 +60,4 @@
         }
     }
 }
+#endif

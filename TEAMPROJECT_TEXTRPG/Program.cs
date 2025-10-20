@@ -1,4 +1,6 @@
-﻿namespace TEAMPROJECT_TEXTRPG
+﻿using TEAMPROJECT_TEXTRPG.Managers;
+
+namespace TEAMPROJECT_TEXTRPG
 {
     internal class Program
     {

@@ -1,8 +1,11 @@
-﻿namespace TEAMPROJECT_TEXTRPG.Scenes
+﻿using TEAMPROJECT_TEXTRPG.Managers;
+using TEAMPROJECT_TEXTRPG.Utility;
+
+namespace TEAMPROJECT_TEXTRPG.Scenes
 {
     internal class HomeScene : Scene
     {
-        internal override void Show()
+        public override void Show()
         {
             DisplayHome();
         }
@@ -24,7 +27,7 @@
                 Console.WriteLine("||                                                                                                        ||");
                 Console.WriteLine("|| 1. 상태 보기                                                                                           ||");
                 Console.WriteLine("|| 2. 전투 시작                                                                                           ||");
-                Console.WriteLine("|| 3. 퀘스트 보기                                                                                           ||");
+                Console.WriteLine("|| 3. 퀘스트 보기                                                                                         ||");
                 Console.WriteLine("|| 0. 게임 종료                                                                                           ||");
                 Console.WriteLine("||                                                                                                        ||");
                 Console.WriteLine("============================================================================================================");
@@ -35,25 +38,23 @@
                 {
                     case 1: // 1. 상태 보기
                         isValidInput = true;
-                        Console.WriteLine("상태보기를 선택하셨습니다.");
-                        GameManager.Instance.currentState = GameState.Stat;
+                        GameManager.Instance.CurrentState = GameState.Stat;
                         break;
 
                     case 2: // 2. 전투 시작
                         isValidInput = true;
-                        Console.WriteLine("전투를 선택하셨습니다.");
-                        GameManager.Instance.currentState = GameState.BattleStart;
+                        GameManager.Instance.CurrentState = GameState.TotalBattle;
                         break;
                     case 3:
                         isValidInput = true;
-                        Console.WriteLine("퀘스트를 선택하셨습니다.");
-                        GameManager.Instance.currentState = GameState.Quest;
+                        Console.WriteLine("퀘스트는 아직 구현되지 않았습니다.");
+                        //GameManager.Instance.CurrentState = GameState.Quest;
                         break;
 
                     case 0: // 0. 게임 종료
                         isValidInput = true;
                         Console.WriteLine("게임을 종료합니다.");
-                        GameManager.Instance.currentState = GameState.None;
+                        GameManager.Instance.CurrentState = GameState.None;
                         break;
 
                     default: // 유효하지 않은 입력
@@ -62,7 +63,7 @@
                         break;
                 }
 
-                if (isValidInput && GameManager.Instance.currentState != GameState.None)
+                if (isValidInput && GameManager.Instance.CurrentState != GameState.None)
                 {
                     Console.WriteLine("\n아무 키나 눌러 다음으로 진행해주세요.");
                     Console.ReadKey();
