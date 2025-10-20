@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace TEAMPROJECT_TEXTRPG
+namespace TEAMPROJECT_TEXTRPG.Utility
 {
     public static class InputHandler
     {
@@ -61,6 +61,7 @@ namespace TEAMPROJECT_TEXTRPG
 
         public static int GetInputToInt()
         {
+            Console.Write(">> ");
             string input = Console.ReadLine() ?? "";    // null을 반환할 경우 빈 문자열을 대신 사용
             string cleanInput = Regex.Replace(input, @"\s+", "");   // 입력받은 문자열에서 공백 제거
 

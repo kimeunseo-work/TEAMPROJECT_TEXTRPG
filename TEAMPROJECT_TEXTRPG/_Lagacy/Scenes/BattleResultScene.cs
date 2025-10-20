@@ -1,4 +1,8 @@
-﻿namespace TEAMPROJECT_TEXTRPG.Scenes
+﻿#if false
+using TEAMPROJECT_TEXTRPG.Managers;
+using TEAMPROJECT_TEXTRPG.Scenes;
+
+namespace TEAMPROJECT_TEXTRPG.Lagacy.Scenes
 {
     internal class BattleResultScene : Scene
     {
@@ -49,7 +53,7 @@
             {
                 // Home 씬 불러오기
                 Console.Clear();
-                GameManager.Instance.currentState = GameState.Home;
+                GameManager.Instance.CurrentState = GameState.Home;
             }
             // Player 가 입력한 값이 '0' 이 아니면
             else
@@ -80,7 +84,7 @@
                     {
                         // Home 씬 불러오기 (+ 무한 반복문 탈출)
                         Console.Clear();
-                        GameManager.Instance.currentState = GameState.Home;
+                        GameManager.Instance.CurrentState = GameState.Home;
                         break;
                     }
                     // Player 가 입력한 값이 '0' 이 아니면 
@@ -109,7 +113,7 @@
             {
                 // Home 씬 불러오기
                 Console.Clear();
-                GameManager.Instance.currentState = GameState.Home;
+                GameManager.Instance.CurrentState = GameState.Home;
             }
             // Player 가 입력한 값이 '0' 이 아니면 (그 외)
             else
@@ -140,7 +144,7 @@
                     {
                         // Home 씬 불러오기 (+ 무한 반복문 탈출)
                         Console.Clear();
-                        GameManager.Instance.currentState = GameState.Home;
+                        GameManager.Instance.CurrentState = GameState.Home;
                         break;
                     }
                     // Player 가 입력한 값이 '0' 이 아니면 
@@ -221,3 +225,4 @@
         }
     }
 }
+#endif
