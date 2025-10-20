@@ -1,4 +1,6 @@
-﻿namespace TEAMPROJECT_TEXTRPG.Core
+﻿using TEAMPROJECT_TEXTRPG._Unfinished;
+
+namespace TEAMPROJECT_TEXTRPG.Core
 {
 
     internal class Player
@@ -15,7 +17,7 @@
         public double Defense { get; set; }
         public double LvUpAttack { get; set; }
         public double LvUpDefense { get; set; }
-        public Inven inven; // Player 인벤토리 정의
+        public Inven Inventory; // Player 인벤토리 정의
 
         public int Exp { get; set; }
 
@@ -57,7 +59,7 @@
             Mp = MaxMP;
             LvUpAttack = 0;
             LvUpDefense = 0;
-            inven = new Inven(); // 생성자에 인벤토리 생성
+            Inventory = new Inven(); // 생성자에 인벤토리 생성
         }
 
         public void SetJobsStat(Job selectedJob)
@@ -144,13 +146,13 @@
         // Inven 내 Item 추가 메서드
         public void AddItemToInven(Item item)
         {
-            inven.inven.Add(item);
+            Inventory.Inventory.Add(item);
         }
 
         // Inven 출력 메서드
         public void ShowInven()
         {
-            foreach (Item item in inven.inven)
+            foreach (Item item in Inventory.Inventory)
             {
                 Console.WriteLine($"아이템 이름: {item.itemName}, 설명: {item.itemExplanation}");
             }

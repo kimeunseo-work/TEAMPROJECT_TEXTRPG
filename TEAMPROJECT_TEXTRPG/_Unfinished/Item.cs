@@ -144,7 +144,7 @@
     internal class Inven : Items
     {
         // Player 인벤토리로 사용할 inven 리스트 생성
-        public List<Item> inven = new List<Item>();
+        public List<Item> Inventory = new List<Item>();
     }
 
     internal class Drops : Items
