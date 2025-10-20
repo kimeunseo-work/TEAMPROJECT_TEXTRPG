@@ -58,7 +58,7 @@ namespace TEAMPROJECT_TEXTRPG.Lagacy.Scenes
             // Player 가 입력한 값이 '0' 이 아니면
             else
             {
-                // 무한 반복 <<-- 잘못된 입력 문구
+                // 무한 반복 <<-- Player 가 입력한 값이 '0' 일 때까지
                 while (true)
                 {
                     // Console 창 Clear
@@ -118,7 +118,7 @@ namespace TEAMPROJECT_TEXTRPG.Lagacy.Scenes
             // Player 가 입력한 값이 '0' 이 아니면 (그 외)
             else
             {
-                // 무한 반복
+                // 무한 반복 <<-- Player 가 입력한 값이 '0' 일 때까지
                 while (true)
                 {
                     // Console 창 Clear
