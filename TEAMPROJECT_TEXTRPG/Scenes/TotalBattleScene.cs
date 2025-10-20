@@ -180,7 +180,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                 // 배틀 취소
                 if (battleStartResult.HasFlag(BattleInput.IsQuit))
                 {
-                    Console.WriteLine("마을로 돌아갑니다.");
+                    Console.WriteLine("메인 화면으로 돌아갑니다.");
                     Console.ReadKey();
                     break;
                 }
