@@ -17,8 +17,8 @@ namespace TEAMPROJECT_TEXTRPG.Lagacy.Scenes
 
         public void StartBattle()
         {
-            int x = CharacterManager.Instance.player.Hp;
-            CharacterManager.Instance.player.hped = x;
+            int hped = CharacterManager.Instance.player.Hp; // 전투 전 체력 정의
+            CharacterManager.Instance.player.Hped = hped; // 전투 전 체력 값 초기화
 
             Console.Clear();
             Console.WriteLine("Battle!!");

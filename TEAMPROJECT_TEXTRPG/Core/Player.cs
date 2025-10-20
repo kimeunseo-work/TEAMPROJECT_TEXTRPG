@@ -1,4 +1,6 @@
-﻿namespace TEAMPROJECT_TEXTRPG.Core
+﻿using TEAMPROJECT_TEXTRPG._Unfinished;
+
+namespace TEAMPROJECT_TEXTRPG.Core
 {
 
     internal class Player
@@ -15,6 +17,7 @@
         public double Defense { get; set; }
         public double LvUpAttack { get; set; }
         public double LvUpDefense { get; set; }
+        public Inven Inventory; // Player 인벤토리 정의
 
         public int Exp { get; set; }
 
@@ -25,7 +28,7 @@
             set => hp = Math.Max(0, value); // hp가 0보다 작으면 0으로 고정
         }
 
-        public int hped; // 전투 전 체력
+        public int Hped; // 전투 전 체력 정의
 
         private int mp;
         public int Mp
@@ -56,6 +59,7 @@
             Mp = MaxMP;
             LvUpAttack = 0;
             LvUpDefense = 0;
+            Inventory = new Inven(); // 생성자에 인벤토리 생성
         }
 
         public void SetJobsStat(Job selectedJob)
@@ -103,6 +107,8 @@
             MaxMP += CurrentJob.LvUpAddMaxMP;
             BaseAttack += CurrentJob.LvUpAttack;
             BaseDefense += CurrentJob.LvUpDefense;
+            Attack = BaseAttack;
+            Defense = BaseDefense;
 
             //회복
 
@@ -137,6 +143,21 @@
             monster.TakeDamage(actualDamage);
 
             return actualDamage;
+        }
+        
+        // Inven 내 Item 추가 메서드
+        public void AddItemToInven(Item item)
+        {
+            Inventory.Inventory.Add(item);
+        }
+
+        // Inven 출력 메서드
+        public void ShowInven()
+        {
+            foreach (Item item in Inventory.Inventory)
+            {
+                Console.WriteLine($"아이템 이름: {item.itemName}, 설명: {item.itemExplanation}");
+            }
         }
     }
 }

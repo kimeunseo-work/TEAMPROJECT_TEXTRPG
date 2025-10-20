@@ -58,7 +58,7 @@ namespace TEAMPROJECT_TEXTRPG.Lagacy.Scenes
             // Player 가 입력한 값이 '0' 이 아니면
             else
             {
-                // 무한 반복 <<-- 잘못된 입력 문구
+                // 무한 반복 <<-- Player 가 입력한 값이 '0' 일 때까지
                 while (true)
                 {
                     // Console 창 Clear
@@ -118,7 +118,7 @@ namespace TEAMPROJECT_TEXTRPG.Lagacy.Scenes
             // Player 가 입력한 값이 '0' 이 아니면 (그 외)
             else
             {
-                // 무한 반복
+                // 무한 반복 <<-- Player 가 입력한 값이 '0' 일 때까지
                 while (true)
                 {
                     // Console 창 Clear
@@ -163,7 +163,7 @@ namespace TEAMPROJECT_TEXTRPG.Lagacy.Scenes
             Console.WriteLine();
             Console.WriteLine($"던전에서 몬스터 {GameManager.Instance.monsters.Count}마리를 잡았습니다.");
             Console.WriteLine($"Lv.{CharacterManager.Instance.player.Level} {CharacterManager.Instance.player.Name}");
-            Console.WriteLine($"HP {CharacterManager.Instance.player.hped} -> {CharacterManager.Instance.player.Hp}");
+            Console.WriteLine($"HP {CharacterManager.Instance.player.Hped} -> {CharacterManager.Instance.player.Hp}");
             Console.WriteLine();
             Console.WriteLine($"경험치{subExp} 획득 (현재 {CharacterManager.Instance.player.Exp} / 필요 {CharacterManager.Instance.player.GetRequiredExp()})");
             Console.WriteLine();
@@ -185,7 +185,7 @@ namespace TEAMPROJECT_TEXTRPG.Lagacy.Scenes
             Console.WriteLine("You Lose..");
             Console.WriteLine();
             Console.WriteLine($"Lv.{CharacterManager.Instance.player.Level} {CharacterManager.Instance.player.Name}");
-            Console.WriteLine($"HP {CharacterManager.Instance.player.hped} -> 0");
+            Console.WriteLine($"HP {CharacterManager.Instance.player.Hped} -> 0");
             Console.WriteLine();
         }
 

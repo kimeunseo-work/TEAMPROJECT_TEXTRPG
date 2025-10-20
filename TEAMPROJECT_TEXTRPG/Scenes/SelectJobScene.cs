@@ -15,6 +15,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
         {
             int playerSelect;
             List<Job> selectJobs = JobManager.AllJobs;
+            const int jobNameWidth = 106;
 
             while (true)
             {
@@ -25,7 +26,10 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                 Console.WriteLine("||                                                                                                        ||");
                 for (int i = 0; i < selectJobs.Count; i++)
                 {
-                    Console.WriteLine($"|| {i + 1}. {selectJobs[i].Name,-10}                                                                                        ||");
+                    string jobStr = $"|| {i + 1}. {selectJobs[i].Name}";
+                    Console.Write(jobStr);
+                    Console.Write(new string(' ', jobNameWidth - InputHandler.GetPrintableLength(jobStr)));
+                    Console.WriteLine("||");
                 }
                 Console.WriteLine("||                                                                                                        ||");
                 Console.WriteLine("============================================================================================================");
