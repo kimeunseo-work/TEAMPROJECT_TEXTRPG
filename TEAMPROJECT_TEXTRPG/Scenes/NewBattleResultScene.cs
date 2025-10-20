@@ -140,9 +140,11 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                 }
             }
 
-            // Home 씬 불러오기
+            // CharacterCreate 씬 불러오기
             Console.Clear();
-            GameManager.Instance.CurrentState = GameState.Home;
+            // 죽으면 초기화하고 캐릭터 생성 화면으로.
+            CharacterManager.Instance.player = new();
+            GameManager.Instance.CurrentState = GameState.CharacterCreate;
         }
 
         // '전투 결과창(승리) Text' 묶음
