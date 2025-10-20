@@ -1,8 +1,11 @@
-﻿namespace TEAMPROJECT_TEXTRPG.Scenes
+﻿using TEAMPROJECT_TEXTRPG.Managers;
+using TEAMPROJECT_TEXTRPG.Utility;
+
+namespace TEAMPROJECT_TEXTRPG.Scenes
 {
     internal class PlayerInfoScene : Scene
     {
-        internal override void Show()
+        public override void Show()
         {
             DisplayPlayerInfo();
         }
@@ -17,13 +20,13 @@
                 Console.WriteLine($"\nLv.{CharacterManager.Instance.player.Level}\n\n{CharacterManager.Instance.player.Name}({CharacterManager.Instance.player.CurrentJob.Name})\n\n공격력: {CharacterManager.Instance.player.Attack:F1}\n\n방어력: {CharacterManager.Instance.player.Defense}" +
                 $"\n\n체력: {CharacterManager.Instance.player.Hp}\n\n마나: {CharacterManager.Instance.player.Mp}\n\n경험치: {CharacterManager.Instance.player.Exp}\n\nGold: {CharacterManager.Instance.player.Gold}");
 
-                Console.WriteLine($"\n1.\n0. 나가기");
+                Console.WriteLine($"\n0. 나가기");
 
                 int input = InputHandler.GetUserActionInput();
                 if (input == 0)
                 {
                     keep = false;
-                    GameManager.Instance.currentState = GameState.Home;
+                    GameManager.Instance.CurrentState = GameState.Home;
                 }
                 else
                 {

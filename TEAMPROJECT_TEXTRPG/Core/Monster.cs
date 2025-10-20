@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TEAMPROJECT_TEXTRPG
+﻿namespace TEAMPROJECT_TEXTRPG.Core
 {
     internal class Monster
     {
@@ -8,10 +6,23 @@ namespace TEAMPROJECT_TEXTRPG
         public int Id { get; set; }
         public string Name { get;  set; }
         public int Level { get; set; }
-        public int Hp { get;  set; }
+        private int hp;
+        public int Hp
+        {
+            get => hp;
+            set
+            {
+                if (value <= 0)
+                {
+                    IsDead = true;
+                    hp = 0;
+                }
+                else hp = value;
+            }
+        }
         public int Atk { get; set; }
-        public int MonExp {  get; set; }
-        public bool IsDead { get;  set; }
+        public int MonExp { get; set; }
+        public bool IsDead { get; set; }
         public bool IsAttackComplete { get; private set; }
 
         public Monster(int id, string name, int level, int hp, int atk, int monExp, bool isDead = false)
@@ -37,20 +48,13 @@ namespace TEAMPROJECT_TEXTRPG
 
         }
 
-        /// <summary>
-        /// 몬스터 일반 공격
-        /// </summary>
-        internal void Attack(Player player) => player.TakeDamage(Atk);
-        internal void TakeDamage(int amount)
-        {
-            Hp -= amount;
-            if(Hp <= 0) IsDead = false;
-        }
+        public void Attack(Player player) => player.TakeDamage(Atk);
+        public void TakeDamage(int amount) => Hp -= amount;
     }
 
     internal class Monsters
     {
-        internal List<Monster> monster = new List<Monster>()
+        public List<Monster> monster = new List<Monster>()
         {
             new Monster(0,"미니언", 2, 15, 5, 5),
             new Monster(1,"공허충", 3, 10, 9, 3),
@@ -64,7 +68,7 @@ namespace TEAMPROJECT_TEXTRPG
         /// <summary>
         /// 몬스터 소환 메서드
         /// </summary>
-        internal List<Monster> SpawnRandomMonsters()
+        public List<Monster> SpawnRandomMonsters()
         {
             var monsterCount = new Random().Next(1, 5);
             var monsters = GetRandomMonsters(monsterCount);
@@ -83,7 +87,5 @@ namespace TEAMPROJECT_TEXTRPG
             }
             return monsters;
         }
-
     }
-
 }

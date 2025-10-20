@@ -1,4 +1,7 @@
-﻿using System.Reflection.Metadata.Ecma335;
+﻿#if false
+using TEAMPROJECT_TEXTRPG.Core;
+using TEAMPROJECT_TEXTRPG.Managers;
+using TEAMPROJECT_TEXTRPG.Utility;
 
 namespace TEAMPROJECT_TEXTRPG.Scenes
 {
@@ -14,7 +17,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                 // 몬스터가 사망하여 공격하지 않았음.
                 if (result.Value.oldHp == null && result.Value.isDodge == false) continue;
 
-                
+
                 if (result.Value.oldHp != null && result.Value.isDodge != true)
                 {
                     // 화면 출력
@@ -85,9 +88,9 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
         /// 몬스터 공격 처리
         /// </summary>
         /// <returns>공격 전후 플레이어 체력</returns>
-        private (bool,int?)? MonsterAttack(Monster monster)
+        private (bool, int?)? MonsterAttack(Monster monster)
         {
-            if (monster.IsDead) return (false,null);
+            if (monster.IsDead) return (false, null);
 
             var oldHp = CharacterManager.Instance.player.Hp;
             //회피기능
@@ -112,7 +115,8 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
 
 
 
-            return (false,oldHp);
+            return (false, oldHp);
         }
     }
 }
+#endif

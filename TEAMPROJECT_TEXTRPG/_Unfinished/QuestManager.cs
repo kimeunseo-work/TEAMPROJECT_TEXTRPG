@@ -5,28 +5,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+//﻿#if false//
+using TEAMPROJECT_TEXTRPG.Core;
 
-namespace TEAMPROJECT_TEXTRPG
+namespace TEAMPROJECT_TEXTRPG.Managers
 {
-
     internal enum QuestType
     {
-
         Monster,
         Gear,
         enhance
-
     }
-
-
 
     internal class QuestManager
     {
-        /// <싱글톤>
-        /// 
+        /// <summary>
+        /// 싱글톤
         /// </summary>
         private static QuestManager instance;
-        internal static QuestManager Instance
+        public static QuestManager Instance
         {
             get
             {
@@ -415,6 +412,8 @@ namespace TEAMPROJECT_TEXTRPG
                 //퀘스트가 정해지면 그다음에 
             
         }
+        public void SelectQuestScene()
+        {
 
 
 
@@ -444,19 +443,13 @@ namespace TEAMPROJECT_TEXTRPG
 
                 if (input == "1")
                 {
-
-
                     CurrentQuestScene();
                     break;
-
-
                 }
                 else if (input == "2")
                 {
-
                     SelectQuestScene();
                     break;
-
                 }
                 else if (input == "0")
                 {
@@ -470,7 +463,6 @@ namespace TEAMPROJECT_TEXTRPG
                     Console.ReadKey();
 
                     continue;
-
                 }
 
 
@@ -484,15 +476,6 @@ namespace TEAMPROJECT_TEXTRPG
            
 
         }
-
-
-
-
-
-
-
-
-
-
     }
 }
+//#endif

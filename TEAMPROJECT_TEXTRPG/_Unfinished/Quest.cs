@@ -4,21 +4,18 @@ using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
+//﻿#if false
+using TEAMPROJECT_TEXTRPG.Managers;
 
-namespace TEAMPROJECT_TEXTRPG
+namespace TEAMPROJECT_TEXTRPG.Core
 {
     internal class Quest
     {
         public string Name;
-
         public string Description;
-
         public string QuestInfo;
-
         public Item ItemReward;
-
         public int GoldReward;
-
         public int ExpReward;
 
         public bool isSelected = false;
@@ -57,7 +54,7 @@ namespace TEAMPROJECT_TEXTRPG
             
 
         }
-     
+
 
         //이렇게 생성자에서 Monsters를 받아올 수 있게 하면 Monsters의 클래스의 변수를 가져올수있는건가요 이 quest에서
         //
@@ -69,11 +66,6 @@ namespace TEAMPROJECT_TEXTRPG
                      
 
         internal virtual void Show() { }
-
-
-
-
-
     }
 
     internal class MonsterKillQuest : Quest
@@ -161,14 +153,7 @@ namespace TEAMPROJECT_TEXTRPG
             Console.WriteLine($"{ItemReward.itemName} x 1");
             Console.WriteLine($"{GoldReward}G");
             Console.WriteLine();
-            
-
-
-
         }
-        
-
-
     }
     internal class MonsterKillQuest2 : Quest
     {
@@ -177,7 +162,7 @@ namespace TEAMPROJECT_TEXTRPG
 
         internal override void Show()
         {
-            throw new NotImplementedException();
         }
     }
 }
+//#endif
