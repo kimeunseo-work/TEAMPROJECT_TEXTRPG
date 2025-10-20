@@ -9,10 +9,10 @@ namespace TEAMPROJECT_TEXTRPG.Managers
     {
         None,// 전투 X
         Start,// 전투 시작. 몬스터 소환
-        PlayerTurn,
-        MonsterTurn,
-        Victory,
-        Lose,
+        PlayerTurn,// 플레이어 턴
+        MonsterTurn,// 몬스터 턴
+        Victory,// 승리
+        Lose,// 패배
     }
 
     internal class BattleManager
@@ -108,6 +108,9 @@ namespace TEAMPROJECT_TEXTRPG.Managers
             await Task.Run(RunBattle);
         }
 
+        /// <summary>
+        /// 전투의 전체 흐름 제어
+        /// </summary>
         private async Task RunBattle()
         {
             // 상태에 따른 로직
@@ -140,7 +143,7 @@ namespace TEAMPROJECT_TEXTRPG.Managers
         /// <summary>
         /// 배틀 결과
         /// </summary>
-        private async Task ExitBattle()
+        private async Task BattleEnd()
         {
             var monstersExps = CurrentMonsters.Select(monster => monster.MonExp).ToArray();
             // 배틀이 끝났음을 게임 매니저에게 알림
@@ -165,18 +168,18 @@ namespace TEAMPROJECT_TEXTRPG.Managers
         //============================================================//
 
         /// <summary>
-        /// 현재 배틀 상태를 적절히 바꾸는 메서드
+        /// CurrentBattleState를 적절히 제어.
         /// </summary>
         private void ChangeBattleState()
         {
-            // 나중에 이걸로 배틀 상태 저장할 수 있음.
-            if (GameManager.Instance.CurrentState != GameState.TotalBattle)
-            {
-                // 이어서 하기
-                //ChangeBattleState(currentBattleState);
-                ChangeBattleState(NewBattleState.None);
-                return;
-            }
+            //// 나중에 이걸로 배틀 상태 저장할 수 있음.
+            //if (GameManager.Instance.CurrentState != GameState.TotalBattle)
+            //{
+            //    // 이어서 하기
+            //    //ChangeBattleState(currentBattleState);
+            //    ChangeBattleState(NewBattleState.None);
+            //    return;
+            //}
 
             switch (CurrentBattleState)
             {
@@ -212,8 +215,7 @@ namespace TEAMPROJECT_TEXTRPG.Managers
         }
 
         /// <summary>
-        /// 현재 배틀 상태에 따라
-        /// 적절한 로직을 호출하는 메서드
+        /// CurrentBattleState에 따라 적절한 로직 호출
         /// </summary>
         private void HandleBattleState()
         {
@@ -244,6 +246,7 @@ namespace TEAMPROJECT_TEXTRPG.Managers
                     // 몬스터 수 만큼 반복
                     foreach (var monster in CurrentMonsters)
                     {
+                        if (IsPlayerDead()) break;
                         if (monster.IsDead == true) continue;
                         var result = AttackByMonster(monster);
                         // 몬스터 화면 호출
@@ -256,7 +259,7 @@ namespace TEAMPROJECT_TEXTRPG.Managers
                 case NewBattleState.Victory:
                 case NewBattleState.Lose:
                     // 배틀 종료
-                    ExitBattle();
+                    BattleEnd();
                     break;
             }
 
