@@ -27,6 +27,13 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                 Console.WriteLine($"\nLv.{player.Level}\n\n{player.Name}({player.CurrentJob.Name})\n\n공격력: {player.Attack:F1}\n\n방어력: {player.Defense}" +
                 $"\n\n체력: {player.Hp}\n\n마나: {player.Mp}\n\n경험치: {player.Exp}\n\nGold: {player.Gold}");
 
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("[ 보유 아이템 목록 ]");
+                Console.WriteLine();
+                CharacterManager.Instance.player.ShowInventory();
+                Console.WriteLine();
+
                 Console.WriteLine($"\n0. 나가기");
 
                 int input = InputHandler.GetUserActionInput();

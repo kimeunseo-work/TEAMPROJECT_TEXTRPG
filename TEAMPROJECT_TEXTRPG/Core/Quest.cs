@@ -14,20 +14,20 @@ namespace TEAMPROJECT_TEXTRPG.Core
         public int ItemGivingCount; // 아이템 몇 개 지급할 건지
         public int GoldReward; // 보상 골드
         public int ExpReward; // 보상 경험치
-        //public string QuestInfo;
         public bool IsAccept = false; // 퀘스트를 수락 했는지
         public bool IsComplete = false; // 퀘스트를 완료 했는지
+        public int CurrentKillCount = 0; // 현재 킬 카운트를 퀘스트 안에서 체크
+        //public string QuestInfo;
         //public int _kill = QuestManager.Instance.killCountRecord.Count; // 이 것도 문제가 됩니다. 근데 참조를 안하는 군요.
         //public int CurrentKillCount
         //=> QuestManager.Instance.killCountRecord.TryGetValue(QuestMonster.Id, out var v) ? v : 0;
-        public int CurrentKillCount = 0; // 현재 킬 카운트를 퀘스트 안에서 체크
         //public bool QuestSelected = false; 참조를 안하네요
         //public Monsters monsters = new Monsters(); //몬스터 리스트? //Monsters에서 monster만 monsterlist로 지정 괜히 복잡해져서 그냥 없앰
 
         public string ClearText => IsComplete ? "[완료]" : " ";
 
         public Quest() { }
-        public Quest(string name, string desc, int needkillCount, bool getRewarded, Monster questMon, Item itemReward, int itemCount, int gold, int exp)
+        public Quest(string name, string desc, int needkillCount, bool getRewarded, Monster questMon, Item itemReward, int itemCount, int gold, int exp, bool isAccept = false, bool isComplete = false, int currentKillCount = 0)
         {
             Name = name;
             Description = desc;
@@ -38,6 +38,9 @@ namespace TEAMPROJECT_TEXTRPG.Core
             ItemGivingCount = itemCount;
             GoldReward = gold;
             ExpReward = exp;
+            IsAccept = isAccept;
+            IsComplete = isComplete;
+            CurrentKillCount = currentKillCount;
         }
 
         public Quest(Quest clone)
@@ -51,6 +54,9 @@ namespace TEAMPROJECT_TEXTRPG.Core
             ItemGivingCount = clone.ItemGivingCount;
             GoldReward = clone.GoldReward;
             ExpReward = clone.ExpReward;
+            IsAccept = clone.IsAccept;
+            IsComplete = clone.IsComplete;
+            CurrentKillCount = clone.CurrentKillCount;
         }
 
         public string GetProgressLabel() => $"{CurrentKillCount}/{NeedKillCount}";
@@ -72,7 +78,7 @@ namespace TEAMPROJECT_TEXTRPG.Core
     {
         public string Quest1Info => $"미니언 5마리 처치 ({GetProgressLabel()})";
 
-        public MonsterKillQuest(string name, string desc, int needkillCount, bool getRewarded, Monster questMon, Item itemReward, int itemCount, int gold, int exp) : base(name, desc, needkillCount, getRewarded, questMon, itemReward, itemCount, gold, exp)
+        public MonsterKillQuest(string name, string desc, int needkillCount, bool getRewarded, Monster questMon, Item itemReward, int itemCount, int gold, int exp, bool isAccept = false, bool isComplete = false, int currentKillCount = 0) : base(name, desc, needkillCount, getRewarded, questMon, itemReward, itemCount, gold, exp, isAccept, isComplete, currentKillCount)
         {
             Name = name;
             Description = desc;
@@ -83,6 +89,9 @@ namespace TEAMPROJECT_TEXTRPG.Core
             ItemGivingCount = itemCount;
             GoldReward = gold;
             ExpReward = exp;
+            IsAccept = isAccept;
+            IsComplete = isComplete;
+            CurrentKillCount = currentKillCount;
             // ItemReward = QuestManager.Instance.items.equipItem1;
         }
 
@@ -97,6 +106,9 @@ namespace TEAMPROJECT_TEXTRPG.Core
             ItemGivingCount = clone.ItemGivingCount;
             GoldReward = clone.GoldReward;
             ExpReward = clone.ExpReward;
+            IsAccept = clone.IsAccept;
+            IsComplete = clone.IsComplete;
+            CurrentKillCount = clone.CurrentKillCount;
         }
 
         public int GetCurrentCount()

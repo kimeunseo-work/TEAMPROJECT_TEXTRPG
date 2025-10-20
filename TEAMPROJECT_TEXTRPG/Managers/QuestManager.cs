@@ -66,7 +66,7 @@ namespace TEAMPROJECT_TEXTRPG.Managers
                 needkillCount: 1,
                 getRewarded: false,
                 questMon: new Monsters().monster[0], //미니언 몬스터 할당
-                itemReward: new Items().equipItems[1],// QuestManager.Instance.items.equipItems[1];
+                itemReward: new Items().equipItem1,// QuestManager.Instance.items.equipItems[1];
                 itemCount: 1,
                 gold: 5,
                 exp: 100));
@@ -151,6 +151,7 @@ namespace TEAMPROJECT_TEXTRPG.Managers
                 // 퀘스트 지정 몬스터가 필드에 몇 마리 있는지 반환
                 int sameMonsterCount = fieldMonsters.Count(m => m.Name == questMonster.Name);
                 killCountRecord[questMonster.Id] += sameMonsterCount;
+                quest.Value.CurrentKillCount += sameMonsterCount;
 
                 // 퀘스트 목표 달성 체크
                 if (killCountRecord[questMonster.Id] >= quest.Value.NeedKillCount)

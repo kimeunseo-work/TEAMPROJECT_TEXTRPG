@@ -118,7 +118,7 @@ namespace TEAMPROJECT_TEXTRPG.Managers
         public double LvUpDefense;
         public int Exp;
         public int Gold;
-        public Inven Inventory;
+        public Inventory Inventory;
     }
 
     public class QuestData
