@@ -86,7 +86,7 @@ namespace TEAMPROJECT_TEXTRPG.Managers
             // 몬스터 데이터 초기 세팅
             CurrentMonsters = monsterList.SpawnRandomMonsters();
             // 전투 후 결과창에 출력할 Hp
-            player.hped = player.Hp;
+            player.Hped = player.Hp;
             // 스킬 최초 할당
             if (CurrentSkills.Count <= 0)
             {

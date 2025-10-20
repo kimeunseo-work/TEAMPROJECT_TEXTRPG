@@ -193,7 +193,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
             Console.WriteLine();
             Console.WriteLine($"던전에서 몬스터 {monsterExpsCount}마리를 잡았습니다.");
             Console.WriteLine($"Lv.{player.Level} {player.Name}");
-            Console.WriteLine($"HP {player.hped} -> {player.Hp}");
+            Console.WriteLine($"HP {player.Hped} -> {player.Hp}");
             Console.WriteLine();
             Console.WriteLine($"경험치{subExp} 획득 (현재 {player.Exp} / 필요 {player.GetRequiredExp()})");
             Console.WriteLine();
@@ -215,7 +215,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
             Console.WriteLine("You Lose..");
             Console.WriteLine();
             Console.WriteLine($"Lv.{player.Level} {player.Name}");
-            Console.WriteLine($"HP {player.hped} -> 0");
+            Console.WriteLine($"HP {player.Hped} -> 0");
             Console.WriteLine();
         }
 
