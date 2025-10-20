@@ -289,6 +289,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                     {
                         Console.WriteLine("다시 공격 방식을 선택합니다.");
                         Console.ReadKey();
+                        ConsoleUtility.ClearLine(Console.CursorTop, 18);
                         continue;
                     }
 
