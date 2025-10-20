@@ -59,7 +59,7 @@ namespace TEAMPROJECT_TEXTRPG.Core
             Description = "이봐! 마을 근처에 미니언들이 너무 많아졌다고 생각하지 않나?\r\n" +
                 "마을주민들의 안전을 위해서라도 저것들 수를 좀 줄여야 한다고!\r\n" +
                 "모험가인 자네가 좀 처치해주게!";
-            ItemReward = QuestManager.Instance.items.equipItems[1];
+            ItemReward = QuestManager.Instance.items.equipItem1;
             itemGivingCount = 1;
             GoldReward = 5;
             ExpReward = 100;
