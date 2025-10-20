@@ -84,6 +84,7 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                 BattleResultWinText(monsterExps.Length);
 
                 Console.WriteLine();
+                // 'Quest 현황 갱신' 묶음 실행하고
                 QuestManager.Instance.OnMonsterKilled();
                 Console.WriteLine();
                 
