@@ -1,4 +1,5 @@
-﻿using TEAMPROJECT_TEXTRPG.Scenes;
+﻿using TEAMPROJECT_TEXTRPG.Core;
+using TEAMPROJECT_TEXTRPG.Scenes;
 
 namespace TEAMPROJECT_TEXTRPG.Managers
 {
@@ -57,6 +58,7 @@ namespace TEAMPROJECT_TEXTRPG.Managers
         }
         public Dictionary<GameState, Scene> scenes;
         public Scene currentScene;
+        internal List<Monster> monsters = new List<Monster>();
 
         /* 생성자 */
         //============================================================//
