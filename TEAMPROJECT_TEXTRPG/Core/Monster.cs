@@ -2,7 +2,9 @@
 {
     internal class Monster
     {
-        public string Name { get; set; }
+
+        public int Id { get; set; }
+        public string Name { get;  set; }
         public int Level { get; set; }
         private int hp;
         public int Hp
@@ -23,8 +25,9 @@
         public bool IsDead { get; set; }
         public bool IsAttackComplete { get; private set; }
 
-        public Monster(string name, int level, int hp, int atk, int monExp, bool isDead = false)
+        public Monster(int id, string name, int level, int hp, int atk, int monExp, bool isDead = false)
         {
+            Id = id;
             Name = name;
             Level = level;
             Hp = hp;
@@ -53,12 +56,12 @@
     {
         public List<Monster> monster = new List<Monster>()
         {
-            new Monster("미니언", 2, 15, 5, 5),
-            new Monster("공허충", 3, 10, 9, 3),
-            new Monster("대포미니언", 5, 25, 8, 10),
-            new Monster("돌거북", 3, 10, 3, 2),
-            new Monster("고대 돌거북", 8, 25, 7, 9),
-            new Monster("칼날부리", 5, 15, 6, 6)
+            new Monster(0,"미니언", 2, 15, 5, 5),
+            new Monster(1,"공허충", 3, 10, 9, 3),
+            new Monster(2,"대포미니언", 5, 25, 8, 10),
+            new Monster(3,"돌거북", 3, 10, 3, 2),
+            new Monster(4,"고대 돌거북", 8, 25, 7, 9),
+            new Monster(5,"칼날부리", 5, 15, 6, 6)
 
         };
 
