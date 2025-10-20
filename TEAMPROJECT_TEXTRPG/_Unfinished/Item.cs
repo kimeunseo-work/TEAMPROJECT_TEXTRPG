@@ -1,7 +1,7 @@
 ﻿namespace TEAMPROJECT_TEXTRPG._Unfinished
 {
     // Item 클래스
-    internal class Item
+    public class Item
     {
         // 주석_아이템 생성 필요하실 때 참고하세요! 아이템은 코드 가장 아랫쪽 class Items 에서 생성하시면 됩니다.
 
@@ -109,7 +109,7 @@
     }
 
     // 게임에서 사용할 Items
-    internal class Items
+    public class Items
     {
         // 아이템 유형 별 Item 리스트 생성
         public List<Item> equipItems = new List<Item>(); // 장비 Item 리스트
@@ -141,7 +141,7 @@
     }
 
     // Player 인벤토리  클래스
-    internal class Inven : Items
+    public class Inven : Items
     {
         // Player 인벤토리로 사용할 inven 리스트 생성
         public List<Item> Inventory = new List<Item>();

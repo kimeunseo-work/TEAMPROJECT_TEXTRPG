@@ -1,6 +1,6 @@
 ﻿namespace TEAMPROJECT_TEXTRPG.Core
 {
-    internal class Monster
+    public class Monster
     {
 
         public int Id { get; set; }
@@ -24,6 +24,8 @@
         public int MonExp { get; set; }
         public bool IsDead { get; set; }
         public bool IsAttackComplete { get; private set; }
+
+        public Monster() { }
 
         public Monster(int id, string name, int level, int hp, int atk, int monExp, bool isDead = false)
         {
@@ -52,7 +54,7 @@
         public void TakeDamage(int amount) => Hp -= amount;
     }
 
-    internal class Monsters
+    public class Monsters
     {
         public List<Monster> monster = new List<Monster>()
         {

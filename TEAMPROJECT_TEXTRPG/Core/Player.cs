@@ -3,12 +3,23 @@
 namespace TEAMPROJECT_TEXTRPG.Core
 {
 
-    internal class Player
+    public class Player
     {
         public int Level { get; set; } = 1;
         public string Name { get; set; }
         public Job CurrentJob { get; set; }
-        public int Gold { get; set; } = 1500;
+        private int hp;
+        public int Hp
+        {
+            get => hp;
+            set => hp = Math.Max(0, value); // hp가 0보다 작으면 0으로 고정
+        }
+        private int mp;
+        public int Mp
+        {
+            get => mp;
+            set => mp = Math.Max(0, value); // mp가 0보다 작으면 0으로 고정
+        }
         public int MaxHP { get; set; }
         public int MaxMP { get; set; }
         public double BaseAttack { get; set; }
@@ -17,26 +28,12 @@ namespace TEAMPROJECT_TEXTRPG.Core
         public double Defense { get; set; }
         public double LvUpAttack { get; set; }
         public double LvUpDefense { get; set; }
-        public Inven Inventory; // Player 인벤토리 정의
-
         public int Exp { get; set; }
+        public int Gold { get; set; } = 1500;
+        public Inven Inventory { get; set; } // Player 인벤토리 정의
 
-        private int hp;
-        public int Hp
-        {
-            get => hp;
-            set => hp = Math.Max(0, value); // hp가 0보다 작으면 0으로 고정
-        }
-
-        public int Hped; // 전투 전 체력 정의
-
-        private int mp;
-        public int Mp
-        {
-            get => mp;
-            set => mp = Math.Max(0, value); // mp가 0보다 작으면 0으로 고정
-        }
-
+        // 전투 전 체력 정의
+        public int Hped;
         //경험치 테이블
         private Dictionary<int, int> ExpTable = new Dictionary<int, int>()
         {
@@ -97,8 +94,6 @@ namespace TEAMPROJECT_TEXTRPG.Core
         public int GetRequiredExp() =>
 
             ExpTable.ContainsKey(Level) ? ExpTable[Level] : int.MaxValue;
-
-
 
         private void LevelUp()
         {

@@ -9,6 +9,7 @@ namespace TEAMPROJECT_TEXTRPG.Managers
     internal enum GameState
     {
         None,// 게임 종료
+        Intro,
         CharacterCreate,//캐릭터 생성 화면
         SelectJob,//캐릭터 직업 선택 화면
         Home,// 메인 화면
@@ -16,6 +17,7 @@ namespace TEAMPROJECT_TEXTRPG.Managers
         TotalBattle,
         NewBattleResult,
         Quest,
+        LoadData,
     }
 
     internal class GameManager
@@ -65,11 +67,13 @@ namespace TEAMPROJECT_TEXTRPG.Managers
         public GameManager()
         {
             // 첫 시작 게임 상태
-            CurrentState = GameState.CharacterCreate;
+            CurrentState = GameState.Intro;
 
             // 화면 모음
             scenes = new Dictionary<GameState, Scene>
             {
+                { GameState.Intro, new IntroScene() },
+                { GameState.LoadData, new LoadScene() },
                 { GameState.CharacterCreate, new InitCharacterScene() },
                 { GameState.SelectJob, new SelectJobScene() },
                 { GameState.Home, new HomeScene() },

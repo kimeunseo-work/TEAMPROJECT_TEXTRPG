@@ -1,86 +1,120 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
-using TEAMPROJECT_TEXTRPG._Unfinished;
-
-//﻿#if false
+﻿using TEAMPROJECT_TEXTRPG._Unfinished;
 using TEAMPROJECT_TEXTRPG.Managers;
 
 namespace TEAMPROJECT_TEXTRPG.Core
 {
-    internal class Quest
+    public class Quest
     {
-        public string Name;
-        public string Description;
-        public string QuestInfo;
-        public Item ItemReward;
-        public int GoldReward;
-        public int ExpReward;
-        public bool isSelected = false;
-        public bool isClear = false;
-        public bool getRewarded = false;
-        public int _kill = QuestManager.Instance._kills.Count;
-        public int CurrentKillCount
-        => QuestManager.Instance._kills.TryGetValue(QuestMonster.Id, out var v) ? v : 0;
-        public string ClearText => isClear ? "[완료]" : " "; 
-        public int KillCount;
-        public int itemGivingCount;
+        public string Name; // 이름
+        public string Description; // 설명
+        public int NeedKillCount; // 목표 킬 수
+        public bool GetRewarded = false; // 보상을 받은 퀘스트인지 체크
+        public Monster QuestMonster; // 퀘스트 몬스터 지정
+        public Item ItemReward; // 지급할 아이템
+        public int ItemGivingCount; // 아이템 몇 개 지급할 건지
+        public int GoldReward; // 보상 골드
+        public int ExpReward; // 보상 경험치
+        //public string QuestInfo;
+        public bool IsAccept = false; // 퀘스트를 수락 했는지
+        public bool IsComplete = false; // 퀘스트를 완료 했는지
+        //public int _kill = QuestManager.Instance.killCountRecord.Count; // 이 것도 문제가 됩니다. 근데 참조를 안하는 군요.
+        //public int CurrentKillCount
+        //=> QuestManager.Instance.killCountRecord.TryGetValue(QuestMonster.Id, out var v) ? v : 0;
+        public int CurrentKillCount = 0; // 현재 킬 카운트를 퀘스트 안에서 체크
+        //public bool QuestSelected = false; 참조를 안하네요
+        //public Monsters monsters = new Monsters(); //몬스터 리스트? //Monsters에서 monster만 monsterlist로 지정 괜히 복잡해져서 그냥 없앰
 
-        protected virtual int GetCurrentCount()
+        public string ClearText => IsComplete ? "[완료]" : " ";
+
+        public Quest() { }
+        public Quest(string name, string desc, int needkillCount, bool getRewarded, Monster questMon, Item itemReward, int itemCount, int gold, int exp)
         {
-            return 0; // 기본값
+            Name = name;
+            Description = desc;
+            NeedKillCount = needkillCount;
+            GetRewarded = getRewarded;
+            QuestMonster = questMon;
+            ItemReward = itemReward;
+            ItemGivingCount = itemCount;
+            GoldReward = gold;
+            ExpReward = exp;
         }
 
-        protected virtual string GetProgressLabel() => $"{GetCurrentCount()}/{KillCount}";
-       
-        public Monsters monsters = new Monsters(); //몬스터 리스트
-       //Monsters에서 monster만 monsterlist로 지정 괜히 복잡해져서 그냥 없앰
-        public Monster QuestMonster; //퀘스트 몬스터 지정
-        public bool QuestSelected = false;
-     
-        internal virtual void Show() { }
+        public Quest(Quest clone)
+        {
+            Name = clone.Name;
+            Description = clone.Description;
+            NeedKillCount = clone.NeedKillCount;
+            GetRewarded = clone.GetRewarded;
+            QuestMonster = clone.QuestMonster;
+            ItemReward = clone.ItemReward;
+            ItemGivingCount = clone.ItemGivingCount;
+            GoldReward = clone.GoldReward;
+            ExpReward = clone.ExpReward;
+        }
+
+        public string GetProgressLabel() => $"{CurrentKillCount}/{NeedKillCount}";
+        public virtual void Show()
+        {
+
+        }
+
+        //protected virtual int GetCurrentCount()
+        //{
+        //    return 0; // 기본값
+        //}
+
+        //protected virtual string GetProgressLabel() => $"{GetCurrentCount()}/{NeedKillCount}";
+
     }
 
     internal class MonsterKillQuest : Quest
     {
-          public virtual string QuestInfo => $"미니언 5마리 처치 ({GetProgressLabel()})";
+        public string Quest1Info => $"미니언 5마리 처치 ({GetProgressLabel()})";
 
-        public MonsterKillQuest()
-        : base()
+        public MonsterKillQuest(string name, string desc, int needkillCount, bool getRewarded, Monster questMon, Item itemReward, int itemCount, int gold, int exp) : base(name, desc, needkillCount, getRewarded, questMon, itemReward, itemCount, gold, exp)
         {
-            KillCount = 1;
-            getRewarded = false;
-            // GameManager에서 Monsters에 몬스터 리스트 가져옴 
-            QuestMonster = monsters.monster[0]; //미니언 몬스터 할당
-            Name = "마을을 위협하는 미니언 처치";
-            Description = "이봐! 마을 근처에 미니언들이 너무 많아졌다고 생각하지 않나?\r\n" +
-                "마을주민들의 안전을 위해서라도 저것들 수를 좀 줄여야 한다고!\r\n" +
-                "모험가인 자네가 좀 처치해주게!";
-            ItemReward = QuestManager.Instance.items.equipItems[1];
-            itemGivingCount = 1;
-            GoldReward = 5;
-            ExpReward = 100;
+            Name = name;
+            Description = desc;
+            NeedKillCount = needkillCount;
+            GetRewarded = getRewarded;
+            QuestMonster = questMon; //미니언 몬스터 할당
+            ItemReward = itemReward; // QuestManager.Instance.items.equipItems[1];
+            ItemGivingCount = itemCount;
+            GoldReward = gold;
+            ExpReward = exp;
             // ItemReward = QuestManager.Instance.items.equipItem1;
         }
 
-        protected override int GetCurrentCount()
+        public MonsterKillQuest(Quest clone) : base(clone)
         {
-            return QuestManager.Instance._kills.TryGetValue(QuestMonster.Id, out var v) ? v : 0;
+            Name = clone.Name;
+            Description = clone.Description;
+            NeedKillCount = clone.NeedKillCount;
+            GetRewarded = clone.GetRewarded;
+            QuestMonster = clone.QuestMonster;
+            ItemReward = clone.ItemReward;
+            ItemGivingCount = clone.ItemGivingCount;
+            GoldReward = clone.GoldReward;
+            ExpReward = clone.ExpReward;
         }
 
-        internal override void Show()
+        public int GetCurrentCount()
+        {
+            return QuestManager.Instance.killCountRecord.TryGetValue(QuestMonster.Id, out var v) ? v : 0;
+        }
+
+        public override void Show()
         {
             Console.WriteLine("Quest!!");
             Console.WriteLine();
-            Console.WriteLine($"{Name}{ClearText}"); //그 clear가 되면 여기서 어 퀘스트 클래스안에 그 show라는 메서드가있는거죠 네? //홈에서 3번을 누르면
+            Console.WriteLine($"{Name}{ClearText}");
             Console.WriteLine();
             Console.WriteLine($"{Description}");
             Console.WriteLine();
-            Console.WriteLine($"- {QuestInfo}");
-            Console.WriteLine($"_kills = {QuestManager.Instance._kills[QuestMonster.Id]}");
+            Console.WriteLine($"- {Quest1Info}");
+            //Console.WriteLine($"_kills = {QuestManager.Instance.killCountRecord[Quest1.QuestMonster.Id]}");
+            //Console.WriteLine($"_kills = {QuestMonster.Name} {CurrentKillCount}/{NeedKillCount}");
             Console.WriteLine("-보상-");
             Console.WriteLine($"{ItemReward.itemName} x 1");
             Console.WriteLine($"{GoldReward}G");
@@ -88,4 +122,3 @@ namespace TEAMPROJECT_TEXTRPG.Core
         }
     }
 }
-//#endif

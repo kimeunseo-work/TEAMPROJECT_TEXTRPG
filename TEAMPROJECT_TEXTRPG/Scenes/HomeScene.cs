@@ -28,6 +28,8 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                 Console.WriteLine("|| 1. 상태 보기                                                                                           ||");
                 Console.WriteLine("|| 2. 전투 시작                                                                                           ||");
                 Console.WriteLine("|| 3. 퀘스트 보기                                                                                         ||");
+                Console.WriteLine("|| 4. 게임 저장                                                                                           ||");
+                Console.WriteLine("|| 5. 게임 로드                                                                                           ||");
                 Console.WriteLine("|| 0. 게임 종료                                                                                           ||");
                 Console.WriteLine("||                                                                                                        ||");
                 Console.WriteLine("============================================================================================================");
@@ -47,8 +49,17 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                         break;
                     case 3:
                         isValidInput = true;
-                        Console.WriteLine("퀘스트는 아직 구현되지 않았습니다.");
                         GameManager.Instance.CurrentState = GameState.Quest;
+                        break;
+                    case 4:
+                        isValidInput = true;
+                        Console.WriteLine("게임을 저장했습니다.");
+                        DataManager.Instance.SaveData();
+                        break;
+                    case 5:
+                        isValidInput = true;
+                        Console.WriteLine("로딩창을 불러옵니다.");
+                        GameManager.Instance.CurrentState = GameState.LoadData;
                         break;
 
                     case 0: // 0. 게임 종료

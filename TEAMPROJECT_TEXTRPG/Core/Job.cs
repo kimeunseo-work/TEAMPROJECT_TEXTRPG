@@ -1,6 +1,6 @@
 ﻿namespace TEAMPROJECT_TEXTRPG.Core
 {
-    internal class Job
+    public class Job
     {
         public string Name { get; private set; }
         public int MaxHP { get; private set; }
