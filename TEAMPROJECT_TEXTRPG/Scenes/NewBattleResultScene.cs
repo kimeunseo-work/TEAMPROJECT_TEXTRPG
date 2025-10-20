@@ -12,31 +12,31 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
 
         private Player player;      // Player 정보를 가져오기 위한 변수 선언
 
-        // 해당 Class에서 실행할 작업(?)
+        // 해당 Class 작업에 참고할 메서드 생성
         public NewBattleResultScene()
         {
             // Player 정보를 가져오기 위한 변수 초기화
             player = CharacterManager.Instance.player;
         }
 
-        // GameManager 에서 요구한 작업을 실행하는 메서드(?)
+        // GameManager 에서 요구한 작업을 실행하는 메서드
         public override void Show()
         {
-            // BattleManager에서 요구한 작업을 실행하기 위한 get 값(?)
+            // BattleManager에서 요구한 작업을 실행하기 위한 구독 값 생성
             BattleManager.Instance.OnBattleResultReady += HandleResult;
 
             // 반복_현재 씬이 NewBattleResult 일 때
             while (GameManager.Instance.CurrentState == GameState.NewBattleResult)
             {
-                // (?)
+                // 반복문의 무한반복을 막기 위한 코드
                 Thread.Sleep(100);
             }
 
-            // BattleManager에서 요구한 작업을 실행하기 위한 set 값(?)
+            // BattleManager에서 요구한 작업을 실행하기 위한 구독 값 소멸
             BattleManager.Instance.OnBattleResultReady -= HandleResult;
         }
 
-        // BattleManager에서 요구한 작업을 실행하기 위한 set 값 메서드(?)
+        // BattleManager에서 요구한 작업을 실행하기 위한 메서드
         private void HandleResult(NewBattleState result, int[] monsterExps)
         {
             // 전투의 결과가 '승리'일 경우
