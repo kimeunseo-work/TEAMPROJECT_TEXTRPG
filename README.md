@@ -1,4 +1,4 @@
-# 프로젝트 이름 모하죵
+# 프로젝트 이름 Super I TEXT RPG
 
 ## 📖 목차
 1. [프로젝트 소개](#프로젝트-소개)
@@ -16,13 +16,19 @@
 ## 프로젝트 계기
 ## 💜 주요기능
 
-- 기능 1
+- 기능 1 / GameManager 에서 게임 실행의 전반적인 구동을 담당함.
 
-- 기능 2
+- 기능 2 / CharacterManager 에서 Player 캐릭터의 생성에 관한 역할을 담당함.
 
-- 기능 3
+- 기능 3 / JobManager 에서 Player 캐릭터의 직업군 생성 및 적용에 관한 역할을 담당함.
 
-- 기능 4
+- 기능 4 / BattleManager 에서 전투 흐름의 전반적인 구동을 담당함.
+
+- 기능 5 / SkillManager 에서 Player 캐릭터의 직업에 따른 Skill 적용에 관한 역할을 담당함.
+
+- 기능 6 / QuestManager 와 Quest 에서 Player 캐릭터의 Quest 현황을 처리하는 역할을 담당함.
+
+- 기능 7 / DataManager 에서 게임의 저장과 로드의 전반적인 구동을 담당함.
 
 
 ## ⏲️ 개발기간
@@ -58,6 +64,16 @@ C:.
     |   Program.cs
     |   TEAMPROJECT_TEXTRPG.csproj
     |
+    \---Bin
+        \---Debug
+            +---Net9.0
+            |       Newtonsoft.Json.dll
+            |       TEAMPROJECT_TEXTRPG.deps.json
+            |       TEAMPROJECT_TEXTRPG.dll
+            |       TEAMPROJECT_TEXTRPG.exe
+            |       TEAMPROJECT_TEXTRPG.pdn
+            |       TEAMPROJECT_TEXTRPG.runtimeconfig.json
+    |
     +---Core
     |       Item.cs
     |       Job.cs
@@ -69,23 +85,62 @@ C:.
     +---Managers
     |       BattleManager.cs
     |       CharacterManager.cs
+    |       DataManager.cs    
     |       GameManager.cs
     |       JobManager.cs
     |       QuestManager.cs
     |       SkillManager.cs
     |
+    \---obj
+    |       project.asstes.json
+    |       project.nuget.json
+    |       TEAMPROJECT_TEXTRPG.csproj.nuget.dgspec.json
+    |       TEAMPROJECT_TEXTRPG.csproj.nuget.g.props
+    |       TEAMPROJECT_TEXTRPG.csproj.nuget.g.targets
+        \---Debug
+            \---Net9.0
+            |       .NETCoreApp,Version=v9.0.AssemblyAttributes.cs
+            |       apphost.exe
+            |       TEAMPROJ.A7AC528E.Up2Date
+            |       TEAMPROJECT_TEXTRPG.AssemblyInfo.cs
+            |       TEAMPROJECT_TEXTRPG.AssemblyInfoInputs.cache
+            |       TEAMPROJECT_TEXTRPG.assets.cache
+            |       TEAMPROJECT_TEXTRPG.csproj.AssemblyReference.cache
+            |       TEAMPROJECT_TEXTRPG.csproj.BuildWithSkipAnalyzers
+            |       TEAMPROJECT_TEXTRPG.csproj.CoreCompileInputs.cache
+            |       TEAMPROJECT_TEXTRPG.csproj.FileListAbsolute.txt
+            |       TEAMPROJECT_TEXTRPG.dll
+            |       TEAMPROJECT_TEXTRPG.GeneratedMSBuildEditorConfig.editorconfig
+            |       TEAMPROJECT_TEXTRPG.genruntimeconfig.cache
+            |       TEAMPROJECT_TEXTRPG.GlobalUsing.g.cs
+            |       TEAMPROJECT_TEXTRPG.pdb
+            |       TEAMPROJECT_TEXTRPG.sourcelink.json
+            |
+                +---ref
+                |       TEAMPROJECT_TEXTRPG.dll
+                |
+                +---refint
+                |       TEAMPROJECT_TEXTRPG.dll
+    |
+    +---SaveData
+    |       PlayerData1.json
+    |
     +---Scenes
-    |       EnemyTurnScene.cs
     |       HomeScene.cs
     |       InitCharacterScene.cs
+    |       IntroScene.cs
+    |       LoadHomeScene.cs
+    |       LoadScene.cs
     |       NewBattleResultScene.cs
     |       PlayerInfoScene.cs
     |       QuestScene.cs
+    |       SaveScene.cs
     |       Scene.cs
     |       SelectJobScene.cs
     |       TotalBattleScene.cs
     |
     +---Utility
+    |       ConsoleUtility.cs
     |       InputHandler.cs
     |       UIColorUtility.cs
     |
@@ -94,7 +149,10 @@ C:.
         |       BattleResultScene.cs
         |       BattleScene.cs
         |       BattleStartScene.cs
+        |       EnemyTurnScene.cs
         |
-        \---Skills
+        +---Skills
                 SkillAction.cs
+    |
+    +---_Unfinished
 ## Trouble Shooting
