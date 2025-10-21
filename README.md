@@ -194,3 +194,6 @@ C:.
 ```
 
 ## Trouble Shooting
+https://www.notion.so/teamsparta/9-super-I-28b2dc3ef5148127858cc3bf1178235d
+
+- 링크 내 '문서화' 목록_팀 프로젝트 전체적인 진행 흐름(발표 자료 제작시 참고 바람) 파일 최하단부에 작성했습니다. 열람 시 참조 바랍니다.
