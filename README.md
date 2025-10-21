@@ -58,6 +58,16 @@ C:.
     |   Program.cs
     |   TEAMPROJECT_TEXTRPG.csproj
     |
+    \---Bin
+        \---Debug
+            +---Net9.0
+            |       Newtonsoft.Json.dll
+            |       TEAMPROJECT_TEXTRPG.deps.json
+            |       TEAMPROJECT_TEXTRPG.dll
+            |       TEAMPROJECT_TEXTRPG.exe
+            |       TEAMPROJECT_TEXTRPG.pdn
+            |       TEAMPROJECT_TEXTRPG.runtimeconfig.json
+    |
     +---Core
     |       Item.cs
     |       Job.cs
@@ -69,23 +79,62 @@ C:.
     +---Managers
     |       BattleManager.cs
     |       CharacterManager.cs
+    |       DataManager.cs    
     |       GameManager.cs
     |       JobManager.cs
     |       QuestManager.cs
     |       SkillManager.cs
     |
+    \---obj
+    |       project.asstes.json
+    |       project.nuget.json
+    |       TEAMPROJECT_TEXTRPG.csproj.nuget.dgspec.json
+    |       TEAMPROJECT_TEXTRPG.csproj.nuget.g.props
+    |       TEAMPROJECT_TEXTRPG.csproj.nuget.g.targets
+        \---Debug
+            \---Net9.0
+            |       .NETCoreApp,Version=v9.0.AssemblyAttributes.cs
+            |       apphost.exe
+            |       TEAMPROJ.A7AC528E.Up2Date
+            |       TEAMPROJECT_TEXTRPG.AssemblyInfo.cs
+            |       TEAMPROJECT_TEXTRPG.AssemblyInfoInputs.cache
+            |       TEAMPROJECT_TEXTRPG.assets.cache
+            |       TEAMPROJECT_TEXTRPG.csproj.AssemblyReference.cache
+            |       TEAMPROJECT_TEXTRPG.csproj.BuildWithSkipAnalyzers
+            |       TEAMPROJECT_TEXTRPG.csproj.CoreCompileInputs.cache
+            |       TEAMPROJECT_TEXTRPG.csproj.FileListAbsolute.txt
+            |       TEAMPROJECT_TEXTRPG.dll
+            |       TEAMPROJECT_TEXTRPG.GeneratedMSBuildEditorConfig.editorconfig
+            |       TEAMPROJECT_TEXTRPG.genruntimeconfig.cache
+            |       TEAMPROJECT_TEXTRPG.GlobalUsing.g.cs
+            |       TEAMPROJECT_TEXTRPG.pdb
+            |       TEAMPROJECT_TEXTRPG.sourcelink.json
+            |
+                +---ref
+                |       TEAMPROJECT_TEXTRPG.dll
+                |
+                +---refint
+                |       TEAMPROJECT_TEXTRPG.dll
+    |
+    +---SaveData
+    |       PlayerData1.json
+    |
     +---Scenes
-    |       EnemyTurnScene.cs
     |       HomeScene.cs
     |       InitCharacterScene.cs
+    |       IntroScene.cs
+    |       LoadHomeScene.cs
+    |       LoadScene.cs
     |       NewBattleResultScene.cs
     |       PlayerInfoScene.cs
     |       QuestScene.cs
+    |       SaveScene.cs
     |       Scene.cs
     |       SelectJobScene.cs
     |       TotalBattleScene.cs
     |
     +---Utility
+    |       ConsoleUtility.cs
     |       InputHandler.cs
     |       UIColorUtility.cs
     |
@@ -94,7 +143,10 @@ C:.
         |       BattleResultScene.cs
         |       BattleScene.cs
         |       BattleStartScene.cs
+        |       EnemyTurnScene.cs
         |
-        \---Skills
+        +---Skills
                 SkillAction.cs
+    |
+    +---_Unfinished
 ## Trouble Shooting
