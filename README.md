@@ -27,6 +27,7 @@
 
 
 ## 프로젝트 계기
+- SPARTA 내일배움캠프_Unity 게임 개발 커리큘럼 참여 中 C# 코드를 사용한 팀 프로젝트 게임 제작 과제를 수행하기 위함
 
 
 ## 💜 주요기능
@@ -77,7 +78,7 @@
 
 
 ### 🚀 배포 (Deploy)
-- **빌드 환경:** Unity 2022.3.10f1
+- **빌드 환경:** Unity 2022.3.17f1 (?)
 - **배포 방식:** Windows .exe 파일 빌드
 - **결과물:** `/Builds/Game.exe`
 
@@ -90,6 +91,9 @@
 
 ## 와이어프레임
 <img width="2006" height="1238" alt="image" src="https://github.com/user-attachments/assets/4858b92b-8bab-4899-b783-f348a899d826" />
+
+
+## API 명세서
 
 
 ## ERD
