@@ -90,6 +90,7 @@
 
 
 ## 프로젝트 파일 구조
+```bash
 C:.
 |   .gitattributes
 |   .gitignore
@@ -190,6 +191,6 @@ C:.
                 SkillAction.cs
     |
     +---_Unfinished
-
+```
 
 ## Trouble Shooting
