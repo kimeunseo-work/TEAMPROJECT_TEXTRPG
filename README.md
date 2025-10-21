@@ -51,6 +51,8 @@
 ## 서비스 구조
 
 ## 와이어프레임
+<img width="2006" height="1238" alt="image" src="https://github.com/user-attachments/assets/4858b92b-8bab-4899-b783-f348a899d826" />
+
 
 ## ERD
 
