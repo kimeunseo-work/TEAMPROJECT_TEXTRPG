@@ -1,5 +1,6 @@
 # 프로젝트 이름 Super I TEXT RPG
 
+
 ## 📖 목차
 1. [프로젝트 소개](#프로젝트-소개)
 2. [주요기능](#주요기능)
@@ -12,49 +13,87 @@
 9. [프로젝트 파일 구조](#프로젝트-파일-구조)
 10. [Trouble Shooting](#trouble-shooting)
 
+
 ## 👨‍🏫 프로젝트 소개
+- 프로젝트 명 : Super I TEXTRPG
+- 프로젝트 설명 : ‘I’ 끼리 모여서 만든 텍스트알피지
+- 프로젝트 팀원
+    - 팀장 : 김은서
+    - 팀원 : 김하늘
+    - 팀원 : 송덕희
+    - 팀원 : 유원영
+    - 팀원 : 장준혁
+    - 팀원 : 전규태
+
+
 ## 프로젝트 계기
+
+
 ## 💜 주요기능
 
-- 기능 1 / GameManager 에서 게임 실행의 전반적인 구동을 담당함.
+- 기능 1
+    - GameManager 에서 게임 실행의 전반적인 구동을 담당함.
 
-- 기능 2 / CharacterManager 에서 Player 캐릭터의 생성에 관한 역할을 담당함.
+- 기능 2
+    - CharacterManager 에서 Player 캐릭터의 생성에 관한 역할을 담당함.
 
-- 기능 3 / JobManager 에서 Player 캐릭터의 직업군 생성 및 적용에 관한 역할을 담당함.
+- 기능 3
+    - JobManager 에서 Player 캐릭터의 직업군 생성 및 적용에 관한 역할을 담당함.
 
-- 기능 4 / BattleManager 에서 전투 흐름의 전반적인 구동을 담당함.
+- 기능 4
+    - BattleManager 에서 전투 흐름의 전반적인 구동을 담당함.
 
-- 기능 5 / SkillManager 에서 Player 캐릭터의 직업에 따른 Skill 적용에 관한 역할을 담당함.
+- 기능 5
+    - SkillManager 에서 Player 캐릭터의 직업에 따른 Skill 적용에 관한 역할을 담당함.
 
-- 기능 6 / QuestManager 와 Quest 에서 Player 캐릭터의 Quest 현황을 처리하는 역할을 담당함.
+- 기능 6
+    - QuestManager 와 Quest 에서 Player 캐릭터의 Quest 현황을 처리하는 역할을 담당함.
 
-- 기능 7 / DataManager 에서 게임의 저장과 로드의 전반적인 구동을 담당함.
+- 기능 7
+    - DataManager 에서 게임의 저장과 로드의 전반적인 구동을 담당함.
 
 
 ## ⏲️ 개발기간
-- 2025.10.14(화) ~ 2025.10.20(월)
+- 총 7일   { 2025.10.14(화) ~ 2025.10.20(월) }
+
+
 ## 📚️ 기술스택
+
+
 ### 🖥️ Language
 *  C#
+
+
 ### 🔧 Version Control
 *  Git + GitHub
+
+
 ### 🧩 IDE
 * Visual Studio
+
+
 ### 🧰 Framework
 * net9.0
+
+
 ### 🚀 배포 (Deploy)
 - **빌드 환경:** Unity 2022.3.10f1
 - **배포 방식:** Windows .exe 파일 빌드
 - **결과물:** `/Builds/Game.exe`
+
+
 ### 💾  DBMS
 
+
 ## 서비스 구조
+
 
 ## 와이어프레임
 <img width="2006" height="1238" alt="image" src="https://github.com/user-attachments/assets/4858b92b-8bab-4899-b783-f348a899d826" />
 
 
 ## ERD
+
 
 ## 프로젝트 파일 구조
 C:.
@@ -157,4 +196,6 @@ C:.
                 SkillAction.cs
     |
     +---_Unfinished
+
+
 ## Trouble Shooting
