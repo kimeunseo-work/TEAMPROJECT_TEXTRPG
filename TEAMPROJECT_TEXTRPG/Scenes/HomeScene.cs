@@ -53,13 +53,13 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                         break;
                     case 4:
                         isValidInput = true;
-                        Console.WriteLine("게임을 저장했습니다.");
-                        DataManager.Instance.SaveData();
+                        Console.WriteLine("세이브창을 불러옵니다.");
+                        GameManager.Instance.CurrentState = GameState.SaveData;
                         break;
                     case 5:
                         isValidInput = true;
                         Console.WriteLine("로딩창을 불러옵니다.");
-                        GameManager.Instance.CurrentState = GameState.LoadData;
+                        GameManager.Instance.CurrentState = GameState.LoadHomeData;
                         break;
 
                     case 0: // 0. 게임 종료
