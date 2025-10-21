@@ -16,26 +16,19 @@
 ## 프로젝트 계기
 ## 💜 주요기능
 
-- 기능 1
-    GameManager 에서 게임 실행의 전반적인 구동을 담당함.
+- 기능 1 / GameManager 에서 게임 실행의 전반적인 구동을 담당함.
 
-- 기능 2
-    CharacterManager 에서 Player 캐릭터의 생성에 관한 역할을 담당함.
+- 기능 2 / CharacterManager 에서 Player 캐릭터의 생성에 관한 역할을 담당함.
 
-- 기능 3
-    JobManager 에서 Player 캐릭터의 직업군 생성 및 적용에 관한 역할을 담당함.
+- 기능 3 / JobManager 에서 Player 캐릭터의 직업군 생성 및 적용에 관한 역할을 담당함.
 
-- 기능 4
-    BattleManager 에서 전투 흐름의 전반적인 구동을 담당함.
+- 기능 4 / BattleManager 에서 전투 흐름의 전반적인 구동을 담당함.
 
-- 기능 5
-    SkillManager 에서 Player 캐릭터의 직업에 따른 Skill 적용에 관한 역할을 담당함.
+- 기능 5 / SkillManager 에서 Player 캐릭터의 직업에 따른 Skill 적용에 관한 역할을 담당함.
 
-- 기능 6
-    QuestManager 와 Quest 에서 Player 캐릭터의 Quest 현황을 처리하는 역할을 담당함.
+- 기능 6 / QuestManager 와 Quest 에서 Player 캐릭터의 Quest 현황을 처리하는 역할을 담당함.
 
-- 기능 7
-    DataManager 에서 게임의 저장과 로드의 전반적인 구동을 담당함.
+- 기능 7 / DataManager 에서 게임의 저장과 로드의 전반적인 구동을 담당함.
 
 
 ## ⏲️ 개발기간
