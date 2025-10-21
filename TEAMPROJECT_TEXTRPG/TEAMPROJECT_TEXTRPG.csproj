@@ -8,15 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="SaveData\**" />
+    <EmbeddedResource Remove="SaveData\**" />
+    <None Remove="SaveData\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="MonsterHelpers.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="SaveData\" />
   </ItemGroup>
 
 </Project>

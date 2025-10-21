@@ -18,6 +18,8 @@ namespace TEAMPROJECT_TEXTRPG.Managers
         NewBattleResult,
         Quest,
         LoadData,
+        LoadHomeData,
+        SaveData,
     }
 
     internal class GameManager
@@ -74,6 +76,8 @@ namespace TEAMPROJECT_TEXTRPG.Managers
             {
                 { GameState.Intro, new IntroScene() },
                 { GameState.LoadData, new LoadScene() },
+                { GameState.LoadHomeData, new LoadHomeScene() },
+                { GameState.SaveData, new SaveScene() },
                 { GameState.CharacterCreate, new InitCharacterScene() },
                 { GameState.SelectJob, new SelectJobScene() },
                 { GameState.Home, new HomeScene() },
