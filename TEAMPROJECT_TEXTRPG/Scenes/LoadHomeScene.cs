@@ -1,23 +1,22 @@
-﻿using System.Xml;
-using TEAMPROJECT_TEXTRPG.Managers;
+﻿using TEAMPROJECT_TEXTRPG.Managers;
 using TEAMPROJECT_TEXTRPG.Utility;
 
 namespace TEAMPROJECT_TEXTRPG.Scenes
 {
-    internal class LoadScene : Scene
+    internal class LoadHomeScene : Scene
     {
         public override void Show()
         {
             Console.Clear();
 
             var saveDatas = DataManager.Instance.saveDatas;
-            if ( saveDatas == null || saveDatas.Count == 0)
+            if (saveDatas == null || saveDatas.Count == 0)
             {
                 Console.WriteLine("저장된 데이터가 없습니다.");
                 Console.WriteLine("처음으로 돌아갑니다.");
                 Console.ReadKey();
 
-                GameManager.Instance.CurrentState = GameState.Intro;
+                GameManager.Instance.CurrentState = GameState.Home;
                 return;
             }
 
@@ -46,10 +45,10 @@ namespace TEAMPROJECT_TEXTRPG.Scenes
                 }
                 else if (playerSelect == 0)
                 {
-                    Console.WriteLine("처음으로 돌아갑니다.");
+                    Console.WriteLine("이전으로 돌아갑니다.");
                     Console.ReadKey();
 
-                    GameManager.Instance.CurrentState = GameState.Intro;
+                    GameManager.Instance.CurrentState = GameState.Home;
                     return;
                 }
                 else

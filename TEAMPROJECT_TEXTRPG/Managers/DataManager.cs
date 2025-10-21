@@ -20,44 +20,43 @@ namespace TEAMPROJECT_TEXTRPG.Managers
             }
         }
 
-        public List<(DateTime, PlayerData, List<QuestData>)> saveDatas;
+        public List<(int, DateTime, PlayerData, List<QuestData>)> saveDatas;
+        public List<string> saveNames;
+
+        public string folderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..", "SaveData");
 
         public DataManager()
         {
-            // 폴더 경로 지정해서 불러오는 작업
-            saveDatas = new();
-
-            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..", "SaveData");
-
-            var index = 0;
-            while (true)
+            // 폴더 없으면 생성
+            if (!Directory.Exists(folderPath))
             {
-                var currentfilePath = Path.Combine(filePath, $"PlayerData{index}.json");
-
-                if (File.Exists(currentfilePath))
-                {
-                    var data = File.ReadAllText(currentfilePath);
-                    var loadData = JsonConvert.DeserializeObject<(DateTime, PlayerData, List<QuestData>)>(data);
-
-                    saveDatas.Add(loadData);
-                    index++;
-                    continue;
-                }
-                break;
+                Directory.CreateDirectory(folderPath);
             }
+            // 이름만 불러오기
+            saveNames = Directory.GetFiles(folderPath).ToList();
+
+            // 데이터 파일 로드
+            List<(int, DateTime, PlayerData, List<QuestData>)> tempList = new();
+            foreach (string fileName in saveNames)
+            {
+                //var currentfilePath = Path.Combine(folderPath, fileName);
+                var jsonData = File.ReadAllText(fileName);
+                var loadData = JsonConvert.DeserializeObject<(int, DateTime, PlayerData, List<QuestData>)>(jsonData);
+                tempList.Add(loadData);
+            }
+            saveDatas = tempList;
         }
 
         /// <summary>
         /// 데이터 세이브
         /// </summary>
-        public void SaveData()
+        public void SaveData(int input)
         {
-            var count = saveDatas.Count;
-
+            // 퀘스트 자식 클래스 판별
             List<QuestData> questDatas = new();
             foreach (var quest in QuestManager.Instance.OnGoingQuestList)
             {
-                if(quest.Value is MonsterKillQuest monQuest)
+                if (quest.Value is MonsterKillQuest monQuest)
                 {
                     questDatas.Add(new QuestData()
                     {
@@ -66,14 +65,27 @@ namespace TEAMPROJECT_TEXTRPG.Managers
                     });
                 }
             }
-
-            var data = (DateTime.Now, CharacterManager.Instance.ExportPlayerData(), questDatas);
+            var data = (input, DateTime.Now, CharacterManager.Instance.ExportPlayerData(), questDatas);
+            // 직렬화
             var dataJson = JsonConvert.SerializeObject(data);
 
-            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..", "SaveData", $"PlayerData{count}.json");
+            // 저장
+            var fileName = $"PlayerData{input}.json";
+            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..", "SaveData", fileName);
+            // 실제로 덮어씌우기가 가능함.
             File.WriteAllText(filePath, dataJson);
 
-            saveDatas.Add(data);
+            // 화면 출력 위해서
+            // 덮어씌우기
+            if (saveNames.Contains(filePath))
+            {
+                var index = saveNames.FindIndex(0, saveDatas.Count, x => x == filePath);
+                saveDatas[index] = data;
+            }
+            else
+            {
+                saveDatas.Add(data);
+            }
         }
 
         /// <summary>
@@ -81,16 +93,22 @@ namespace TEAMPROJECT_TEXTRPG.Managers
         /// </summary>
         public void LoadSave(int index)
         {
-            var data = saveDatas[index];
+            // 파일 이름 불러오기
+            var dataName = saveNames[index];
+            var jsonData = File.ReadAllText(Path.Combine(folderPath, dataName));
+            // 데이터 역직렬화
+            var loadData = JsonConvert.DeserializeObject<(DateTime, PlayerData, List<QuestData>)>(jsonData);
 
-            CharacterManager.Instance.LoadPlayerData(data.Item2);
+            // 캐릭터 정보 로딩
+            CharacterManager.Instance.LoadPlayerData(loadData.Item2);
 
+            // 퀘스트 정보 로딩
             var QuestList = new List<KeyValuePair<int, Quest>>();
-            foreach (var quest in data.Item3)
+            foreach (var quest in loadData.Item3)
             {
                 if (quest.QuestType == nameof(MonsterKillQuest))
                 {
-                    KeyValuePair<int, Quest> valuePair = new (quest.OnGoingQuest.Key, new MonsterKillQuest(quest.OnGoingQuest.Value));
+                    KeyValuePair<int, Quest> valuePair = new(quest.OnGoingQuest.Key, new MonsterKillQuest(quest.OnGoingQuest.Value));
                     QuestList.Add(valuePair);
                 }
             }
