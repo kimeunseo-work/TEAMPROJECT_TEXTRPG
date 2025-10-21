@@ -78,6 +78,14 @@
 
 
 ## 와이어프레임
+
+
+### 와이어프레임_최초 협업본
+<img width="1134" height="768" alt="image" src="https://github.com/user-attachments/assets/f74167fc-60cd-48f7-9158-2e9e11bcd3cd" />
+<img width="2525" height="2121" alt="image (1)" src="https://github.com/user-attachments/assets/5c966106-509b-4cdf-a2d9-1f05174e18c9" />
+
+
+### 와이어프레임_최종본
 <img width="2006" height="1238" alt="image" src="https://github.com/user-attachments/assets/4858b92b-8bab-4899-b783-f348a899d826" />
 
 
